@@ -23,7 +23,13 @@ import { Med2patientComponent} from './med2patients/med2patient.component';
 import { Med2patientDetailsComponent } from './med2patients/med2patient-details.component';
 import { Med2patientsService } from './med2patients/med2patients.service';
 
+import { StudentComponent} from './students/student.component';
+import { StudentDetailsComponent } from './students/student-details.component';
+import { StudentAddComponent } from './students/student-add.component';
+import { StudentsService } from './students/students.service';
 
+import { ActualpatientComponent} from './actualpatients/actualpatient.component';
+import { ActualpatientsService } from './actualpatients/actualpatients.service';
 
 @Component({
     selector: 'my-app',
@@ -33,8 +39,8 @@ import { Med2patientsService } from './med2patients/med2patients.service';
             <router-outlet></router-outlet>
         </div>
     `,
-    directives: [ROUTER_DIRECTIVES, HeaderComponent, PeopleComponent, PatientComponent, MedicineComponent, Med2patientComponent],
-    providers: [StarWarsService, PatientsService, MedicinesService, Med2patientsService, ROUTER_PROVIDERS, HTTP_PROVIDERS]
+    directives: [ROUTER_DIRECTIVES, HeaderComponent, PeopleComponent, PatientComponent, MedicineComponent, Med2patientComponent , StudentComponent , ActualpatientComponent],
+    providers: [StarWarsService, PatientsService, MedicinesService, Med2patientsService, ROUTER_PROVIDERS, HTTP_PROVIDERS , StudentsService , ActualpatientsService]
 })
 @RouteConfig([
     { path: '/patients', name: 'Patients', component: PatientComponent, useAsDefault: true},
@@ -43,7 +49,11 @@ import { Med2patientsService } from './med2patients/med2patients.service';
     { path: '/medicines/:id', name: 'Medicine Details', component: MedicineDetailsComponent },
    { path: '/med2patients', name: 'Med2patients', component: Med2patientComponent},
     { path: '/med2patients/:id', name: 'Med2patient Details', component: Med2patientDetailsComponent },
-    {path: '/auth/...', name: 'Auth', component: AuthenticationComponent}
+    {path: '/auth/...', name: 'Auth', component: AuthenticationComponent},
+    { path: '/students', name: 'Students', component: StudentComponent},
+    { path: '/students/:id', name: 'Student Details', component: StudentDetailsComponent },
+    { path: '/studentsAdd', name: 'Student Add', component: StudentAddComponent },
+    { path: '/Actualpatients', name: 'Actualpatients', component: ActualpatientComponent},
 ])
 export class AppComponent {
     
