@@ -9,13 +9,44 @@ import { Med2patientsService } from './med2patients.service';
   selector: 'med2patients-list',
   directives: [Med2patientDetailsComponent, ROUTER_DIRECTIVES],
   template: `
-  <!-- this is the new syntax for ng-repeat -->
+  <!-- this is the new syntax for ng-repeat 
   <ul class="med2patients">
     <li *ngFor="#med2patient of med2patients" >
       <a href="#" [routerLink]="['Med2patient Details', {id: med2patient.id}]">{{med2patient.patientid}}/{{med2patient.name}}</a>
     </li>
   </ul>
   <h6>Thanks to http://www.barbarianmeetscoding.com/blog/categories/angular2-step-by-step/ </h6>
+  -->
+<div class="panel panel-primary ">
+	  <div class="panel-heading">
+    <div class='row'>            
+            <div class='col-md-2'><span style='font-size:large'>Patient List</span></div>
+            <div class='col-md-6'>
+                <span style='font-size:large'>Filter by:</span ><input style="color:black" type='text' [(ngModel)]='listFilter'/>
+            </div>           
+     </div>	
+	 <div style='font-size:large'> Click On patient to add items to that patient</div>	 
+	  </div>
+	  <div class="panel-body">
+		<div class="table-responsive">
+		<table class="table">
+        <thead>
+                    <tr>
+                        <th>Patient Name</th>
+                    </tr>
+         </thead>
+         <tbody>
+              <tr *ngFor="#med2patient of med2patients">     
+                      <td>
+                      <a href="#" [routerLink]="['Med2patient Details', {id: med2patient.id}]">{{med2patient.patientid}}/{{med2patient.name}}</a>
+                      </td>		
+              </tr>         
+         </tbody>
+		  </table>	  
+		  </div>
+		</div>
+	</div>  
+
   `,
   styleUrls: ['html/med2patients/med2patients.component.css']
 })
