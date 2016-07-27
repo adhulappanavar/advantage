@@ -12,7 +12,7 @@ import { Med2patientsService } from './med2patients.service';
   <!-- this is the new syntax for ng-repeat -->
   <ul class="med2patients">
     <li *ngFor="#med2patient of med2patients" >
-      <a href="#" [routerLink]="['Med2patient Details', {id: med2patient.id}]">{{med2patient.name}}</a>
+      <a href="#" [routerLink]="['Med2patient Details', {id: med2patient.id}]">{{med2patient.patientid}}/{{med2patient.name}}</a>
     </li>
   </ul>
   <h6>Thanks to http://www.barbarianmeetscoding.com/blog/categories/angular2-step-by-step/ </h6>

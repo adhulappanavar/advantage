@@ -1,5 +1,6 @@
     {
       "name": "Pateint-1",
+      "patientid" : "ptnt1",
       "height": "172",
       "weight": "77",
       "url": "http://swapi.co/api/people/1/",
@@ -36,6 +37,7 @@
     }
     {
       "name": "Pateint-2",
+      "patientid" : "ptnt2",
       "height": "167",
       "weight": "75",
       "url": "http://swapi.co/api/people/2/",
@@ -57,6 +59,7 @@
     }
     {
       "name": "Pateint-3",
+      "patientid" : "ptnt3",
       "height": "96",
       "weight": "32",
       "url": "http://swapi.co/api/people/3/",
@@ -78,6 +81,7 @@
     }
     {
       "name": "Pateint-4",
+      "patientid" : "ptnt4",
       "height": "202",
       "weight": "136",
       "url": "http://swapi.co/api/people/4/",

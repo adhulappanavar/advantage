@@ -66,6 +66,7 @@ router.post('/', function(req, res, next) {
 
         var med2patients = new Med2patients({
             url         : req.body.url,
+            patientid   : req.body.patientid,
             name        : req.body.name,
             height      : req.body.height,
             weight      : req.body.weight,
@@ -113,6 +114,7 @@ router.post('/:id', function(req, res, next) {
 //            });
 //        }
         doc.url = req.body.url;
+        doc.patientid = req.body.patientid;
         doc.name = req.body.name;
         doc.height = req.body.height;
         doc.weight = req.body.weight;

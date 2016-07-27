@@ -9,6 +9,7 @@ var subMedicine = new Schema({
 
 var schema = new Schema({
     url             : String,
+    patientid       : String,
     name            : String,
     height          : Number,
     weight          : Number,

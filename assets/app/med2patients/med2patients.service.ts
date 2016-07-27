@@ -49,6 +49,7 @@ function toMed2patient(r:any): Med2patient{
     id: r._id,
     url: r.url,
     name: r.name,
+    patientid : r.patientid,
     weight: r.weight,
     height: r.height,
     mongoId : r._id,
