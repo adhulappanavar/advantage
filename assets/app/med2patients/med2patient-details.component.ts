@@ -6,8 +6,8 @@ import { NgForm }    from 'angular2/common';
 import { Med2patientsService } from './med2patients.service';
 import { Med2patient } from './med2patient';
 
-import { MedicinesService } from '../medicines/medicines.service';
-import { Medicine } from '../medicines/medicine';
+import { ActualmedicinesService } from '../actualmedicines/actualmedicines.service';
+import { Actualmedicine } from '../actualmedicines/actualmedicine';
 
 
 @Component({
@@ -17,12 +17,12 @@ import { Medicine } from '../medicines/medicine';
 })
 export class Med2patientDetailsComponent implements OnInit {
     @Input() med2patient : Med2patient;
-    medicines: Medicine[] = [];
+    actualmedicines: Actualmedicine[] = [];
     isSaving: boolean;
     professions: string[] = ['jedi', 'bounty hunter', 'princess', 'sith lord'];
 
     constructor(private med2patientsService: Med2patientsService,
-                private medicinesService: MedicinesService,
+                private actualmedicinesService: ActualmedicinesService,
                private routeParams: RouteParams,
                private router: Router){
     }
@@ -38,9 +38,9 @@ export class Med2patientDetailsComponent implements OnInit {
           .subscribe(p => this.med2patient = p);
 
         //Get Medicines to show Medicine List
-        this.medicinesService
-                .getAllMedicines()
-                .subscribe(p => this.medicines = p)
+        this.actualmedicinesService
+                .getAllActualmedicines()
+                .subscribe(p => this.actualmedicines = p)
     }
 
 
@@ -67,10 +67,10 @@ export class Med2patientDetailsComponent implements OnInit {
            console.log(event, med2patient);
     }
 
-      addNewMedPatientList(event : string, medicine : Medicine) {
+      addNewMedPatientList(event : string, actualmedicine : Actualmedicine) {
             console.log("Send to Patient List clicked");
-           console.log(event, medicine);
-           this.med2patient.newmedicines.push(medicine);
+           console.log(event, actualmedicine);
+           this.med2patient.newmedicines.push(actualmedicine);
            this.saveMed2patientDetails()
     }
 }

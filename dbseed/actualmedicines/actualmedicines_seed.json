@@ -1,0 +1,106 @@
+{
+	"url" : "001" ,    
+    "name" : "med-1",
+    "cost" : 100
+}
+
+{
+	"url" : "001" ,    
+    "name" : "med-2",
+    "cost" : 100
+}
+
+{
+	"url" : "001" ,    
+    "name" : "med-3",
+    "cost" : 100
+}
+
+{
+	"url" : "001" ,    
+    "name" : "med-4",
+    "cost" : 100
+}
+
+{
+	"url" : "001" ,    
+    "name" : "DIAPER",
+    "cost" : 2700.00
+}
+
+{
+	"url" : "001" ,    
+    "name" : "DIAPER",
+    "cost" : 450.00
+}
+
+{
+	"url" : "001" ,    
+    "name" : "LAB INVESTIGATIONS",
+    "cost" : 800.00
+}
+{
+	"url" : "001" ,    
+    "name" : "GLOVES",
+    "cost" : 500.00
+}
+{
+	"url" : "001" ,    
+    "name" : "AIR BED MAINTENANCE CHARGES",
+    "cost" : 500.00
+}
+{
+	"url" : "001" ,    
+    "name" : "WATER BED MAINTENANCE CHARGES",
+    "cost" : 400.00
+}
+{
+	"url" : "001" ,    
+    "name" : "DOCTOR CONSULTATION",
+    "cost" : 600.00
+}
+{
+	"url" : "001" ,    
+    "name" : "CATHETERIZATION",
+    "cost" : 1300.00
+}
+{
+	"url" : "001" ,    
+    "name" : "BLADDER WASH CHARGES",
+    "cost" : 500.00
+}
+{
+	"url" : "001" ,    
+    "name" : "UROBAG",
+    "cost" : 100.00
+}
+{
+	"url" : "001" ,    
+    "name" : "GRBS",
+    "cost" : 150.00
+}
+{
+	"url" : "001" ,    
+    "name" : "GRBS",
+    "cost" : 150.00
+}
+{
+	"url" : "001" ,    
+    "name" : "IV SET (BUTTERFLY, CANNULA, NS, DNS, RL)",
+    "cost" : 300.00
+}
+{
+	"url" : "001" ,    
+    "name" : "INJECTIONS",
+    "cost" : 300.00
+}
+{
+	"url" : "001" ,    
+    "name" : "PHYSIOTHERAPY CHARGES",
+    "cost" : 4000.00
+}
+{
+	"url" : "001" ,    
+    "name" : "MONTHLY CHARGES",
+    "cost" : 20000.00
+}

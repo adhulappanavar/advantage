@@ -38,7 +38,7 @@ import { Med2patientsService } from './med2patients.service';
          <tbody>
               <tr *ngFor="#med2patient of med2patients">     
                       <td>
-                      <a href="#" [routerLink]="['Med2patient Details', {id: med2patient.id}]">{{med2patient.patientid}}/{{med2patient.name}}</a>
+                      <a href="#" [routerLink]="['Med2patient Details', {id: med2patient.id}]">{{med2patient.patientid}}/{{med2patient.name}}/{{med2patient.dob}}</a>
                       </td>		
               </tr>         
          </tbody>

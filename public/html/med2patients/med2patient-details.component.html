@@ -15,7 +15,7 @@
       <h4 style='font-size:large'>You selected:</h4>
       <div class='col-md-4'> Name : {{med2patient.name}}</div> 
       <div class='col-md-4'> Patient Id : {{med2patient.patientid}} </div>
-      <div class='col-md-4'> Weight : {{med2patient.weight}}</div>
+      <div class='col-md-4'> Date Of Birth : {{med2patient.dob}}</div>
       </div>
       <div class='col-md-1 col-md-offset-4'>
        <a class='btn btn-default' (click)='gotoPeoplesList()' style='width:80px'>
@@ -47,7 +47,7 @@
                     </tr>
                   </thead>
                   <tbody id="list1">
-                    <tr *ngFor="#medicine of medicines">
+                    <tr *ngFor="#medicine of actualmedicines">
                          <td>{{medicine.name}}</td>
                          <td><a (click)="addNewMedPatientList($event, medicine)">Add</a></td>
                     </tr>

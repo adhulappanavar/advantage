@@ -1,17 +1,358 @@
 {
-	"regitrationNumber" : "001" ,    
-    "name"        : "Patient-1",
+	"registrationNumber" : "001" ,    
+    "name"        : "Kamala",
     "gender"      : "Female",
-    "DOB"         : "1934-01-01",
+    "dob"         : "1941-01-01",
     "dateOfAdmission" : "2014-01-01",  
     "photoUrl"    : "http://lorempixel.com/100/100/people?1",
-    "PCPContact" : {
+    "pcpContact" : {
 		"name" : "ABC" , 
 		"contactNo" : "+91 123456789" , 
 		"adress" : "BLR"
 	},
     "comments" : "patient 1 is from so n so place",
     "initialPayment" : {
-		"registrationFee" : 8000
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+{
+	"registrationNumber" : "002" ,    
+    "name"        : "Subadra",
+    "gender"      : "Female",
+    "dob"         : "1941-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+
+{
+	"registrationNumber" : "003" ,    
+    "name"        : "Bhagyam M",
+    "gender"      : "Female",
+    "dob"         : "1934-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+
+{
+	"registrationNumber" : "004" ,    
+    "name"        : "Surendran K T",
+    "gender"      : "Male",
+    "dob"         : "1938-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+
+{
+	"registrationNumber" : "005" ,    
+    "name"        : "M P Prameelamma",
+    "gender"      : "Female",
+    "dob"         : "1945-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+
+{
+	"registrationNumber" : "006" ,    
+    "name"        : "Sudha Rao",
+    "gender"      : "Female",
+    "dob"         : "1938-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+
+{
+	"registrationNumber" : "007" ,    
+    "name"        : "Saramma Jacob",
+    "gender"      : "Female",
+    "dob"         : "1936-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+
+{
+	"registrationNumber" : "008" ,    
+    "name"        : "Lacca Raju Lakshmi Anasuya",
+    "gender"      : "Female",
+    "dob"         : "1951-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+
+{
+	"registrationNumber" : "009" ,    
+    "name"        : "Meenakshi",
+    "gender"      : "Female",
+    "dob"         : "1957-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+
+{
+	"registrationNumber" : "010" ,    
+    "name"        : "Dilip Kumar Sen",
+    "gender"      : "Male",
+    "dob"         : "1933-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+
+{
+	"registrationNumber" : "011" ,    
+    "name"        : "M S Shankari",
+    "gender"      : "Female",
+    "dob"         : "1920-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+
+{
+	"registrationNumber" : "012" ,    
+    "name"        : "Rachel George",
+    "gender"      : "Female",
+    "dob"         : "1941-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+
+{
+	"registrationNumber" : "013" ,    
+    "name"        : "Jose Pattamana",
+    "gender"      : "Male",
+    "dob"         : "1931-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+
+{
+	"registrationNumber" : "014" ,    
+    "name"        : "Alice George",
+    "gender"      : "Female",
+    "dob"         : "1954-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
+	}
+}
+
+{
+	"registrationNumber" : "015" ,    
+    "name"        : "Pyarelal Kaul",
+    "gender"      : "Male",
+    "dob"         : "1936-01-01",
+    "dateOfAdmission" : "2014-01-01",  
+    "photoUrl"    : "http://lorempixel.com/100/100/people?1",
+    "pcpContact" : {
+		"name" : "ABC" , 
+		"contactNo" : "+91 123456789" , 
+		"adress" : "BLR"
+	},
+    "comments" : "patient 1 is from so n so place",
+    "initialPayment" : {
+		"registrationFee" : 8000,
+        "cautionDeposit" : 75000,
+        "advancePayment" : 20000,
+        "establishmentCharges" : 37500,
+        "monthlyCharges" : 20000,
+        "phyisiotherapyCharges": 4000,
+        "privateNurseCharges" : 7000
 	}
 }
