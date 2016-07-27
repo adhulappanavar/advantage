@@ -118,7 +118,7 @@ router.post('/:id', function(req, res, next) {
         doc.weight = req.body.weight;
         doc.profession = req.body.profession;
         doc.medicines = req.body.medicines,
-        doc.newmedicines = req.body.medicines,
+        doc.newmedicines = req.body.newmedicines,
         
         doc.save(function(err, result) {
             if (err) {

@@ -1,1 +1,1 @@
-mongoimport --db advantage --collection peoples --drop --file ./people_seed.json
+mongoimport --db aniladvantagedb --collection peoples --drop --file ./people_seed.json
