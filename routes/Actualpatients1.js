@@ -2,35 +2,35 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 
-var Med2patients = require('../models/med2patients');
+var Actualpatients = require('../models/Actualpatients');
 
 
-router.get('/static', function(req, res, next) {
+/*router.get('/static', function(req, res, next) {
         res.json( [
              {
       "name": "Luke Skywalker",
       "height": "172",
       "weight": "77",
-      "url": "http://swapi.co/api/med2patients/1/"
+      "url": "http://swapi.co/api/patients/1/"
     },
     {
       "name": "C-3PO",
       "height": "167",
       "weight": "75",
-      "url": "http://swapi.co/api/med2patients/2/"
+      "url": "http://swapi.co/api/patients/2/"
     },
     {
       "name": "R2-D2",
       "height": "96",
       "weight": "32",
-      "url": "http://swapi.co/api/med2patients/3/"
+      "url": "http://swapi.co/api/patients/3/"
     }
      ])
  
-});
+});*/
 
 router.get('/', function(req, res, next) {
-    Med2patients.find()
+    Actualpatients.find()
         .exec(function(err, docs) {
             if (err) {
                 return res.status(404).json({
@@ -47,7 +47,7 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/:id', function(req, res, next) {
-    Med2patients.findById(req.params.id)
+    Actualpatients.findById(req.params.id)
         .exec(function(err, docs) {
             if (err) {
                 return res.status(404).json({
@@ -62,22 +62,15 @@ router.get('/:id', function(req, res, next) {
         });
 });
 
-router.post('/', function(req, res, next) {
-
-        var med2patients = new Med2patients({
+/*router.post('/', function(req, res, next) {
+        var patients = new Patients({
             url         : req.body.url,
-            patientid   : req.body.patientid,
             name        : req.body.name,
-            registrationNumber : req.body.registrationNumber,
-            dob         : req.body.dob,
-            dateOfAdmission : req.body.dateOfAdmission,
             height      : req.body.height,
             weight      : req.body.weight,
-            profession  : req.body.profession,
-            medicines : req.body.medicines,
-            newmedicines : req.body.medicines,
+            profession  : req.body.profession
            });
-        med2patients.save(function(err, result) {
+        patients.save(function(err, result) {
             if (err) {
                 return res.status(404).json({
                     title: 'An error occurred',
@@ -94,7 +87,7 @@ router.post('/', function(req, res, next) {
 
 
 router.post('/:id', function(req, res, next) {
-    Med2patients.findById(req.params.id, function(err, doc) {
+    Patients.findById(req.params.id, function(err, doc) {
         if (err) {
             return res.status(404).json({
                 title: 'An error occurred',
@@ -117,16 +110,10 @@ router.post('/:id', function(req, res, next) {
 //            });
 //        }
         doc.url = req.body.url;
-        doc.patientid = req.body.patientid;
-        doc.registrationNumber = req.body.registrationNumber;
-        doc.dob = req.body.dob;
-        doc.dateOfAdmission = req.body.dateOfAdmission;
         doc.name = req.body.name;
         doc.height = req.body.height;
         doc.weight = req.body.weight;
         doc.profession = req.body.profession;
-        doc.medicines = req.body.medicines,
-        doc.newmedicines = req.body.newmedicines,
         
         doc.save(function(err, result) {
             if (err) {
@@ -155,6 +142,6 @@ router.use('/', function(req, res, next) {
     });
 });
 
-
+*/
 
 module.exports = router;

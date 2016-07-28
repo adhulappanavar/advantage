@@ -10,6 +10,9 @@ var subMedicine = new Schema({
 var schema = new Schema({
     url             : String,
     patientid       : String,
+    registrationNumber : String,
+    dob             : Date,
+    dateOfAdmission : Date,    
     name            : String,
     height          : Number,
     weight          : Number,

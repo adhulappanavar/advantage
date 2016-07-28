@@ -15,7 +15,7 @@
       <h4 style='font-size:large'>You selected:</h4>
       <div class='col-md-4'> Name : {{med2patient.name}}</div> 
       <div class='col-md-4'> Patient Id : {{med2patient.patientid}} </div>
-      <div class='col-md-4'> Weight : {{med2patient.weight}}</div>
+      <div class='col-md-4'> Date Of Birth : {{med2patient.dob}}</div>
       </div>
       <div class='col-md-1 col-md-offset-4'>
        <a class='btn btn-default' (click)='gotoPeoplesList()' style='width:80px'>
@@ -47,7 +47,7 @@
                     </tr>
                   </thead>
                   <tbody id="list1">
-                    <tr *ngFor="#medicine of medicines">
+                    <tr *ngFor="#medicine of actualmedicines">
                          <td>{{medicine.name}}</td>
                          <td><a (click)="addNewMedPatientList($event, medicine)">Add</a></td>
                     </tr>
@@ -63,7 +63,7 @@
                               <div align="center" style='font-size:large'>Picked Mediciines</div>
                               <br>
                               <div align="right">
-                                <a class='btn btn-primary'  (click)='onClickingSave()' style='width:80px'>
+                                <a class='btn btn-primary'  (click)='onSaveFromNewMedicine2GivenMedicine($event, med2patient)' style='width:80px'>
                                   Save            
                                 </a>
                               </div>        
@@ -84,7 +84,7 @@
                                   <tbody id="list1">
                                     <tr *ngFor="#newmed2patientmedicine of med2patient.newmedicines">
                                         <td>{{newmed2patientmedicine.name}}</td>
-                                        <td *ngIf="notEditable">{{mnewmed2patientmedicineedicine.qty}}</td>
+                                        <td *ngIf="notEditable">{{mnewmed2patientmedicine.qty}}</td>
                                         <td *ngIf="notEditable">{{newmed2patientmedicine.cost}}</td>
                                         <td *ngIf="notEditable"></td>
                                         <td *ngIf="!notEditable"><input [(ngModel)]="newmed2patientmedicine.qty" type="Number"></td>
@@ -111,7 +111,7 @@
                                               <tbody id="list1">
                                                 <tr *ngFor="#med2patientmedicine of med2patient.medicines">
                                                     <td>{{med2patientmedicine.name}}</td>
-                                                    <td>{{med2patientmedicineedicine.qty}}</td>
+                                                    <td>{{med2patientmedicine.qty}}</td>
                                                     <td>{{med2patientmedicine.cost}}</td>
                                                 </tr>
                                               </tbody>

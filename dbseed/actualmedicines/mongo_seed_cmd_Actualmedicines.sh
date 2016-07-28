@@ -1,0 +1,1 @@
+mongoimport --db aniladvantagedb --collection actualmedicines --drop --file ./actualmedicines_seed.json
