@@ -71,6 +71,30 @@ export class Med2patientDetailsComponent implements OnInit {
             console.log("Send to Patient List clicked");
            console.log(event, actualmedicine);
            this.med2patient.newmedicines.push(actualmedicine);
-           this.saveMed2patientDetails()
+           this.saveMed2patientDetails();
     }
+
+     onSaveFromNewMedicine2GivenMedicine(event : string, med2patient : Med2patient)
+  {
+                console.log("Save from Picked Medicine to Patients Given Medicine");
+                console.log("New Medicine to be save to Given medicine ..." , event, med2patient);
+                console.log ("New Medicine Length  ", med2patient.length);
+                  console.log ("Med2Patient Object before save  ", med2patient;
+                var tempnewmed : Actualmedicine;
+               for(var i = 0 ; i < med2patient.length ; i++)
+                {
+                      tempnewmed = { 
+                        name : med2patient[i].name,
+                        cost : med2patient[i].cost
+                      };
+                      this.med2patient.medicines.push(tempnewmed);
+                } 
+
+              console.log ("Med2Patient Object after save  ", med2patient;
+
+                this.med2patient.newmedicines = [];
+                this.saveMed2patientDetails();
+    
+  }
+ 
 }
