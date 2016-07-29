@@ -57,7 +57,9 @@ function toMed2patient(r:any): Med2patient{
     height: r.height,
     mongoId : r._id,
     medicines : r.medicines,
-    newmedicines : r.newmedicines
+    newmedicines : r.newmedicines,
+    medtotalcost : r.medtotalcost,
+    newmedtotalcost : r.newmedtotalcost
   });
   console.log('Parsed med2patient:', med2patient);
   return med2patient;

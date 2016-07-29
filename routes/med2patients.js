@@ -76,6 +76,8 @@ router.post('/', function(req, res, next) {
             profession  : req.body.profession,
             medicines : req.body.medicines,
             newmedicines : req.body.medicines,
+            medtotalcost : req.body.medtotalcost,
+            newmedtotalcost : req.body.newmedtotalcost
            });
         med2patients.save(function(err, result) {
             if (err) {
@@ -127,6 +129,7 @@ router.post('/:id', function(req, res, next) {
         doc.profession = req.body.profession;
         doc.medicines = req.body.medicines;
         doc.newmedicines = req.body.newmedicines;
+
 
 //        doc.medtotalcost = calcuateTotalcost(req.body.medicine);
 //        doc.newmedtotalcost = calcuateTotalcost(req.body.newmedicines);
