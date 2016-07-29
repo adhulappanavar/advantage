@@ -97,8 +97,16 @@ export class ActualpatientComponent implements OnInit{
     }
     
     onDelete(id : string) {
-        this.actualpatientsService.deleteMessage(id);
+//        this.actualpatientsService.deleteMessage(id);
+      this.actualpatientsService
+          .deleteActualpatient(id)
+          .subscribe( 
+            (r: Response) => {console.log('success, ')},
+            (error) => {console.log('error: ', error);}
+          );
+
     }
+
     
     stringAsDate(dateStr) {
           return new Date(dateStr);

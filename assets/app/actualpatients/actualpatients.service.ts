@@ -9,6 +9,7 @@ import { Actualpatient } from '../actualpatients/actualpatient';
 export class ActualpatientsService{
   //private baseUrl: string = 'http://swapi.co/api';
     private baseUrl: string = 'http://localhost:3000';
+//    private baseUrl: string = 'http://192.168.1.104:3000';
 
   constructor(private http : Http){}
 
@@ -45,16 +46,26 @@ export class ActualpatientsService{
          return this.http.post('/actualpatients' , body, {headers: headers});
   }
 
+deleteActualpatient(id: string) : Observable<Response>{
+      console.log("In SaveNewStudent");
+        const body = JSON.stringify(id);
+        console.log("body from Delete Patient : " , body);
+        const headers = new Headers({'Content-Type': 'application/json'});
+
+//         return this.http.post('/actualpatients' , body, {headers: headers});
+         return this.http.delete('/actualpatients/${id}');
+
+
+  }
+
+
   deleteMessage(id: string) : Observable<Response>{
       const body = JSON.stringify({"_id" : id});
       const headers = new Headers({'Content-Type': 'application/json'});
-      return this.http.delete(`actualpatients/deleteby` , body, {headers: headers});
-        
-       /* this.messages.splice(this.messages.indexOf(message), 1);
-        const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-        return this._http.delete('http://localhost:3000/message/' + message.messageId + token)
+      return this.http.get(`${this.baseUrl}/actualpatients/${id}`)
             .map(response => response.json())
-            .catch(error => Observable.throw(error.json()));*/
+            .catch(error => Observable.throw(error.json()));
+  
     }
 
 

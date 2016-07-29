@@ -140,7 +140,7 @@ router.post('/:id', function(req, res, next) {
 });
 
 
-router.delete('/deleteby' , function(req, res, next) {
+router.delete('/:id' , function(req, res, next) {
   console.log('del profile');
   console.log(req.body.id);
    Actualpatients.findByIdAndRemove(req.body.id, function(err, doc) {
