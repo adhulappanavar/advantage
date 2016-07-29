@@ -86,7 +86,7 @@ export class Med2patientDetailsComponent implements OnInit {
                       this.med2patient.medicines.push(med2patient.newmedicines[i]);
                 } 
                 
-              console.log ("Med2Patient Object after save  ", med2patient;
+              console.log ("Med2Patient Object after save  ", med2patient);
 
                 this.med2patient.newmedicines = [];
                 this.saveMed2patientDetails();

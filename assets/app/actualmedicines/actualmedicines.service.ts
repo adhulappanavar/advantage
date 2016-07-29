@@ -65,6 +65,6 @@ function toActualmedicine(r:any): Actualmedicine{
       name: r.name,  
       cost: r.cost
     } );
-  console.log('Parsed actualmedicine:', actualmedicine);
+  //console.log('Parsed actualmedicine:', actualmedicine);
   return actualmedicine;
 }

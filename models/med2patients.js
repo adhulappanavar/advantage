@@ -5,7 +5,7 @@ var subMedicine = new Schema({
             medid   : String,
             name    : String,
             qty     : String,
-            totalcost : Number});
+            cost : Number});
 
 var schema = new Schema({
     url             : String,
@@ -18,7 +18,9 @@ var schema = new Schema({
     weight          : Number,
     profession      : String,
     medicines       : [ subMedicine ],
-    newmedicines    : [ subMedicine ]
+    newmedicines    : [ subMedicine ],
+    medtotalcost    : Number,
+    newmedtotalcost : Number
 });
 
 module.exports = mongoose.model('Med2patients', schema);

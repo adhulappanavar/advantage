@@ -125,9 +125,34 @@ router.post('/:id', function(req, res, next) {
         doc.height = req.body.height;
         doc.weight = req.body.weight;
         doc.profession = req.body.profession;
-        doc.medicines = req.body.medicines,
-        doc.newmedicines = req.body.newmedicines,
-        
+        doc.medicines = req.body.medicines;
+        doc.newmedicines = req.body.newmedicines;
+
+//        doc.medtotalcost = calcuateTotalcost(req.body.medicine);
+//        doc.newmedtotalcost = calcuateTotalcost(req.body.newmedicines);
+
+            var tempcost = 0;
+           
+            console.log("req.body.medicines : ", req.body.medicines);
+            if(req.body.medicines) {
+                    console.log("Total cost : req.body.medicines.length ", req.body.medicines.length );
+                    for (var index = 0; index < req.body.medicines.length; index++) {
+                        tempcost = req.body.medicines[index].cost + tempcost;
+                    }
+                    doc.medtotalcost = tempcost;
+                    console.log("Total cost : doc.medtotalcost ", tempcost );
+            }
+            console.log("req.body.newmedicines : ", req.body.newmedicines);
+            if(req.body.newmedicines) {
+                    tempcost = 0;
+                    console.log("Total cost : req.body.newmedicines.length ", req.body.newmedicines.length );                    
+                    for (var index = 0; index < req.body.newmedicines.length; index++) {
+                        tempcost = req.body.newmedicines[index].cost + tempcost;
+                    }
+                   console.log("Total cost : doc.newmedtotalcost ", tempcost );
+                   doc.newmedtotalcost = tempcost;
+            }
+
         doc.save(function(err, result) {
             if (err) {
                 return res.status(404).json({
@@ -142,6 +167,15 @@ router.post('/:id', function(req, res, next) {
         });
     });
 });
+
+function calcuateTotalcost (medlist){
+    var tempcost = 0;
+    for (var index = 0; index < medlist.length; index++) {
+         tempcost += medlist[index].totalcost;
+     }
+     console.log("Total Cost", tempcost);
+     return tempcost;
+};
 
 router.use('/', function(req, res, next) {
     jwt.verify(req.query.token, 'secret', function(err, decoded) {
