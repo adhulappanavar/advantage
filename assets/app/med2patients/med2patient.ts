@@ -14,6 +14,6 @@ export interface Med2patient {
   mongoId? : string;
   medicines? : Actualmedicine[];
   newmedicines? : Actualmedicine[];
-  medtotalcost : number;
-  newmedtotalcost : number;
+  medtotalcost? : number;
+  newmedtotalcost? : number;
 }

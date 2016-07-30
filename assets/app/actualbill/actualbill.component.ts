@@ -14,6 +14,7 @@ import { Med2patient } from '../med2patients/med2patient';
   selector: 'actualpatients-list',
   directives: [ ROUTER_DIRECTIVES],
   template: `
+  <div align="center" *ngIf="editMode"><button class="btn btn-success">Create Bill</button></div>
   <div class="panel panel-default ">
 	  <div class="panel-heading">
 	    <div class='row'>     
@@ -97,7 +98,8 @@ import { Med2patient } from '../med2patients/med2patient';
   
 })
 export class ActualBillComponent implements OnInit{
-  med2patient : Med2patient={ };
+  med2patient : Med2patient={"mongoId": " " };
+  editMode = true;
   thepatient : Actualpatient={};
   showImage = false;
   imageWidth = 50;
