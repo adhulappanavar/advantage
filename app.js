@@ -6,6 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+
+var cfg = require('./config');
+
+
+
 var appRoutes = require('./routes/app');
 var peopleRoutes = require('./routes/peoples');
 var patientsRoutes = require('./routes/patients');
@@ -19,12 +24,14 @@ var studentsRoutes = require('./routes/students');
 
 var app = express();
 
-var opts = {"server" : "localhost", "port" :"27017", "db" : "aniladvantagedb//"};
-//core.connect = function connect(opts) {
-  mongoose.Promise = global.Promise;
-  mongoose.connect(`mongodb://${opts.server}:${opts.port}/${opts.db}`);
-//  return mongoose.connection;
-//};
+
+console.log (cfg.mongo.uri, cfg.mongo.db);
+mongoose.Promise = global.Promise;
+mongoose.connect(cfg.mongo.uri);
+
+
+//var opts = {"server" : "localhost", "port" :"27017", "db" : "aniladvantagedb//"};
+//  mongoose.connect(`mongodb://${opts.server}:${opts.port}/${opts.db}`);
 
 //mongoose.connect('localhost:27017/aniladvantagedb');
 
