@@ -6,6 +6,7 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
       <header class="row">
             <nav class="col-md-8 col-md-offset-2">
                 <ul class="nav nav-pills">
+                   <li>HELLO</li>
                     <li><a [routerLink]="['Med2patients']">Med2Patients</a></li>
                     <li><a [routerLink]="['Auth']">User Management</a></li>
                     <li><a [routerLink]="['Actualpatients']">Patients</a></li>
