@@ -70,10 +70,7 @@ router.post('/', function(req, res, next) {
             name        : req.body.name,
             registrationNumber : req.body.registrationNumber,
             dob         : req.body.dob,
-            dateOfAdmission : req.body.dateOfAdmission,
-            height      : req.body.height,
-            weight      : req.body.weight,
-            profession  : req.body.profession,
+            dateOfAdmission : req.body.dateOfAdmission,            
             medicines : req.body.medicines,
             newmedicines : req.body.medicines,
             medtotalcost : req.body.medtotalcost,
@@ -108,51 +105,29 @@ router.post('/:id', function(req, res, next) {
                 title: 'No message found',
                 error: {message: 'Message could not be found'}
             });
-        }
-        console.log("Mongo Record before update .... "+doc);
-        console.log("Request Body from Browser .... "+req.body);
-//        console.log(decoded.user);
-//        if (doc.user != decoded.user._id) {
-//            return res.status(401).json({
-//                title: 'Not Authorized',
-//                error: {message: 'Message created by other user'}
-//            });
-//        }
+        }        
         doc.url = req.body.url;
         doc.patientid = req.body.patientid;
         doc.registrationNumber = req.body.registrationNumber;
         doc.dob = req.body.dob;
         doc.dateOfAdmission = req.body.dateOfAdmission;
-        doc.name = req.body.name;
-        doc.height = req.body.height;
-        doc.weight = req.body.weight;
-        doc.profession = req.body.profession;
+        doc.name = req.body.name;        
         doc.medicines = req.body.medicines;
         doc.newmedicines = req.body.newmedicines;
-
-
-//        doc.medtotalcost = calcuateTotalcost(req.body.medicine);
-//        doc.newmedtotalcost = calcuateTotalcost(req.body.newmedicines);
-
-            var tempcost = 0;
-           
-            console.log("req.body.medicines : ", req.body.medicines);
-            if(req.body.medicines) {
-                    console.log("Total cost : req.body.medicines.length ", req.body.medicines.length );
-                    for (var index = 0; index < req.body.medicines.length; index++) {
-                        tempcost = req.body.medicines[index].cost + tempcost;
-                    }
-                    doc.medtotalcost = tempcost;
-                    console.log("Total cost : doc.medtotalcost ", tempcost );
+        var tempcost = 0; 
+        if(req.body.medicines)
+         {               
+               for (var index = 0; index < req.body.medicines.length; index++) {
+                       tempcost = req.body.medicines[index].cost + tempcost;
+                }
+                doc.medtotalcost = tempcost;               
             }
-            console.log("req.body.newmedicines : ", req.body.newmedicines);
+            
             if(req.body.newmedicines) {
-                    tempcost = 0;
-                    console.log("Total cost : req.body.newmedicines.length ", req.body.newmedicines.length );                    
+                    tempcost = 0;                              
                     for (var index = 0; index < req.body.newmedicines.length; index++) {
                         tempcost = req.body.newmedicines[index].cost + tempcost;
                     }
-                   console.log("Total cost : doc.newmedtotalcost ", tempcost );
                    doc.newmedtotalcost = tempcost;
             }
 
@@ -176,7 +151,7 @@ function calcuateTotalcost (medlist){
     for (var index = 0; index < medlist.length; index++) {
          tempcost += medlist[index].totalcost;
      }
-     console.log("Total Cost", tempcost);
+
      return tempcost;
 };
 
