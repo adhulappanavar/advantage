@@ -59,6 +59,7 @@ import { ActualpatientsFilterPipe } from './actualpatient-filter.pipe';
           <td>
             <a (click) = "onDelete(actualpatient.id)">Delete</a>
           </td>
+          <td><a>CheckOut</a></td>          
 				</tr>
         </tbody>
 			  </table>	  

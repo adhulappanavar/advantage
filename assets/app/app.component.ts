@@ -35,6 +35,8 @@ import { ActualmedicineDetailsComponent} from './actualmedicines/actualmedicine-
 import { ActualmedicinesEditComponent} from './actualmedicines/actualmedicine-edit.component';
 import { ActualmedicinesService } from './actualmedicines/actualmedicines.service';
 
+import {ActualpatientListPaymentComponent} from './actualpayment/actualpateintlist-payment.component';
+import{ActualBillComponent} from './actualbill/actualbill.component';
 
 @Component({
     selector: 'my-app',
@@ -44,7 +46,7 @@ import { ActualmedicinesService } from './actualmedicines/actualmedicines.servic
             <router-outlet></router-outlet>
         </div>
     `,
-    directives: [ROUTER_DIRECTIVES, HeaderComponent, PeopleComponent, PatientComponent, MedicineComponent, Med2patientComponent, ActualpatientComponent , ActualmedicineComponent],
+    directives: [ROUTER_DIRECTIVES, HeaderComponent, PeopleComponent, PatientComponent, MedicineComponent, Med2patientComponent, ActualpatientComponent , ActualmedicineComponent ,  ActualpatientListPaymentComponent , ActualBillComponent] ,
     providers: [StarWarsService, PatientsService, MedicinesService, Med2patientsService, ActualpatientsService , ActualmedicinesService  ,ROUTER_PROVIDERS, HTTP_PROVIDERS]
 })
 @RouteConfig([
@@ -60,6 +62,8 @@ import { ActualmedicinesService } from './actualmedicines/actualmedicines.servic
     { path: '/ActualmedicinesAdd', name: 'Actualmedicines Add', component: ActualmedicinesAddComponent},
     { path: '/ActualmedicinesDetails', name: 'Actualmedicines Details', component: ActualmedicineDetailsComponent}, 
     { path: '/ActualmedicinesEdit', name: 'Actualmedicines Edit', component: ActualmedicinesEditComponent},
+    { path: '/BillForPatient', name: 'Bill For Patient', component: ActualBillComponent},
+    { path: '/PaymentPatientList', name: 'Payment Patient List', component: ActualpatientListPaymentComponent}
     
 ])
 export class AppComponent {

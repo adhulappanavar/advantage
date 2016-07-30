@@ -189,19 +189,7 @@ router.delete('/:id' , function(req, res, next) { console.log("test");
         console.log("Request Body from Browser .... "+req.body);
    });
 });    
-  /*console.log(req.body);
-  Actualpatients.findByIdAndRemove(req.body , {},
-    function(err, obj) {
-      if (err) next(err);
-      req.body.destroy(function(error) {
-        if (err) {
-          next(err)
-        }
-      });
-      res.json(200, obj);
-    }
-  );*/
-
+ 
 
 
 

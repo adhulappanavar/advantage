@@ -11,6 +11,7 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
                                     <li><a [routerLink]="['Actualpatients']">Patients</a></li>
                                     <li><a [routerLink]="['Actualmedicines']">Items</a></li>
                                     <li><a  [routerLink]="['Med2patients']">AddItemToBill</a></li>
+                                    <li><a  [routerLink]="['Payment Patient List']">Payment Patient List</a></li>
                                     <li><a [routerLink]="['Auth']">User Management</a></li>									
 								</ul>
 							</div>
