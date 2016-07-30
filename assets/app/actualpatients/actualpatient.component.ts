@@ -96,7 +96,7 @@ export class ActualpatientComponent implements OnInit{
         this.showImage = !this.showImage;
     }
     
-    onDelete(id : string) {
+    onDelete(id : string) { console.log("logging another change!!!!");
 //        this.actualpatientsService.deleteMessage(id);
       this.actualpatientsService
           .deleteActualpatient(id)
@@ -104,6 +104,10 @@ export class ActualpatientComponent implements OnInit{
             (r: Response) => {console.log('success, ')},
             (error) => {console.log('error: ', error);}
           );
+
+          this.actualpatientsService
+      .getAllActualpatients()
+      .subscribe(p => this.actualpatients = p);
 
     }
 

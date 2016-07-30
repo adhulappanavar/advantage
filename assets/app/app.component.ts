@@ -38,9 +38,9 @@ import { ActualmedicinesService } from './actualmedicines/actualmedicines.servic
 
 @Component({
     selector: 'my-app',
-    template: ` 
-        <div class="container">
-            <my-header></my-header>
+    template: `
+    <my-header></my-header> 
+        <div class="container">            
             <router-outlet></router-outlet>
         </div>
     `,
@@ -48,10 +48,10 @@ import { ActualmedicinesService } from './actualmedicines/actualmedicines.servic
     providers: [StarWarsService, PatientsService, MedicinesService, Med2patientsService, ActualpatientsService , ActualmedicinesService  ,ROUTER_PROVIDERS, HTTP_PROVIDERS]
 })
 @RouteConfig([
-   { path: '/med2patients', name: 'Med2patients', component: Med2patientComponent},
+   { path: '/med2patients', name: 'Med2patients', component: Med2patientComponent , useAsDefault: true},
     { path: '/med2patients/:id', name: 'Med2patient Details', component: Med2patientDetailsComponent },
     {path: '/auth/...', name: 'Auth', component: AuthenticationComponent},
-    { path: '/Actualpatients', name: 'Actualpatients', component: ActualpatientComponent, useAsDefault: true },
+    { path: '/Actualpatients', name: 'Actualpatients', component: ActualpatientComponent },
     { path: '/ActualpatientsAdd', name: 'Actualpatients Add', component: ActualpatientsAddComponent },
     { path: '/ActualpatientsDetails', name: 'Actualpatients Details', component: ActualpatientDetailsComponent}, 
     { path: '/ActualpatientsEdit', name: 'Actualpatients Edit', component: ActualpatientsEditComponent},
