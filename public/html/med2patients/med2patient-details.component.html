@@ -13,9 +13,8 @@
     <div class="row">
       <div class='col-md-6'>
       <h4 style='font-size:large'>You selected:</h4>
-      <div class='col-md-4'> Name : {{med2patient.name}}</div> 
-      <div class='col-md-4'> Patient Id : {{med2patient.patientid}} </div>
-      <div class='col-md-4'> Date Of Birth : {{med2patient.dob}}</div>
+      <div class='col-md-4'> Name : {{med2patient.name}}</div>
+     
       </div>
       <div class='col-md-1 col-md-offset-4'>
        <a class='btn btn-default' (click)='gotoPeoplesList()' style='width:80px'>
@@ -47,7 +46,7 @@
                     </tr>
                   </thead>
                   <tbody id="list1">
-                    <tr *ngFor="#medicine of actualmedicines">
+                    <tr *ngFor="#medicine of actualmedicines | actualmedicinesFilter : listFilter">
                          <td>{{medicine.name}}</td>
                          <td><a (click)="addNewMedPatientList($event, medicine)">Add</a></td>
                     </tr>
@@ -59,14 +58,11 @@
         </div><!--div class='col-md-6'  End of Pick Medicine in FIrst column-->
         <div class="col-md-6">
           <div class="row">
-                      <div >
-                          <div style="background-color:#337ab7;padding:0px 2px 6px 7px;color:white;border-radius:5px;border-style: hidden">            
-                              <div align="center" style='font-size:large'>Picked Mediciines</div>
-                          </div>
-                              <br>
+                      <div class="row">                                     
+                              <div align="center" style='font-size:large; color:#337ab7'><h2 style="color:#337ab7">Picked Mediciines</h2></div>                                                   
                               <div align="right">
                                 <a class='btn btn-primary'  (click)='onSaveFromNewMedicine2GivenMedicine($event, med2patient)' style='width:80px'>
-                                  Save            
+                                  Save           
                                 </a>
                               </div>        
                       </div>                             
@@ -77,21 +73,15 @@
                                     <tr>
                                       <th>Medicine Name</th>
                                       <th>Qty</th>
-                                      <th>Cost</th>
-                                      <th *ngIf="notEditable"><a (click) = 'makeEditable()'>Edit</a></th>
-                                      <th *ngIf="!notEditable"><a (click) = 'makeEditable()'>Done</a></th>
+                                      <th>Cost</th>                                      
                                       <th></th>                      
                                     </tr>
                                   </thead>
                                   <tbody id="list1">
                                     <tr *ngFor="#newmed2patientmedicine of med2patient.newmedicines">
-                                        <td>{{newmed2patientmedicine.name}}</td>
-                                        <td *ngIf="notEditable">{{mnewmed2patientmedicine.qty}}</td>
-                                        <td *ngIf="notEditable">{{newmed2patientmedicine.cost}}</td>
-                                        <td *ngIf="notEditable"></td>
-                                        <td *ngIf="!notEditable"><input [(ngModel)]="newmed2patientmedicine.qty" type="Number"></td>
-                                        <td *ngIf="!notEditable"><input [(ngModel)]="newmed2patientmedicine.cost" type="Number"></td>
-                                        <td *ngIf="!notEditable"></td>
+                                        <td>{{newmed2patientmedicine.name}}</td>                                        
+                                        <td ><input [(ngModel)]="newmed2patientmedicine.qty" type="Number"></td>
+                                        <td ><input [(ngModel)]="newmed2patientmedicine.cost" type="Number"></td>                                        
                                         <td><a>Delete</a></td>
                                     </tr>
                                   </tbody>
@@ -102,8 +92,8 @@
                           </div> 
                            <br>
                             <br>
-                          <div style="background-color:#337ab7;padding:0px 2px 6px 7px;color:white;border-radius:5px;border-style: hidden">            
-                              <div align="center" style='font-size:large'>Unbilled Medicine List</div>
+                          <div>            
+                              <div align="center" style='font-size:large;color:#337ab7'>Unbilled Medicine List</div>
                           </div> 
                           <div class="table-responsive">
                                           <table class="table">

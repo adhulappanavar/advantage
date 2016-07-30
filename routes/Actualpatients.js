@@ -3,7 +3,7 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 
 var Actualpatients = require('../models/actualpatients');
-
+var Med2patients = require('../models/med2patients');
 
 router.get('/static', function(req, res, next) {
         res.json( [
@@ -82,7 +82,35 @@ router.post('/', function(req, res, next) {
                     error: err
                 });
             }
-            res.status(201).json({
+            /*res.status(201).json({
+                message: 'Saved message',
+                obj: result
+            });*/
+        });
+
+        var med2patients = new Med2patients({
+            url         : req.body.url,
+            patientid   : req.body.patientid,
+            name        : req.body.name,
+            registrationNumber : req.body.registrationNumber,
+            dob         : req.body.dob,
+            dateOfAdmission : req.body.dateOfAdmission,
+            height      : req.body.height,
+            weight      : req.body.weight,
+            profession  : req.body.profession,
+            medicines : [],
+            newmedicines : [],
+            medtotalcost : 0,
+            newmedtotalcost : 0
+           });
+        med2patients.save(function(err, result) {
+            if (err) {
+                return res.status(404).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(202).json({
                 message: 'Saved message',
                 obj: result
             });

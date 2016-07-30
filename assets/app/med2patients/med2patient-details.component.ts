@@ -8,18 +8,19 @@ import { Med2patient } from './med2patient';
 
 import { ActualmedicinesService } from '../actualmedicines/actualmedicines.service';
 import { Actualmedicine } from '../actualmedicines/actualmedicine';
-
+import { ActualmedicinesFilterPipe } from '../actualmedicines/actualmedicine-filter.pipe';
 
 @Component({
   selector: 'med2patient-details',
   templateUrl: 'html/med2patients/med2patient-details.component.html',
-  styleUrls: ['html/med2patients/med2patient-details.component.css']
+  styleUrls: ['html/med2patients/med2patient-details.component.css'],
+  pipes : [ActualmedicinesFilterPipe]
 })
 export class Med2patientDetailsComponent implements OnInit {
     @Input() med2patient : Med2patient;
     actualmedicines: Actualmedicine[] = [];
     isSaving: boolean;
-    professions: string[] = ['jedi', 'bounty hunter', 'princess', 'sith lord'];
+    listFilter = "";
 
     constructor(private med2patientsService: Med2patientsService,
                 private actualmedicinesService: ActualmedicinesService,
@@ -70,6 +71,7 @@ export class Med2patientDetailsComponent implements OnInit {
       addNewMedPatientList(event : string, actualmedicine : Actualmedicine) {
             console.log("Send to Patient List clicked");
            console.log(event, actualmedicine);
+           actualmedicine.qty = 1;
            this.med2patient.newmedicines.push(actualmedicine);
            this.saveMed2patientDetails();
     }

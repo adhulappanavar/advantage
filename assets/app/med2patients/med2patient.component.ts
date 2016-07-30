@@ -5,9 +5,12 @@ import { Med2patient } from './med2patient';
 import { Med2patientDetailsComponent } from './med2patient-details.component';
 import { Med2patientsService } from './med2patients.service';
 
+import {ActualpatientsFilterPipe} from './actualpatient-filter.pipe';
+
 @Component({
   selector: 'med2patients-list',
   directives: [Med2patientDetailsComponent, ROUTER_DIRECTIVES],
+  pipes : [ActualpatientsFilterPipe] , 
   template: `
   <!-- this is the new syntax for ng-repeat 
   <ul class="med2patients">
@@ -24,8 +27,8 @@ import { Med2patientsService } from './med2patients.service';
             <div class='col-md-6'>
                 <span style='font-size:large'>Filter by:</span ><input style="color:black" type='text' [(ngModel)]='listFilter'/>
             </div>           
-     </div>	
-	 <div style='font-size:large'> Click On patient to add items to that patient</div>	 
+     </div>	<br>
+	 <div style='font-size:large'> Click on Patient Name to Add Items to that Patient</div>	 
 	  </div>
 	  <div class="panel-body">
 		<div class="table-responsive">
@@ -36,9 +39,9 @@ import { Med2patientsService } from './med2patients.service';
                     </tr>
          </thead>
          <tbody>
-              <tr *ngFor="#med2patient of med2patients">     
+              <tr *ngFor="#med2patient of med2patients | actualpatientsFilter : listFilter">     
                       <td>
-                      <a href="#" [routerLink]="['Med2patient Details', {id: med2patient.id}]">{{med2patient.patientid}}/{{med2patient.name}}/{{med2patient.dob}}</a>
+                      <a href="#" [routerLink]="['Med2patient Details', {id: med2patient.id}]">{{med2patient.name}}</a>
                       </td>		
               </tr>         
          </tbody>
@@ -53,7 +56,7 @@ import { Med2patientsService } from './med2patients.service';
 export class Med2patientComponent implements OnInit{
   med2patients: Med2patient[] = [];
   selectedMed2patient: Med2patient;
-
+  listfilter= "";
   constructor(private med2patientsService : Med2patientsService){ }
 
   ngOnInit(){
