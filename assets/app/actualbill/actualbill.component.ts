@@ -32,7 +32,10 @@ import { Med2patient } from '../med2patients/med2patient';
               <div class="table">
                 <tbody>
                 <tr><td>Patient Name:</td><td>{{med2patient.name}}</td></tr>
-                
+                <tr><td>Patient Name:</td><td>{{thepatient.name}}</td></tr>
+                <tr><td>Reg No:</td><td>{{thepatient.registrationNumber}}</td></tr>
+                <tr><td>DOA :</td><td>{{stringAsDate(thepatient.dateOfAdmission)}}</td></tr>
+                <tr><td>Age/Gender</td><td>{{clacAge(thepatient.dob)}}/{{thepatient.gender}}</td></tr>
               </div>
               </div>
             </div>
@@ -41,7 +44,10 @@ import { Med2patient } from '../med2patients/med2patient';
                 <table class="table">
                   <tbody>
                     <tr><td>Category:</td><td>Monthly Bill</td></tr>
-                    
+                    <tr><td>Category:</td><td>Monthly Bill</td></tr>
+                    <tr><td>Month:</td><td>{{getBillingMonth()}}</td></tr>
+                    <tr><td>Date:</td><td>{{todaysDate()}}</td></tr>
+                    <tr><td>Prepared By:</td><td>{{user}}</td></tr>				
                   </tbody>
                 </table>
               </div>
