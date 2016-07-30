@@ -21,12 +21,12 @@ var app = express();
 
 var opts = {"server" : "localhost", "port" :"27017", "db" : "aniladvantagedb//"};
 //core.connect = function connect(opts) {
-  mongoose.Promise = global.Promise;
-  mongoose.connect(`mongodb://${opts.server}:${opts.port}/${opts.db}`);
+//  mongoose.Promise = global.Promise;
+//  mongoose.connect(`mongodb://${opts.server}:${opts.port}/${opts.db}`);
 //  return mongoose.connection;
 //};
 
-//mongoose.connect('localhost:27017/aniladvantagedb');
+mongoose.connect('localhost:27017/aniladvantagedb');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

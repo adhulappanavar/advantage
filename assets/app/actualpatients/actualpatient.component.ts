@@ -96,7 +96,7 @@ export class ActualpatientComponent implements OnInit{
         this.showImage = !this.showImage;
     }
     
-    onDelete(id : string) {
+    onDelete(id : string) { console.log("logginf another change");
 //        this.actualpatientsService.deleteMessage(id);
       this.actualpatientsService
           .deleteActualpatient(id)

@@ -140,10 +140,11 @@ router.post('/:id', function(req, res, next) {
 });
 
 
-router.delete('/:id' , function(req, res, next) {
+router.delete('/:id' , function(req, res, next) { console.log("test");
   console.log('del profile');
-  console.log(req.body.id);
-   Actualpatients.findByIdAndRemove(req.body.id, function(err, doc) {
+  console.log(req.params.id);
+  console.log("param id");
+   Actualpatients.findByIdAndRemove(req.params.id, function(err, doc) {
         if (err) {
             return res.status(404).json({
                 title: 'An error occurred',

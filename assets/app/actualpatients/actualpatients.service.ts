@@ -47,13 +47,13 @@ export class ActualpatientsService{
   }
 
 deleteActualpatient(id: string) : Observable<Response>{
-      console.log("In SaveNewStudent");
+      console.log("In deleteStudent");
         const body = JSON.stringify(id);
         console.log("body from Delete Patient : " , body);
         const headers = new Headers({'Content-Type': 'application/json'});
 
 //         return this.http.post('/actualpatients' , body, {headers: headers});
-         return this.http.delete('/actualpatients/${id}');
+         return this.http.delete(`${this.baseUrl}/actualpatients/${id}`);
 
 
   }
