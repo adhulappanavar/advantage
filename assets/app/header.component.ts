@@ -13,7 +13,7 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
                     <li><a [routerLink]="['Actualmedicines']">Items</a></li>
                     
                 </ul>
-            </nav>
+            </nav>  
         </header>
     `,
     directives: [ROUTER_DIRECTIVES],
