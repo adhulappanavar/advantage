@@ -21,6 +21,7 @@ var actualmedicinesRoutes = require('./routes/actualmedicines');
 var med2patientsRoutes = require('./routes/med2patients');
 var userRoutes = require('./routes/users');
 var studentsRoutes = require('./routes/students');
+var seedsRoutes = require('./routes/seeds');
 
 var app = express();
 
@@ -69,6 +70,7 @@ app.use('/medicines', medicinesRoutes);
 app.use('/med2patients', med2patientsRoutes);
 app.use('/user', userRoutes);
 app.use('/students', studentsRoutes);
+app.use('/seeds', seedsRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler

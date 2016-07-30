@@ -82,7 +82,7 @@ export class Med2patientDetailsComponent implements OnInit {
                 console.log("Save from Picked Medicine to Patients Given Medicine");
                 console.log("New Medicine to be save to Given medicine ..." , event, med2patient);
                 console.log ("New Medicine Length  ", med2patient.newmedicines.length);
-                  console.log ("Med2Patient Object before save  ", med2patient;
+                  console.log ("Med2Patient Object before save  ", med2patient);
                 for(var i = 0 ; i < med2patient.newmedicines.length ; i++)
                 {
                       this.med2patient.medicines.push(med2patient.newmedicines[i]);

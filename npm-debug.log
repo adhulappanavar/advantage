@@ -1,13 +1,16 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'run', 'gulp' ]
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'startclouddev' ]
 2 info using npm@2.15.8
 3 info using node@v4.4.7
-4 verbose run-script [ 'pregulp', 'gulp', 'postgulp' ]
-5 info pregulp udemy-nodejs-angular2@1.0.0
-6 info gulp udemy-nodejs-angular2@1.0.0
+4 verbose run-script [ 'prestartclouddev', 'startclouddev', 'poststartclouddev' ]
+5 info prestartclouddev udemy-nodejs-angular2@1.0.0
+6 info startclouddev udemy-nodejs-angular2@1.0.0
 7 verbose unsafe-perm in lifecycle true
-8 info udemy-nodejs-angular2@1.0.0 Failed to exec gulp script
-9 verbose stack Error: udemy-nodejs-angular2@1.0.0 gulp: `gulp`
+8 info udemy-nodejs-angular2@1.0.0 Failed to exec startclouddev script
+9 verbose stack Error: udemy-nodejs-angular2@1.0.0 startclouddev: `NODE_ENV=clouddev node ./bin/www`
 9 verbose stack Exit status 1
 9 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:217:16)
 9 verbose stack     at emitTwo (events.js:87:13)
@@ -20,17 +23,17 @@
 10 verbose pkgid udemy-nodejs-angular2@1.0.0
 11 verbose cwd /Users/tesco/GitHub/advantage/advantage
 12 error Darwin 14.5.0
-13 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "gulp"
+13 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "startclouddev"
 14 error node v4.4.7
 15 error npm  v2.15.8
 16 error code ELIFECYCLE
-17 error udemy-nodejs-angular2@1.0.0 gulp: `gulp`
+17 error udemy-nodejs-angular2@1.0.0 startclouddev: `NODE_ENV=clouddev node ./bin/www`
 17 error Exit status 1
-18 error Failed at the udemy-nodejs-angular2@1.0.0 gulp script 'gulp'.
+18 error Failed at the udemy-nodejs-angular2@1.0.0 startclouddev script 'NODE_ENV=clouddev node ./bin/www'.
 18 error This is most likely a problem with the udemy-nodejs-angular2 package,
 18 error not with npm itself.
 18 error Tell the author that this fails on your system:
-18 error     gulp
+18 error     NODE_ENV=clouddev node ./bin/www
 18 error You can get information on how to open an issue for this project with:
 18 error     npm bugs udemy-nodejs-angular2
 18 error Or if that isn't available, you can get their info via:
