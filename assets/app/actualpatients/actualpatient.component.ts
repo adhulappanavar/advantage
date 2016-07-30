@@ -20,6 +20,7 @@ import { ActualpatientsFilterPipe } from './actualpatient-filter.pipe';
                 <span style='font-size:large'>Filter by:</span ><input style="color:black" type='text' [(ngModel)]='listFilter'/>
             </div>
             <div class='col-md-1 col-md-offset-1'><button class="btn btn-danger" [routerLink] = "['Actualpatients Add']" >ADD</button></div>
+            <div class='col-md-1'>Female No : <span></span></div>
      </div>		 
 	  </div>
 	  <div class="panel-body">
@@ -43,6 +44,7 @@ import { ActualpatientsFilterPipe } from './actualpatient-filter.pipe';
          </thead>
          <tbody>
 				<tr *ngFor="#actualpatient of actualpatients | actualpatientsFilter:listFilter">
+          {{genderCount(actualpatient.gender)}}
           <td>
                 <img *ngIf='showImage' [src]='actualpatient.photoUrl' [title]='actualpatient.name' [style.width.px]='imageWidth' [style.margin.px]= 'imageMargin'/>
           </td>
@@ -75,10 +77,11 @@ export class ActualpatientComponent implements OnInit{
   selectedActualpatient: Actualpatient;
   listFilter = "";
   showImage = false;
-  imageWidth = 50;
+  imageWidth= 50;
   imageMArgin = 2;
   constructor(private actualpatientsService : ActualpatientsService){ }
-
+  femaleNo = 0 ; 
+  maleNo = 0;
   ngOnInit(){
     //this.actualpatients = this.starWarsService.getAll();
     this.actualpatientsService
@@ -90,6 +93,15 @@ export class ActualpatientComponent implements OnInit{
     this.selectedActualpatient = actualpatient;
   }
   
+  genderCount( gender : string)
+  {
+    console.log("in gender count");
+      if(gender=="Female")
+        this.femaleNo=this.femaleNo+1;
+      else
+        this.maleNo = this.maleNo + 1;
+
+  }
   
   toggleImage() : void
     {
