@@ -43,4 +43,11 @@ export class AuthenticationComponent {
         return this._authService.isLoggedIn();
     }
 
+    
+    getUserName(){
+            var name = this._authService.isLoggedIn();
+            return name;
+        }
+    }
+
 }
