@@ -1,0 +1,39 @@
+1) Add moments for diff for age calc      - DONE
+
+2) delete   -DONE for patient 
+
+3) History events
+
+4) pdf - phantomjs - DONE as jpg
+
+5)get data for patient and meds      -  DONE
+
+6) Authentication  - DONE
+
+7) avoid network for cdnjs
+
+8) active tabs in bootstrap nav bar
+
+9) Clean Up
+
+10) Refreshing URL problem 
+
+11) Save button on med2Patient - DONE
+
+12) Remove unwanted files
+
+13) when a patient is created create actualmed2patient record -DONE for add should do for edit
+
+14) Quantity edit on addtoitem page  - done
+
+15) node.exe and npm instaleed on usb drive and code as well
+
+16) make seed as a route which reads a file system json file an seeds the file js insted of import -DONE 
+Clean Up List:
+
+1) rename actualpatients to patients
+
+2) rename actualmedicines to items
+
+3) rename the methode names
+

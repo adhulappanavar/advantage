@@ -14,7 +14,8 @@ import { Med2patient } from '../med2patients/med2patient';
   selector: 'actualpatients-list',
   directives: [ ROUTER_DIRECTIVES],
   template: `
-  <div align="center"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-success" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
+  <div align="right"><button class="btn btn-success">Make Bill</button></div>
+  <div align="center"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-warning" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
   <br>
   <div class="panel panel-default ">
 	  <div class="panel-heading">
