@@ -14,8 +14,8 @@ import { Med2patient } from '../med2patients/med2patient';
   selector: 'actualpatients-list',
   directives: [ ROUTER_DIRECTIVES],
   template: `
-  <div align="right" *ngIf="!editMode"><button class="btn btn-success" (click)="makeFinal()"> Final Make Bill</button></div>
-  <div align="center"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-warning" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
+  <div align="right" *ngIf="!editMode && notFinal"><button class="btn btn-success" (click)="makeFinal()"> Final Make Bill</button></div>
+  <div align="center" *ngIf="notFinal"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-warning" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
   <br>
   <div class="panel panel-default ">
 	  <div class="panel-heading">
@@ -152,7 +152,7 @@ import { Med2patient } from '../med2patients/med2patient';
            <div class="table responsive">
               <table class="table">
                   <tbody>
-                    <tr><td>Total Cost : </td><td>{{med2patient.medtotalcost}}</td></tr>
+                    <tr><td>Total Cost : </td><td>{{calcTotalAmount(med2patient.medtotalcost)}}</td></tr>
                   </tbody>
               </table>
            </div>   
@@ -174,6 +174,7 @@ export class ActualBillComponent implements OnInit{
   imageWidth = 50;
   imageMArgin = 2;
   slno = 1;
+  notfinal=true;
   selectAll = true;
   id;
   notFinal=true;
@@ -182,6 +183,7 @@ export class ActualBillComponent implements OnInit{
   dontAdd = [] ;
   billDate = this.todaysDate();
   buildtotal = 0;
+  billTotal = 0;
   user="ACE/MARSH";
   constructor(private med2patientsService : Med2patientsService,
               private actualpatientsService : ActualpatientsService,
@@ -201,6 +203,7 @@ export class ActualBillComponent implements OnInit{
           .subscribe(p => this.selectedForBill = p.medicines);               
 
           console.log(this.selectedForBill);
+      
 
      } 
 
@@ -219,6 +222,10 @@ export class ActualBillComponent implements OnInit{
        return false;
      }
 
+     makeFinal()
+     {
+        this.notFinal =!this.notFinal;
+     }
 
    onChangeSelectAll(index , classId,flag , id){
         console.log("try1: " , this.selectedForBill);
@@ -330,15 +337,24 @@ toggleSelect()
 }
 
   calcTotalAmount(actualmed2patient){
-       console.log(this.thepatient.name);
+       console.log(this.thepatient);
        
-       console.log("calcTotalAmount::" , actualmed2patient.patientid);
+       //console.log("calcTotalAmount::" , actualmed2patient.patientid);
        //var len = this.actualmed2patient.medicines.length;
        /*for(var i=0;i< len ; i++)
        {
           this.buildtotal = this.buildtotal + (this.actualmed2patient.medicines[i].cost * parseInt(this.actualmed2patient.medicines[i].qty));   
        }       
        return this.buildtotal;*/
+
+       var cost=0;
+       for(var i = 0 ; i<this.selectedForBill.length; i++)
+       {
+              cost = cost + ( this.selectedForBill[i].cost * this.selectedForBill[i].qty  );
+       }
+
+
+       return cost;
      }
     stringAsDate(dateStr) {
           //return new Date(dateStr);
