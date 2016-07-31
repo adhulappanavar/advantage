@@ -14,8 +14,10 @@ import { Med2patient } from '../med2patients/med2patient';
   selector: 'actualpatients-list',
   directives: [ ROUTER_DIRECTIVES],
   template: `
-  <div align="right" *ngIf="!editMode && notFinal"><button class="btn btn-success" (click)="makeFinal()"> Final Make Bill</button></div>
-  <div align="center" *ngIf="notFinal"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-warning" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
+  <div class="row">  
+      <div class="col-md-6" align="center" *ngIf="notFinal"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-warning" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
+      <div class="col-md-6" align="center" *ngIf="!editMode && notFinal"><button class="btn btn-success" (click)="makeFinal()">Make Final Bill</button></div>
+  </div>
   <br>
   <div class="panel panel-default ">
 	  <div class="panel-heading">
@@ -57,8 +59,8 @@ import { Med2patient } from '../med2patients/med2patient';
                       </td>
                     </tr>
                     <tr>
-                        <td>Month:</td>
-                        <td *ngIf="!editMode">{{billmonth}}</td>
+                        <td>Month/Year:</td>
+                        <td *ngIf="!editMode">{{billmonth}}/{{billyear}}</td>
                         <td *ngIf="editMode">
                           <select class="form-control" id="sel1" [(ngModel)] = "billmonth" >
                             <option value="January">January</option>
@@ -73,6 +75,11 @@ import { Med2patient } from '../med2patients/med2patient';
                             <option value="October">October</option>
                             <option value="November">November</option>
                             <option value="December">December</option>                          
+                          </select>
+                              /
+                          <select class="form-control" id="sel1" [(ngModel)] = "billyear" >
+                            <option [value]="billyear-1">{{billyear-1}}</option>
+                            <option [value]="billyear">{{billyear}}</option>
                           </select>
                         </td>
                     </tr>
@@ -178,6 +185,7 @@ export class ActualBillComponent implements OnInit{
   selectAll = true;
   id;
   notFinal=true;
+  billyear =this.getBillingYear();
   tempbill = [];
   selectedForBill = [];
   dontAdd = [] ;
@@ -380,5 +388,11 @@ toggleSelect()
       //  console.log(m.format("MMMM"));
       
       return m.format("MMMM");
+     }
+
+     getBillingYear()
+     {
+       var m = moment(new Date() , "YYYY-MM-DD");
+       return m.format("YYYY");
      }
 }
