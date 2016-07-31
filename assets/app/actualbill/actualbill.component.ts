@@ -14,7 +14,7 @@ import { Med2patient } from '../med2patients/med2patient';
   selector: 'actualpatients-list',
   directives: [ ROUTER_DIRECTIVES],
   template: `
-  <div align="right"><button class="btn btn-success">Make Bill</button></div>
+  <div align="right" *ngIf="!editMode"><button class="btn btn-success" (click)="makeFinal()"> Final Make Bill</button></div>
   <div align="center"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-warning" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
   <br>
   <div class="panel panel-default ">
@@ -96,23 +96,53 @@ import { Med2patient } from '../med2patients/med2patient';
      </div>
        <div class="panel-body">
             <div class="table-responsive">
-			         <table class="table">
+              <table *ngIf="!editMode && selectedForBill" class="table">
                     <thead>
                         <tr>                            
                             <th>Sl No</th>
                             <th>Particulars</th>
                             <th>Quanty</th>
                             <th>Base Cost</th>
-                            <th>Amount</th>                                           
+                            <th>Amount</th>
+                                                                                                     
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody >
+                        <tr *ngFor="#medicine of selectedForBill;var index=index">
+                             <td>{{index+1}}</td>
+                             <td>{{medicine.name}}</td>
+                             <td>{{medicine.qty}}</td>
+                             <td>{{medicine.cost}}</td>                             
+                             <td>{{medicine.cost * medicine.qty}}</td>
+                        </tr>
+                    </tbody>
+               </table>
+			         <table *ngIf="editMode && med2patient" class="table">
+                    <thead>
+                        <tr>                            
+                            <th>Sl No</th>
+                            <th>Particulars</th>
+                            <th>Quanty</th>
+                            <th>Base Cost</th>
+                            <th>Amount</th>
+                            <th (click) = "toggleSelect()"><a>{{selectAll ? 'UnSelect all' : 'Select All'}}</a></th>                                                                         
+                        </tr>
+                    </thead>
+                    <tbody >
                         <tr *ngFor="#medicine of med2patient.medicines;var index=index">
                              <td>{{index+1}}</td>
                              <td>{{medicine.name}}</td>
                              <td>{{medicine.qty}}</td>
                              <td>{{medicine.cost}}</td>                             
                              <td>{{medicine.cost * medicine.qty}}</td>
+                             <td *ngIf="selectAll">
+                                  <span *ngIf="exists(medicine)"><input type="checkbox" value=""  #cv [checked]=true (change)="onChangeSelectAll(index , medicine.name,cv.checked , medicine._id)"></span>
+                                  <span *ngIf="!exists(medicine)"><input type="checkbox" value=""  #cv [checked]=false (change)="onChangeSelectAll(index , medicine.name,cv.checked , medicine._id)"></span>
+                             </td>
+                             <td *ngIf="!selectAll">
+                                 <span *ngIf="!exists(medicine)"><input type="checkbox" value="" #cv [checked]=false (change)="onChangeUnSelectAll(index , medicine.name,cv.checked , medicine._id)"></span>
+                                 <span *ngIf="exists(medicine)"><input type="checkbox" value="" #cv [checked]=true (change)="onChangeUnSelectAll(index , medicine.name,cv.checked , medicine._id)"></span>
+                             </td>                                            
                         </tr>
                     </tbody>
                </table>
@@ -144,6 +174,12 @@ export class ActualBillComponent implements OnInit{
   imageWidth = 50;
   imageMArgin = 2;
   slno = 1;
+  selectAll = true;
+  id;
+  notFinal=true;
+  tempbill = [];
+  selectedForBill = [];
+  dontAdd = [] ;
   billDate = this.todaysDate();
   buildtotal = 0;
   user="ACE/MARSH";
@@ -154,25 +190,117 @@ export class ActualBillComponent implements OnInit{
 
   ngOnInit(){
      let id = this.routeParams.get('id');
+     this.id = id;
      console.log(id);
-    //this.actualpatients = this.starWarsService.getAll();
-    /*this.actualmed2patientsService
-         .getMed2PatientIdFromPatientId(id)
-          .subscribe(p => this.actualmed2patient = p);
- //   */   //   console.log('getting med2patientObj : ', this.actualmed2patient);
-          
-    /* this.actualpatientsService
-      .getActualpatient(id)
-      .subscribe(p => this.thepatient = p)    
-
-*/
       this.med2patientsService
           .getMed2patients(id)
           .subscribe(p => this.med2patient = p);
 
+      this.med2patientsService
+          .getMed2patients(id)
+          .subscribe(p => this.selectedForBill = p.medicines);               
 
-      //  this.calcTotalAmount(this.actualmed2patient);
-  } 
+          console.log(this.selectedForBill);
+
+     } 
+
+     exists(med)
+     {
+       //console.log("in exists");
+       //console.log(this.selectedForBill);
+       for(var i=0;i<this.selectedForBill.length;i++)
+       {
+         //console.log(this.selectedForBill[i]._id+" : " + med._id);
+         //console.log(this.selectedForBill[i]._id == med._id);
+         if(this.selectedForBill[i]._id == med._id)
+            return true;
+       }
+
+       return false;
+     }
+
+
+   onChangeSelectAll(index , classId,flag , id){
+        console.log("try1: " , this.selectedForBill);
+        console.log(index+" : "+classId+" : "+flag+" : " + id);        
+        if(flag==false)  
+        {              
+
+            this.tempbill = this.selectedForBill;
+            console.log(this.tempbill);
+            this.selectedForBill=[];
+            console.log(this.tempbill);
+            for(var i=0;i<this.tempbill.length;i++)
+            {          
+              if(!(id == this.tempbill[i]._id))
+              {
+                  //console.log(this.med2patient.medicines[i].name);
+                  this.selectedForBill.push(this.tempbill[i]);
+              }
+            }
+
+            console.log(this.selectedForBill);
+        }
+
+        else
+        {
+            this.tempbill = this.selectedForBill;
+            console.log(this.tempbill);
+            //this.selectedForBill=[];
+            console.log(this.tempbill);
+            for(var i=0;i<this.med2patient.medicines.length;i++)
+            {          
+              if((id == this.med2patient.medicines[i]._id))
+              {
+                  console.log(this.med2patient.medicines[i].name);
+                  this.selectedForBill.push(this.med2patient.medicines[i]);
+              }
+            }
+            console.log(this.selectedForBill);
+        }
+   }
+
+
+   onChangeUnSelectAll(index , classId,flag , id){
+        console.log("try1: " , this.selectedForBill);
+        console.log(index+" : "+classId+" : "+flag+" : " + id);        
+        if(flag==true)  
+        {              
+            this.tempbill = this.selectedForBill;
+            console.log(this.tempbill);
+            //this.selectedForBill=[];
+            console.log(this.tempbill);
+            for(var i=0;i<this.med2patient.medicines.length;i++)
+            {          
+              if((id == this.med2patient.medicines[i]._id))
+              {
+                  console.log(this.med2patient.medicines[i].name);
+                  this.selectedForBill.push(this.med2patient.medicines[i]);
+              }
+            }
+            console.log(this.selectedForBill);
+            
+        }
+
+        else
+        {            
+
+            this.tempbill = this.selectedForBill;
+            console.log(this.tempbill);
+            this.selectedForBill=[];
+            console.log(this.tempbill);
+            for(var i=0;i<this.tempbill.length;i++)
+            {          
+              if(!(id == this.tempbill[i]._id))
+              {
+                  //console.log(this.med2patient.medicines[i].name);
+                  this.selectedForBill.push(this.tempbill[i]);
+              }
+            }
+
+            console.log(this.selectedForBill);
+        }
+   }
 
   toggleEditing()
   {
@@ -180,6 +308,27 @@ export class ActualBillComponent implements OnInit{
     console.log("toggleEditing");
     this.editMode = !this.editMode;
   }
+
+toggleSelect()
+{
+    console.log("toggleSelect");
+    this.selectAll = !this.selectAll;
+    console.log(this.selectAll);
+    if(this.selectAll)
+    {
+        this.med2patientsService
+          .getMed2patients(this.id)
+          .subscribe(p => this.selectedForBill = p.medicines);
+    }
+
+    else
+    {
+        this.selectedForBill=[];
+    }
+
+    console.log(this.selectedForBill);
+}
+
   calcTotalAmount(actualmed2patient){
        console.log(this.thepatient.name);
        

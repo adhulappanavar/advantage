@@ -1,3 +1,11 @@
+16) Make admin role
+
+17) Only admin should be given in sign up and delete
+
+
+18) we shoul add user id to all changes
+
+
 1) Add moments for diff for age calc      - DONE
 
 2) delete   -DONE for patient 
