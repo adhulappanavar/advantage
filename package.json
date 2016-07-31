@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=dev node ./bin/www",
+    "start": "node ./bin/www",
     "startdev": "NODE_ENV=dev node ./bin/www",
     "startclouddev": "NODE_ENV=clouddev node ./bin/www",
     "startprod" : "NODE_ENV=prod node ./bin/www",

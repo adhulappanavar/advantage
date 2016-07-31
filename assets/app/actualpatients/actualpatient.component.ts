@@ -5,9 +5,9 @@ import { Actualpatient } from './actualpatient';
 import { ActualpatientDetailsComponent } from './actualpatient-details.component';
 import { ActualpatientsEditComponent } from './actualpatient-edit.component';
 import { ActualpatientsService } from './actualpatients.service';
-
+import { RouteParams, Router} from 'angular2/router';
 import { ActualpatientsFilterPipe } from './actualpatient-filter.pipe';
-
+import {AuthService} from "../auth//auth.service";
 @Component({
   selector: 'actualpatients-list',
   directives: [ActualpatientDetailsComponent, ROUTER_DIRECTIVES],
@@ -80,14 +80,23 @@ export class ActualpatientComponent implements OnInit{
   showImage = false;
   imageWidth= 50;
   imageMArgin = 2;
-  constructor(private actualpatientsService : ActualpatientsService){ }
+  constructor(private actualpatientsService : ActualpatientsService , private _authService: AuthService , private router: Router){ }
   femaleNo = 0 ; 
   maleNo = 0;
   ngOnInit(){
+
+    if(!this.isLoggedIn())
+      {
+        let link = ['Auth'];
+        this.router.navigate(link);
+      }
+
     //this.actualpatients = this.starWarsService.getAll();
     this.actualpatientsService
       .getAllActualpatients()
       .subscribe(p => this.actualpatients = p);
+
+      
   }
 
   selectActualpatient(actualpatient: Actualpatient){
@@ -103,6 +112,10 @@ export class ActualpatientComponent implements OnInit{
         this.maleNo = this.maleNo + 1;
 
   }
+
+  isLoggedIn() {
+        return this._authService.isLoggedIn();
+    }
   
   toggleImage() : void
     {

@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 
-var cfg = require('./config');
+//var cfg = require('./config');
 
 
 
@@ -26,9 +26,9 @@ var seedsRoutes = require('./routes/seeds');
 var app = express();
 
 
-console.log (cfg.mongo.uri, cfg.mongo.db);
-mongoose.Promise = global.Promise;
-mongoose.connect(cfg.mongo.uri);
+//console.log (cfg.mongo.uri, cfg.mongo.db);
+//mongoose.Promise = global.Promise;
+//mongoose.connect(cfg.mongo.uri);
 
 
 //var opts = {"server" : "localhost", "port" :"27017", "db" : "aniladvantagedb//"};
@@ -42,7 +42,7 @@ mongoose.connect(cfg.mongo.uri);
 //};
 
 
-//mongoose.connect('localhost:27017/aniladvantagedb');
+mongoose.connect('localhost:27017/aniladvantagedb');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

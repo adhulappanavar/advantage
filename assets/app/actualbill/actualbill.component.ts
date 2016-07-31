@@ -14,7 +14,8 @@ import { Med2patient } from '../med2patients/med2patient';
   selector: 'actualpatients-list',
   directives: [ ROUTER_DIRECTIVES],
   template: `
-  <div align="center" *ngIf="editMode"><button class="btn btn-success">Create Bill</button></div>
+  <div align="center"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-success" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
+  <br>
   <div class="panel panel-default ">
 	  <div class="panel-heading">
 	    <div class='row'>     
@@ -32,23 +33,58 @@ import { Med2patient } from '../med2patients/med2patient';
               <div class="table-responsive">
               <div class="table">
                 <tbody>
-                <tr><td>Patient Name:</td><td>{{med2patient.name}}</td></tr>
-                <tr><td>Patient Name:</td><td>{{thepatient.name}}</td></tr>
-                <tr><td>Reg No:</td><td>{{thepatient.registrationNumber}}</td></tr>
-                <tr><td>DOA :</td><td>{{stringAsDate(thepatient.dateOfAdmission)}}</td></tr>
-                <tr><td>Age/Gender</td><td>{{clacAge(thepatient.dob)}}/{{thepatient.gender}}</td></tr>
+                <tr><td>Patient Name:</td><td>{{med2patient.name}}</td></tr>                
+                <tr><td>Reg No:</td><td>{{med2patient.registrationNumber}}</td></tr>
+                <tr><td>DOA :</td><td>{{stringAsDate(med2patient.dateOfAdmission)}}</td></tr>
+                <tr><td>Age/Gender</td><td>{{clacAge(med2patient.dob)}}/{{med2patient.gender}}</td></tr>
               </div>
               </div>
             </div>
             <div class="col-md-4" align="center">
               <div class="table-responsive">
                 <table class="table">
-                  <tbody>
-                    <tr><td>Category:</td><td>Monthly Bill</td></tr>
-                    <tr><td>Category:</td><td>Monthly Bill</td></tr>
-                    <tr><td>Month:</td><td>{{getBillingMonth()}}</td></tr>
-                    <tr><td>Date:</td><td>{{todaysDate()}}</td></tr>
-                    <tr><td>Prepared By:</td><td>{{user}}</td></tr>				
+                  <tbody>                    
+                    <tr>
+                      <td>Category:</td>
+                      <td *ngIf="!editMode">{{billtype}}</td>
+                      <td *ngIf="editMode">
+                        <select class="form-control" id="sel1" [(ngModel)] = "billtype" >
+                          <option value="Monthly Bill">Monthly Bill</option>
+                          <option value="Check Out">Check Out</option>
+                          <option value="Death">Death</option>                          
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>Month:</td>
+                        <td *ngIf="!editMode">{{billmonth}}</td>
+                        <td *ngIf="editMode">
+                          <select class="form-control" id="sel1" [(ngModel)] = "billmonth" >
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>    
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>    
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>    
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>                          
+                          </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Date:</td>
+                        <td *ngIf="!editMode">{{billDate}}</td>
+                        <td *ngIf="editMode"><input type="date" [(ngModel)] = "billDate"></td>
+                    </tr>
+                    <tr>
+                        <td>Prepared By:</td>
+                        <td *ngIf="!editMode">{{user}}</td>
+                        <td *ngIf="editMode"><input type="text" [(ngModel)]="user" /></td>
+                    </tr>				
                   </tbody>
                 </table>
               </div>
@@ -101,10 +137,13 @@ export class ActualBillComponent implements OnInit{
   med2patient : Med2patient={"mongoId": " " };
   editMode = true;
   thepatient : Actualpatient={};
+  billtype="Monthly Bill";
+  billmonth=this.getBillingMonth();
   showImage = false;
   imageWidth = 50;
   imageMArgin = 2;
   slno = 1;
+  billDate = this.todaysDate();
   buildtotal = 0;
   user="ACE/MARSH";
   constructor(private med2patientsService : Med2patientsService,
@@ -133,6 +172,13 @@ export class ActualBillComponent implements OnInit{
 
       //  this.calcTotalAmount(this.actualmed2patient);
   } 
+
+  toggleEditing()
+  {
+
+    console.log("toggleEditing");
+    this.editMode = !this.editMode;
+  }
   calcTotalAmount(actualmed2patient){
        console.log(this.thepatient.name);
        

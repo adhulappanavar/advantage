@@ -40,6 +40,7 @@ import{ActualBillComponent} from './actualbill/actualbill.component';
 
 @Component({
     selector: 'my-app',
+    
     template: `
     <my-header></my-header> 
         <div class="container">            
@@ -48,12 +49,17 @@ import{ActualBillComponent} from './actualbill/actualbill.component';
     `,
     directives: [ROUTER_DIRECTIVES, HeaderComponent, PeopleComponent, PatientComponent, MedicineComponent, Med2patientComponent, ActualpatientComponent , ActualmedicineComponent ,  ActualpatientListPaymentComponent , ActualBillComponent] ,
     providers: [StarWarsService, PatientsService, MedicinesService, Med2patientsService, ActualpatientsService , ActualmedicinesService  ,ROUTER_PROVIDERS, HTTP_PROVIDERS]
+    
 })
+
+//var test = true;
+//var test1=false;
 @RouteConfig([
-   { path: '/med2patients', name: 'Med2patients', component: Med2patientComponent , useAsDefault: true},
+   { path: '/med2patients', name: 'Med2patients', component: Med2patientComponent},
     { path: '/med2patients/:id', name: 'Med2patient Details', component: Med2patientDetailsComponent },
     {path: '/auth/...', name: 'Auth', component: AuthenticationComponent},
-    { path: '/Actualpatients', name: 'Actualpatients', component: ActualpatientComponent },
+    
+    { path: '/Actualpatients', name: 'Actualpatients', component: ActualpatientComponent , useAsDefault: true },
     { path: '/ActualpatientsAdd', name: 'Actualpatients Add', component: ActualpatientsAddComponent },
     { path: '/ActualpatientsDetails', name: 'Actualpatients Details', component: ActualpatientDetailsComponent}, 
     { path: '/ActualpatientsEdit', name: 'Actualpatients Edit', component: ActualpatientsEditComponent},
@@ -62,10 +68,16 @@ import{ActualBillComponent} from './actualbill/actualbill.component';
     { path: '/ActualmedicinesAdd', name: 'Actualmedicines Add', component: ActualmedicinesAddComponent},
     { path: '/ActualmedicinesDetails', name: 'Actualmedicines Details', component: ActualmedicineDetailsComponent}, 
     { path: '/ActualmedicinesEdit', name: 'Actualmedicines Edit', component: ActualmedicinesEditComponent},
+    
     { path: '/BillForPatient', name: 'Bill For Patient', component: ActualBillComponent},
     { path: '/PaymentPatientList', name: 'Payment Patient List', component: ActualpatientListPaymentComponent}
-    
+
 ])
+
 export class AppComponent {
-    
+   // test = true;
+    test1=false;
+
+    foo(){ return false;}
 }
+
