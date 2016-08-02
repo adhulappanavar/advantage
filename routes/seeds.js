@@ -25,13 +25,7 @@ router.post('/:id', function(req, res, next) {
         }
         console.log("Mongo Record before update .... "+doc);
         console.log("Request Body from Browser .... "+req.body);
-//        console.log(decoded.user);
-//        if (doc.user != decoded.user._id) {
-//            return res.status(401).json({
-//                title: 'Not Authorized',
-//                error: {message: 'Message created by other user'}
-//            });
-//        }
+
         doc.registrationNumber = req.body.registrationNumber;
         doc.name = req.body.name;
         doc.gender = req.body.gender;
@@ -77,35 +71,38 @@ var actualpatients = new Array();
 
 
             for(var i=0;i<actualpatients.length;i++)
-{
-        var med2patients = new Med2patients({
-            url : actualpatients[i].url,
-            patientid   : actualpatients[i]._id,
-            name : actualpatients[i].name,
-            registrationNumber : actualpatients[i].registrationNumber,
-            dob : actualpatients[i].dob,
-            dateOfAdmission : actualpatients[i].dateOfAdmission,
-            height : actualpatients[i].height,
-            weight : actualpatients[i].weight,
-            profession : actualpatients[i].profession,
-            medicines : [],
-            medtotalcost : 0,
-            newmedicines : [],
-            newmedtotalcost : 0
-           });
-        console.log ("med2patient record to be saved ...", med2patients);
-        med2patients.save(function(err, result) {
-            if (err) {
-                return res.status(404).json({
+            {
+                var med2patients = new Med2patients({
+                    url : actualpatients[i].url,
+                    patientid   : actualpatients[i]._id,
+                    name : actualpatients[i].name,
+                    registrationNumber : actualpatients[i].registrationNumber,
+                    dob : actualpatients[i].dob,
+                    dateOfAdmission : actualpatients[i].dateOfAdmission,
+                    height : actualpatients[i].height,
+                    gender : actualpatients[i].gender , 
+                    weight : actualpatients[i].weight,
+                    profession : actualpatients[i].profession,
+                    medicines : [],
+                    bills : [] , 
+                    medtotalcost : 0,
+                    newmedicines : [],
+                    newmedtotalcost : 0
+                });
+                console.log ("med2patient record to be saved ...", med2patients);
+                med2patients.save(function(err, result) {
+                if (err)
+                {
+                    return res.status(404).json({
                     title: 'An error occurred',
                     error: err
+                     });
+                }
+
                 });
-            }
-           // console.log(result);
+        }
         });
-}
-        });
-//console.log(patients);
+
 
 
     Med2patients.findOne({"patientid" : "5789ee5c4b779cc738abf191"})

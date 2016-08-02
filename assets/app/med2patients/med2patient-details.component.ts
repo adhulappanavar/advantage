@@ -57,7 +57,6 @@ export class Med2patientDetailsComponent implements OnInit {
       this.med2patientsService
           .saveMed2patient(this.med2patient)
           .subscribe(
- //           (r: Response) => {console.log('success, id:'+this.med2patient.id+', Name:'+this.med2patient.name+', Weight:'+this.med2patient.weight)},
             (r: Response) => {console.log('success, '+ JSON.stringify(this.med2patient))},
             (error) => {console.log('error: ', error);},
             () => {this.isSaving = false;}

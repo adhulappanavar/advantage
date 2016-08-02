@@ -10,6 +10,8 @@ import { ActualpatientsService } from '../actualpatients/actualpatients.service'
 import {Med2patientsService} from '../med2patients/med2patients.service'
 import { Med2patient } from '../med2patients/med2patient';
 
+import {billing} from '../med2patients/billing';
+
 @Component({
   selector: 'actualpatients-list',
   directives: [ ROUTER_DIRECTIVES],
@@ -24,7 +26,7 @@ import { Med2patient } from '../med2patients/med2patient';
 	    <div class='row'>     
             <div class="col-md-4"><img  src="images/advantagelogo.png" width="250" height="170"></div>     
             <div class="col-md-8" align="center">
-                  <h2>ADVANTAGE ELDER CARE</h2>
+                  <h2>HI ADVANTAGE ELDER CARE</h2>
                   <p>Hunasamaranahalli Post, (VIA) Bettahalasuru, Bangalore North - 562 157.</p>
                   <p>Website : www.advantageeldercare.com</p>
                   <p>Email: shajiphilip_advantage@yahoo.co.in</p>
@@ -60,7 +62,7 @@ import { Med2patient } from '../med2patients/med2patient';
                     </tr>
                     <tr>
                         <td>Month/Year:</td>
-                        <td *ngIf="!editMode">{{billmonth}}/{{billyear}}</td>
+                        <td *ngIf="!editMode">{{billmonth}} / {{billyear}}</td>
                         <td *ngIf="editMode">
                           <select class="form-control" id="sel1" [(ngModel)] = "billmonth" >
                             <option value="January">January</option>
@@ -188,6 +190,7 @@ export class ActualBillComponent implements OnInit{
   billyear =this.getBillingYear();
   tempbill = [];
   selectedForBill = [];
+  billentry : billing = { medicines : []} ;
   dontAdd = [] ;
   billDate = this.todaysDate();
   buildtotal = 0;
@@ -230,9 +233,30 @@ export class ActualBillComponent implements OnInit{
        return false;
      }
 
+     saveMed2patientDetails(){
+     // this.isSaving = true;
+      this.med2patientsService
+          .saveMed2patient(this.med2patient)
+          .subscribe(
+            (r: Response) => {console.log('success, '+ JSON.stringify(this.med2patient))},
+            (error) => {console.log('error: ', error);}
+            //() => {this.isSaving = false;}
+          );
+    }
+
      makeFinal()
      {
         this.notFinal =!this.notFinal;
+        this.billentry.month = this.billmonth;
+        this.billentry.year = this.billyear;
+        
+        for(var i = 0 ; i < this.selectedForBill.length ; i++)
+        {
+            this.billentry.medicines.push(this.selectedForBill[i]);
+        }
+
+        this.med2patient.bills.push(this.billentry);
+        this.saveMed2patientDetails();
      }
 
    onChangeSelectAll(index , classId,flag , id){

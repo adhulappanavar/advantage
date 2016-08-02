@@ -70,6 +70,8 @@ router.post('/', function(req, res, next) {
             name        : req.body.name,
             registrationNumber : req.body.registrationNumber,
             dob         : req.body.dob,
+            gender      : req.body.gender , 
+            bills       : req.body.bills , 
             dateOfAdmission : req.body.dateOfAdmission,            
             medicines : req.body.medicines,
             newmedicines : req.body.medicines,
@@ -110,6 +112,8 @@ router.post('/:id', function(req, res, next) {
         doc.patientid = req.body.patientid;
         doc.registrationNumber = req.body.registrationNumber;
         doc.dob = req.body.dob;
+        doc.gender = req.body.gender;
+        doc.bills = req.body.bills;
         doc.dateOfAdmission = req.body.dateOfAdmission;
         doc.name = req.body.name;        
         doc.medicines = req.body.medicines;
