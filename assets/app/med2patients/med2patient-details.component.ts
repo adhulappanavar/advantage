@@ -29,16 +29,16 @@ export class Med2patientDetailsComponent implements OnInit {
     }
 
     ngOnInit(){
-//        let id = Number.parseInt(this.routeParams.get('id'));
+
         let id = this.routeParams.get('id');
         console.log('getting med2patient with id: ', id);
 
-        //Get Current Patient Details and Medical Records
+
         this.med2patientsService
           .getMed2patients(id)
           .subscribe(p => this.med2patient = p);
 
-        //Get Medicines to show Medicine List
+
         this.actualmedicinesService
                 .getAllActualmedicines()
                 .subscribe(p => this.actualmedicines = p)

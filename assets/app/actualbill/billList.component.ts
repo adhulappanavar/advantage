@@ -1,4 +1,4 @@
-import { Component, OnInit } from 'angular2/core';
+import { Component, OnInit , Input } from 'angular2/core';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
 import { RouteParams, Router} from 'angular2/router';
 import { Actualpatient } from '../actualpatients/actualpatient';
@@ -13,7 +13,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
   template: `
   <div class="panel panel-primary ">
 	  <div class="panel-heading">
-    <div class='row'>            
+    <div class='row'>
             <div class='col-md-2'><span style='font-size:large'>Patient List</span></div>
             <div class='col-md-6'>
                 <span style='font-size:large'>Filter by:</span ><input style="color:black" type='text' [(ngModel)]='listFilter'/>
@@ -25,18 +25,32 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 		<div class="table-responsive">
 		<table class="table">
         <thead>
-                    <tr>   
-                                            
-                        <th>Month</th>                        
+                    <tr>
+                        <th>
+                            <button class='btn btn-primary' (click) = "toggleImage()">
+                                {{showImage ? 'Hide' : 'Show'}} Image
+                            </button>
+                        </th>
+                        <th>Reg No</th>
+                        <th>Patient Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>   
+                        <th></th>
                     </tr>
          </thead>
-         <tbody *ngIf="actualpatient">
-				<tr *ngFor="#billitem of actualpatient.bills">					
-					<td><a>{{billitem.month}}</a></td>
-          <td><a>HI</a></td>
+         <tbody *ngIf="actualpatients">
+				<tr *ngFor="#actualpatient of actualpatients">
+					<td>
+							<img *ngIf='showImage' [src]='actualpatient.photoUrl' [title]='actualpatient.name' [style.width.px]='imageWidth' [style.margin.px]= 'imageMargin'/>
+					</td>
+					<td>{{actualpatient.registrationNumber}}</td>          
+					<td>{{actualpatient.name}}</td>		
+					<td>{{actualpatient.gender}}</td>
+					<td>{{clacAge(actualpatient.dob)}}</td>
+          <td><a [routerLink] = "['Patient Bill List' , {id: actualpatient.id}]">Create Bill</a></td>          
 				</tr>
           </tbody>
-		  </table>	  
+		   </table>	  
 		  </div>
 		</div>
 	</div>  
@@ -45,9 +59,8 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
   styleUrls: ['html/actualpatients/actualpatients-list.component.css'],
   pipes : [ActualpatientsFilterPipe]
 })
-export class PatientBillListComponent implements OnInit{
-  actualpatients: Med2patient[] = [];
-  actualpatient: Med2patient = {};
+export class BillListComponent implements OnInit{
+  @Input() actualpatients: Med2patient[] = [];
   selectedActualpatient: Actualpatient;
   listFilter = "";
   showImage = false;
@@ -56,24 +69,13 @@ export class PatientBillListComponent implements OnInit{
   constructor(private actualpatientsService : ActualpatientsService , private med2patientsService : Med2patientsService,
   private routeParams: RouteParams){ }
 
-  ngOnInit(){
-    //this.actualpatients = this.starWarsService.getAll();
-    /*this.actualpatientsService
-      .getAllActualpatients()
-      .subscribe(p => this.actualpatients = p)
-      var m = moment("Mar 26th, 1989", "MMM-DD-YYYY");
-      console.log(moment().format('HH:mm:ss'));
-      console.log('You are '+m.fromNow(true) + ' old'); // You are 23 years old
-      */
-
-       let id = this.routeParams.get('id');
+  ngOnInit(){  
 
       this.med2patientsService
-      .getMed2patients(id)
-      .subscribe(p => this.actualpatient = p)
-      
+      .getAllMed2patients()
+      .subscribe(p => this.actualpatients = p)
 
-      console.log("changes made");
+      console.log("changes made111  ");
   }
 
   selectActualpatient(actualpatient: Actualpatient){
@@ -98,4 +100,3 @@ export class PatientBillListComponent implements OnInit{
        return m.fromNow(true);
      }
 }
-
