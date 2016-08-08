@@ -11,45 +11,43 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
   selector: 'actualpatients-list',
   directives: [ROUTER_DIRECTIVES],
   template: `
-  <div class="panel panel-primary ">
-	  <div class="panel-heading">
-    <div class='row'>            
-            <div class='col-md-2'><span style='font-size:large'>Patient List</span></div>
-            <div class='col-md-6'>
-                <span style='font-size:large'>Filter by:</span ><input style="color:black" type='text' [(ngModel)]='listFilter'/>
-            </div>           
-     </div>	
-	 	 
-	  </div>
-	  <div class="panel-body">
-		<div class="table-responsive">
-		<table class="table">
-        <thead>
-                    <tr>   
-                                            
-                        <th>Month</th>                        
-                    </tr>
-         </thead>
-         <tbody *ngIf="actualpatient">
-				<tr *ngFor="#billitem of actualpatient.bills">					
-					<td><a>{{billitem.month}}</a></td>
-          <td><a>HI</a></td>
-				</tr>
-          </tbody>
-		  </table>	  
-		  </div>
-		</div>
-	</div>  
-  
-  `,
+			<div class="panel panel-primary ">
+				<div class="panel-heading">
+					<div class='row'>            
+						<div class='col-md-2'><span style='font-size:large'>Patient List</span></div>
+						<div class='col-md-6'>
+							<span style='font-size:large'>Filter by:</span ><input style="color:black" type='text' [(ngModel)]='listFilter'/>
+						</div>           
+					</div>	
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>                    
+								<th>Month</th>                        
+								</tr>
+							</thead>
+							<tbody *ngIf="actualpatient">
+								<tr *ngFor="#billitem of actualpatient.bills">					
+									<td><a [routerLink] = "['Bill For Patient1' ] , {id: actualpatient.id} , {billid : billitem.id }" >{{billitem.month}}</a></td>									          
+								</tr>
+							</tbody>
+						</table>	  
+					</div>
+				</div>
+			</div>  
+		`,
   styleUrls: ['html/actualpatients/actualpatients-list.component.css'],
   pipes : [ActualpatientsFilterPipe]
 })
 export class PatientBillListComponent implements OnInit{
   actualpatients: Med2patient[] = [];
+  showmeds = false;
   actualpatient: Med2patient = {};
   selectedActualpatient: Actualpatient;
   listFilter = "";
+  medList =[];
   showImage = false;
   imageWidth = 50;
   imageMArgin = 2;
@@ -96,6 +94,11 @@ export class PatientBillListComponent implements OnInit{
      clacAge(dateStr){
        var m = moment(new Date(dateStr) , "YYYY-MM-DD");
        return m.fromNow(true);
+     }
+
+     toggleshowmeds()
+     {
+       this.showmeds = !this.showmeds;
      }
 }
 

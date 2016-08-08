@@ -37,6 +37,7 @@ import { ActualmedicinesService } from './actualmedicines/actualmedicines.servic
 
 import {ActualpatientListPaymentComponent} from './actualpayment/actualpateintlist-payment.component';
 import{ActualBillComponent} from './actualbill/actualbill.component';
+import{ActualBill1Component} from './actualbill/actualbill1.component';
 
 import {BillListComponent} from './actualbill/billList.component';
 import {PatientBillListComponent} from './actualbill/patientbillList.component';
@@ -73,6 +74,7 @@ import {PatientBillListComponent} from './actualbill/patientbillList.component';
     { path: '/ActualmedicinesEdit', name: 'Actualmedicines Edit', component: ActualmedicinesEditComponent},
     
     { path: '/BillForPatient', name: 'Bill For Patient', component: ActualBillComponent},
+    { path: '/BillForPatient1', name: 'Bill For Patient1', component: ActualBill1Component},
     { path: '/PaymentPatientList', name: 'Payment Patient List', component: ActualpatientListPaymentComponent},
 
     { path : '/billlist' , name : 'Bill List' , component : BillListComponent },
