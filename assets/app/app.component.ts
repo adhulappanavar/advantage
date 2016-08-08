@@ -74,7 +74,7 @@ import {PatientBillListComponent} from './actualbill/patientbillList.component';
     { path: '/ActualmedicinesEdit', name: 'Actualmedicines Edit', component: ActualmedicinesEditComponent},
     
     { path: '/BillForPatient', name: 'Bill For Patient', component: ActualBillComponent},
-    { path: '/BillForPatient1', name: 'Bill For Patient1', component: ActualBill1Component},
+    { path: '/BillForPatient1/:iid/:billid', name: 'Bill For Patient1', component: ActualBill1Component},
     { path: '/PaymentPatientList', name: 'Payment Patient List', component: ActualpatientListPaymentComponent},
 
     { path : '/billlist' , name : 'Bill List' , component : BillListComponent },

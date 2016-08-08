@@ -16,6 +16,12 @@ import {billing} from '../med2patients/billing';
   selector: 'actualpatients-list',
   directives: [ ROUTER_DIRECTIVES],
   template: `
+  <div *ngFor = "#bill of med2patient.bills">
+    <div *ngIf = "bill.id == billid">
+      Hello
+    </div> 
+  </div>
+
   <div class="row">  
       <div class="col-md-6" align="center" *ngIf="notFinal"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-warning" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
       <div class="col-md-6" align="center" *ngIf="!editMode && notFinal"><button class="btn btn-success" (click)="makeFinal()">Make Final Bill</button></div>
@@ -128,6 +134,8 @@ export class ActualBill1Component implements OnInit{
   notfinal=true;
   selectAll = true;
   id;
+  billid;
+
   notFinal=true;
   billyear =this.getBillingYear();
   tempbill = [];
@@ -138,16 +146,19 @@ export class ActualBill1Component implements OnInit{
   buildtotal = 0;
   billTotal = 0;
   user="ACE/MARSH";
+  billlist;
   constructor(private med2patientsService : Med2patientsService,
               private actualpatientsService : ActualpatientsService,
               private routeParams: RouteParams,
               private router: Router){ }
 
   ngOnInit(){
-     let id = this.routeParams.get('id');
+     let id = this.routeParams.get('iid');
      let billid = this.routeParams.get('billid');
      this.id = id;
+     this.billid = billid;
      console.log(id);
+     console.log(billid);
       this.med2patientsService
           .getMed2patients(id)
           .subscribe(p => this.med2patient = p);
@@ -157,10 +168,18 @@ export class ActualBill1Component implements OnInit{
           .subscribe(p => this.selectedForBill = p.medicines);               
 
           console.log(this.selectedForBill);
-      
-
+          console.log("//foo"); 
+         // this.foo();        
      }
      
+
+     foo()
+     {
+       for(var i = 0 ; i < this.med2patient.bills.length ; i++  )
+      {
+        console.log("testing : " , this.med2patient.bills[i].month);
+      }                
+     }
 
      saveMed2patientDetails(){
      // this.isSaving = true;
