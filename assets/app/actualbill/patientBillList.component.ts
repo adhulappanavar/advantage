@@ -11,6 +11,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
   selector: 'actualpatients-list',
   directives: [ROUTER_DIRECTIVES],
   template: `
+  <div *ngIf="!showmeds">
 			<div class="panel panel-primary ">
 				<div class="panel-heading">
 					<div class='row'>            
@@ -30,13 +31,98 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 							</thead>
 							<tbody *ngIf="actualpatient">
 								<tr *ngFor="#billitem of actualpatient.bills">					
-									<td><a [routerLink] = "['Bill For Patient1'  , {id: actualpatient.id}]" >{{billitem.month}} / {{billitem._id}}</a></td>									          
+									<td><a (click) = "toggleshowmeds(billitem._id)" >{{billitem.month}} / {{billitem._id}}</a></td>									          
 								</tr>
 							</tbody>
 						</table>	  
 					</div>
 				</div>
-			</div>  
+			</div>
+    </div>  
+    <div *ngIf="showmeds">
+        <div class="panel panel-default ">
+	  <div class="panel-heading">
+	    <div class='row'>     
+            <div class="col-md-4"><img  src="images/advantagelogo.png" width="250" height="170"></div>     
+            <div class="col-md-8" align="center">
+                  <h2>HI ADVANTAGE ELDER CARE</h2>
+                  <p>Hunasamaranahalli Post, (VIA) Bettahalasuru, Bangalore North - 562 157.</p>
+                  <p>Website : www.advantageeldercare.com</p>
+                  <p>Email: shajiphilip_advantage@yahoo.co.in</p>
+                  <p>Tel : 080 60121222, +91 98443 95515, 78295 92189</p>
+            </div>             
+    	 </div><br>
+       <div class="row" *ngIf="actualpatient">
+            <div class="col-md-6" align="center">
+              <div class="table-responsive">
+              <div class="table">
+                <tbody>
+                <tr><td>Patient Name:</td><td>{{actualpatient.name}}</td></tr>                
+                <tr><td>Reg No:</td><td>{{actualpatient.registrationNumber}}</td></tr>
+                <tr><td>DOA :</td><td>{{stringAsDate(actualpatient.dateOfAdmission)}}</td></tr>
+                <tr><td>Age/Gender</td><td>{{clacAge(actualpatient.dob)}}/{{actualpatient.gender}}</td></tr>
+              </div>
+              </div>
+            </div>
+            <div class="col-md-4" align="center">
+              <div class="table-responsive">
+                <table class="table">
+                  <tbody>                    
+                    <tr>
+                      <td>Category:</td>
+                      <td>Monthly Bill</td>                      
+                    </tr>
+                    <tr>
+                        <td>Month/Year:</td>
+                        <td>{{actualpatient.bills.month}} / {{actualpatient.bills.year}}</td>                        
+                    </tr>
+                    <tr>
+                        <td>Date:</td>
+                        <td>{{billDate}}</td>                        
+                    </tr>
+                    <tr>
+                        <td>Prepared By:</td>
+                        <td>{{user}}</td>                        
+                    </tr>				
+                  </tbody>
+                </table>
+              </div>
+            
+            </div>
+       </div>
+       
+     </div>
+       <div class="panel-body">
+            <div class="table-responsive">
+              <table *ngIf="selectedForBill" class="table">
+                    <thead>
+                        <tr>                            
+                            <th>Sl No</th>
+                            <th>Particulars</th>
+                            <th>Quanty</th>
+                            <th>Base Cost</th>
+                            <th>Amount</th>
+                                                                                                     
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <tr *ngFor="#medicine of selectedForBill;var index=index">
+                             <td>{{index+1}}</td>
+                             <td>{{medicine.name}}</td>
+                             <td>{{medicine.qty}}</td>
+                             <td>{{medicine.cost}}</td>                             
+                             <td>{{medicine.cost * medicine.qty}}</td>
+                        </tr>
+                    </tbody>
+               </table>
+			        
+            </div>
+       </div>		 
+	     
+           
+       
+	</div>  
+    </div>
 		`,
   styleUrls: ['html/actualpatients/actualpatients-list.component.css'],
   pipes : [ActualpatientsFilterPipe]
@@ -47,6 +133,7 @@ export class PatientBillListComponent implements OnInit{
   actualpatient: Med2patient = {};
   selectedActualpatient: Actualpatient;
   listFilter = "";
+  selectedForBill;
   medList =[];
   showImage = false;
   imageWidth = 50;
@@ -96,9 +183,25 @@ export class PatientBillListComponent implements OnInit{
        return m.fromNow(true);
      }
 
-     toggleshowmeds()
+     toggleshowmeds( billId)
      {
        this.showmeds = !this.showmeds;
+       console.log("billid : " , billId);
+       console.log("showmeds  :  " , this.showmeds);
+       if(this.showmeds == true)
+       {         
+          for(var i=0; i< this.actualpatient.bills.length ; i++)
+          {
+              console.log("i " , i  , " " , this.actualpatient.bills[i]._id);
+              if(this.actualpatient.bills[i]._id == billId)
+              {
+                  this.selectedForBill = this.actualpatient.bills[i].medicines;
+                  break;
+              }
+          }
+
+          console.log(this.selectedForBill);
+       }
      }
 }
 

@@ -1,3 +1,5 @@
+19) add bill type to med2patients billing schema  and bill date and user made by
+
 16) Make admin role
 
 17) Only admin should be given in sign up and delete
