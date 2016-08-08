@@ -15,12 +15,7 @@ import {billing} from '../med2patients/billing';
 @Component({
   selector: 'actualpatients-list',
   directives: [ ROUTER_DIRECTIVES],
-  template: `
-  <div *ngFor = "#bill of med2patient.bills">
-    <div *ngIf = "bill.id == billid">
-      Hello
-    </div> 
-  </div>
+  template: ` 
 
   <div class="row">  
       <div class="col-md-6" align="center" *ngIf="notFinal"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-warning" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
@@ -153,12 +148,12 @@ export class ActualBill1Component implements OnInit{
               private router: Router){ }
 
   ngOnInit(){
-     let id = this.routeParams.get('iid');
-     let billid = this.routeParams.get('billid');
+     let id = this.routeParams.get('id');
+     //let billid = this.routeParams.get('billid');
      this.id = id;
-     this.billid = billid;
+     //this.billid = billid;
      console.log(id);
-     console.log(billid);
+     //console.log(billid);
       this.med2patientsService
           .getMed2patients(id)
           .subscribe(p => this.med2patient = p);
