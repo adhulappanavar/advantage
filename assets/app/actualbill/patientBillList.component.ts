@@ -30,7 +30,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 							</thead>
 							<tbody *ngIf="actualpatient">
 								<tr *ngFor="#billitem of actualpatient.bills">					
-									<td><a [routerLink] = "['Bill For Patient1'  , {id: actualpatient.id}]" >{{billitem.month}} / {{billitem._id}}</a></td>									          
+									<td><a [routerLink] = "['Bill For Patient1'  , {id1: actualpatient.id+'__'+billitem._id}]" >{{billitem.month}} / {{billitem._id}}</a></td>									          
 								</tr>
 							</tbody>
 						</table>	  

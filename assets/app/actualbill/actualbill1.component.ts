@@ -27,7 +27,7 @@ import {billing} from '../med2patients/billing';
 	    <div class='row'>     
             <div class="col-md-4"><img  src="images/advantagelogo.png" width="250" height="170"></div>     
             <div class="col-md-8" align="center">
-                  <h2>HI ADVANTAGE ELDER CARE</h2>
+                  <h2>ADVANTAGE ELDER CARE</h2>
                   <p>Hunasamaranahalli Post, (VIA) Bettahalasuru, Bangalore North - 562 157.</p>
                   <p>Website : www.advantageeldercare.com</p>
                   <p>Email: shajiphilip_advantage@yahoo.co.in</p>
@@ -148,12 +148,12 @@ export class ActualBill1Component implements OnInit{
               private router: Router){ }
 
   ngOnInit(){
-     let id = this.routeParams.get('id');
-     //let billid = this.routeParams.get('billid');
-     this.id = id;
-     //this.billid = billid;
-     console.log(id);
-     //console.log(billid);
+     let tempid = this.routeParams.get('id1');
+     let splittempid  = tempid.split ("__");
+     this.id = splittempid[0];
+     this.billid = splittempid[0];
+     console.log(this.id);
+     console.log(this.billid);
       this.med2patientsService
           .getMed2patients(id)
           .subscribe(p => this.med2patient = p);
