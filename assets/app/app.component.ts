@@ -36,6 +36,7 @@ import { ActualmedicinesEditComponent} from './actualmedicines/actualmedicine-ed
 import { ActualmedicinesService } from './actualmedicines/actualmedicines.service';
 
 import {ActualpatientListPaymentComponent} from './actualpayment/actualpateintlist-payment.component';
+import { PaymentPageComponent } from './actualpayment/paymentpage.component';
 import{ActualBillComponent} from './actualbill/actualbill.component';
 import{ActualBill1Component} from './actualbill/actualbill1.component';
 
@@ -51,7 +52,7 @@ import {PatientBillListComponent} from './actualbill/patientbillList.component';
             <router-outlet></router-outlet>
         </div>
     `,
-    directives: [ROUTER_DIRECTIVES, HeaderComponent, PeopleComponent, PatientComponent, MedicineComponent, Med2patientComponent, ActualpatientComponent , ActualmedicineComponent ,  ActualpatientListPaymentComponent , ActualBillComponent , BillListComponent] ,
+    directives: [ROUTER_DIRECTIVES, HeaderComponent, PeopleComponent, PatientComponent, MedicineComponent, Med2patientComponent, ActualpatientComponent , ActualmedicineComponent ,  ActualpatientListPaymentComponent , ActualBillComponent , BillListComponent , PaymentPageComponent] ,
     providers: [StarWarsService, PatientsService, MedicinesService, Med2patientsService, ActualpatientsService , ActualmedicinesService  ,ROUTER_PROVIDERS, HTTP_PROVIDERS]
     
 })
@@ -78,7 +79,9 @@ import {PatientBillListComponent} from './actualbill/patientbillList.component';
     { path: '/PaymentPatientList', name: 'Payment Patient List', component: ActualpatientListPaymentComponent},
 
     { path : '/billlist' , name : 'Bill List' , component : BillListComponent },
-    { path : '/patientbilllist/:id' , name : 'Patient Bill List' , component : PatientBillListComponent }
+    { path : '/patientbilllist/:id' , name : 'Patient Bill List' , component : PatientBillListComponent } , 
+
+    { path : '/paymentpage' , name : 'Payment Page' , component : PaymentPageComponent }
 
 ])
 

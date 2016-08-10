@@ -191,11 +191,14 @@ export class PatientBillListComponent implements OnInit{
        if(this.showmeds == true)
        {         
           for(var i=0; i< this.actualpatient.bills.length ; i++)
-          {
+          {            
               console.log("i " , i  , " " , this.actualpatient.bills[i]._id);
+              console.log(this.actualpatient.bills[i].medicines);
+              console.log(this.actualpatient.bills[i]);
+              console.log(this.actualpatient.bills[i].medicines);
               if(this.actualpatient.bills[i]._id == billId)
               {
-                  this.selectedForBill = this.actualpatient.bills[i].medicines;
+                  this.selectedForBill = this.actualpatient.bills[i].medicines;                  
                   break;
               }
           }
@@ -204,4 +207,5 @@ export class PatientBillListComponent implements OnInit{
        }
      }
 }
+
 

@@ -16,7 +16,8 @@ import {AuthService} from "./auth//auth.service";
                                     <li><a [routerLink]="['Actualmedicines']" *ngIf="isLoggedIn()">Items</a></li>
                                     <li><a  [routerLink]="['Med2patients']" *ngIf="isLoggedIn()">PutItemToBill</a></li>
                                     <li><a  [routerLink]="['Payment Patient List']" *ngIf="isLoggedIn()">Generate Bills</a></li>
-                                    <li><a [routerLink] = "['Bill List']">Patient Bill History</a></li>
+                                    <li><a [routerLink] = "['Bill List']" *ngIf="isLoggedIn()">Patient Bill History</a></li>
+                                    <li><a [routerLink] = "['Payment Page']" *ngIf="isLoggedIn()">Payment procedure</a></li>
                                     <li *ngIf="!isLoggedIn()"><a [routerLink]="['Auth']" >User Management</a></li>                                    									
 								</ul>
                                 <ul class="nav navbar-nav navbar-right">

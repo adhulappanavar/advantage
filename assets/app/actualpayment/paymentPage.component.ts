@@ -1,6 +1,6 @@
-import { Component, OnInit , Input } from 'angular2/core';
+import { Component, OnInit } from 'angular2/core';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
-import { RouteParams, Router} from 'angular2/router';
+
 import { Actualpatient } from '../actualpatients/actualpatient';
 import { ActualpatientsService } from '../actualpatients/actualpatients.service';
 import { Med2patient } from '../med2patients/med2patient';
@@ -13,7 +13,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
   template: `
   <div class="panel panel-primary ">
 	  <div class="panel-heading">
-    <div class='row'>
+    <div class='row'>            
             <div class='col-md-2'><span style='font-size:large'>Patient List</span></div>
             <div class='col-md-6'>
                 <span style='font-size:large'>Filter by:</span ><input style="color:black" type='text' [(ngModel)]='listFilter'/>
@@ -38,19 +38,19 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
                         <th></th>
                     </tr>
          </thead>
-         <tbody *ngIf="actualpatients">
-				<tr *ngFor="#actualpatient of actualpatients">
+         <tbody>
+				<tr *ngFor="#actualpatient of actualpatients | actualpatientsFilter:listFilter">
 					<td>
 							<img *ngIf='showImage' [src]='actualpatient.photoUrl' [title]='actualpatient.name' [style.width.px]='imageWidth' [style.margin.px]= 'imageMargin'/>
 					</td>
 					<td>{{actualpatient.registrationNumber}}</td>          
-					<td>{{actualpatient.name}}</td>		
+								<td>{{actualpatient.name}}</td>		
 					<td>{{actualpatient.gender}}</td>
 					<td>{{clacAge(actualpatient.dob)}}</td>
-          <td><a [routerLink] = "['Patient Bill List' , {id: actualpatient.id}]">Bill List</a></td>          
+          <td><a>Create Bill</a></td>          
 				</tr>
           </tbody>
-		   </table>	  
+		  </table>	  
 		  </div>
 		</div>
 	</div>  
@@ -59,23 +59,29 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
   styleUrls: ['html/actualpatients/actualpatients-list.component.css'],
   pipes : [ActualpatientsFilterPipe]
 })
-export class BillListComponent implements OnInit{
-  @Input() actualpatients: Med2patient[] = [];
+export class PaymentPageComponent implements OnInit{
+  actualpatients: Med2patient[] = [];
   selectedActualpatient: Actualpatient;
   listFilter = "";
   showImage = false;
   imageWidth = 50;
   imageMArgin = 2;
-  constructor(private actualpatientsService : ActualpatientsService , private med2patientsService : Med2patientsService,
-  private routeParams: RouteParams){ }
+  constructor(private actualpatientsService : ActualpatientsService , private med2patientsService : Med2patientsService){ }
 
-  ngOnInit(){  
-
+  ngOnInit(){
+    //this.actualpatients = this.starWarsService.getAll();
+    /*this.actualpatientsService
+      .getAllActualpatients()
+      .subscribe(p => this.actualpatients = p)
+      var m = moment("Mar 26th, 1989", "MMM-DD-YYYY");
+      console.log(moment().format('HH:mm:ss'));
+      console.log('You are '+m.fromNow(true) + ' old'); // You are 23 years old
+      */
       this.med2patientsService
       .getAllMed2patients()
       .subscribe(p => this.actualpatients = p)
 
-      console.log("changes made111  ");
+      console.log("changes made");
   }
 
   selectActualpatient(actualpatient: Actualpatient){
