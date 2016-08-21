@@ -147,7 +147,18 @@ setlen()
             return this.totalAmountPaid;
     }
 
-    
+    dues1()
+    {
+        if(this.totalamountbilled > this.totalAmountPaid)
+        {
+            this.dueAmount = (this.totalamountbilled-this.totalAmountPaid);
+            return true;
+        }
+
+        else if(this.totalamountbilled < this.totalAmountPaid)
+            return "Carry Forward : " + (this.totalAmountPaid -this.totalamountbilled );
+    }
+
 
 
      makeFinal()

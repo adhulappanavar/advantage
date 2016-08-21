@@ -52,7 +52,7 @@ router.post('/:id', function(req, res, next) {
 });
 
 
-router.post('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
 
 
 var actualpatients = new Array();
