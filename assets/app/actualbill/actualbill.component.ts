@@ -128,6 +128,7 @@ setlen()
 
     totalAmountBilled()
     {
+        this.totalamountbilled=0;
         console.log(this.med2patient);
         console.log(this.med2patient.bills);
         console.log(this.med2patient.bills[0]);
@@ -141,13 +142,14 @@ setlen()
 
     totoalAmountPaid()
     {
+        this.totalAmountPaid = 0;
         for(var i=0;i<this.med2patient.payment.length;i++)
             this.totalAmountPaid = this.totalAmountPaid + this.med2patient.payment[i].amountPaid;
 
             return this.totalAmountPaid;
     }
 
-    dues1()
+    duue()
     {
         if(this.totalamountbilled > this.totalAmountPaid)
         {
