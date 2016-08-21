@@ -23,7 +23,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 	  </div>
 	  <div class="panel-body">
 		<div class="table-responsive">
-		<table class="table">
+		<table class="table table-striped">
         <thead>
                     <tr>
                         <th>
@@ -47,7 +47,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 								<td>{{actualpatient.name}}</td>		
 					<td>{{actualpatient.gender}}</td>
 					<td>{{clacAge(actualpatient.dob)}}</td>
-          <td><a>Create Bill</a></td>          
+          <td><a [routerLink]="['Payment Page Patient', {id: actualpatient.id}]">Payment Page</a></td>          
 				</tr>
           </tbody>
 		  </table>	  
@@ -87,6 +87,13 @@ export class PaymentPageComponent implements OnInit{
   selectActualpatient(actualpatient: Actualpatient){
     this.selectedActualpatient = actualpatient;
   }
+
+  gotoPeoplesList(){
+        let link = ['Payment Page'];
+        this.router.navigate(link);
+        // could also use:
+        // window.history.back();
+    }
   
   toggleImage() : void
     {

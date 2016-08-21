@@ -23,7 +23,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 	  </div>
 	  <div class="panel-body">
 		<div class="table-responsive">
-		<table class="table">
+		<table class="table table-striped">
         <thead>
                     <tr>
                         <th>

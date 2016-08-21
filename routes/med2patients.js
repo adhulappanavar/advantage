@@ -71,7 +71,8 @@ router.post('/', function(req, res, next) {
             registrationNumber : req.body.registrationNumber,
             dob         : req.body.dob,
             gender      : req.body.gender , 
-            bills       : req.body.bills , 
+            bills       : req.body.bills ,
+            payemnt     : req.body.payment ,  
             dateOfAdmission : req.body.dateOfAdmission,            
             medicines : req.body.medicines,
             newmedicines : req.body.medicines,
@@ -116,6 +117,7 @@ router.post('/:id', function(req, res, next) {
         doc.bills = req.body.bills;
         doc.dateOfAdmission = req.body.dateOfAdmission;
         doc.name = req.body.name;        
+        doc.payment = req.body.payment;
         doc.medicines = req.body.medicines;
         doc.newmedicines = req.body.newmedicines;
         var tempcost = 0; 

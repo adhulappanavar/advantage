@@ -85,6 +85,7 @@ var actualpatients = new Array();
                     profession : actualpatients[i].profession,
                     medicines : [],
                     bills : [] , 
+                    payments : [] , 
                     medtotalcost : 0,
                     newmedicines : [],
                     newmedtotalcost : 0

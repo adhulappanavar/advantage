@@ -23,7 +23,7 @@ import { StudentFilterPipe } from './student-filter.pipe';
 	  </div>
 	  <div class="panel-body">
 			<div class="table-responsive">
-			  <table class="table">
+			  <table class="table table-striped">
 				<tr *ngFor="#student of students | studentFilter:listFilter">
 					<td>
 					  <a href="#" [routerLink]="['Student Details', {id: student.id}]">{{student.name}}</a>

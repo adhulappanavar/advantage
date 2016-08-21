@@ -32,7 +32,7 @@ import {ActualpatientsFilterPipe} from './actualpatient-filter.pipe';
 	  </div>
 	  <div class="panel-body">
 		<div class="table-responsive">
-		<table class="table">
+		<table class="table table-striped">
         <thead>
                     <tr>
                         <th>Patient Name</th>

@@ -5,4 +5,5 @@ export interface Actualmedicine {
   name: string;  
   cost: number;
   mongoId? : string;
+  selected? : string;
 }

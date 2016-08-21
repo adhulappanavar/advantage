@@ -1,4 +1,5 @@
 import {billing} from './billing';
+import {payment} from './payment';
 import { Actualmedicine } from '../actualmedicines/actualmedicine';
 
 export interface Med2patient {
@@ -13,6 +14,7 @@ export interface Med2patient {
   height?: number;
   weight?: number;
   bills? : billing[] ,
+  payment? : payment[] , 
   profession?: string;
   mongoId? : string;
   medicines? : Actualmedicine[];

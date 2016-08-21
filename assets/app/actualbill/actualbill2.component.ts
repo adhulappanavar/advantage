@@ -15,8 +15,7 @@ import {billing} from '../med2patients/billing';
 @Component({
   selector: 'actualpatients-list',
   directives: [ ROUTER_DIRECTIVES],
-  template: ` 
-
+  template: `
   <div class="row">  
       <div class="col-md-6" align="center" *ngIf="notFinal"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-warning" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
       <div class="col-md-6" align="center" *ngIf="!editMode && notFinal"><button class="btn btn-success" (click)="makeFinal()">Make Final Bill</button></div>
@@ -52,19 +51,49 @@ import {billing} from '../med2patients/billing';
                   <tbody>                    
                     <tr>
                       <td>Category:</td>
-                      <td>{{billtype}}</td>                      
+                      <td *ngIf="!editMode">{{billtype}}</td>
+                      <td *ngIf="editMode">
+                        <select class="form-control" id="sel1" [(ngModel)] = "billtype" >
+                          <option value="Monthly Bill">Monthly Bill</option>
+                          <option value="Check Out">Check Out</option>
+                          <option value="Death">Death</option>                          
+                        </select>
+                      </td>
                     </tr>
                     <tr>
                         <td>Month/Year:</td>
-                        <td>{{billmonth}} / {{billyear}}</td>                        
+                        <td *ngIf="!editMode">{{billmonth}} / {{billyear}}</td>
+                        <td *ngIf="editMode">
+                          <select class="form-control" id="sel1" [(ngModel)] = "billmonth" >
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>    
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>    
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>    
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>                          
+                          </select>
+                              /
+                          <select class="form-control" id="sel1" [(ngModel)] = "billyear" >
+                            <option [value]="billyear-1">{{billyear-1}}</option>
+                            <option [value]="billyear">{{billyear}}</option>
+                          </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>Date:</td>
-                        <td>{{billDate}}</td>                        
+                        <td *ngIf="!editMode">{{billDate}}</td>
+                        <td *ngIf="editMode"><input type="date" [(ngModel)] = "billDate"></td>
                     </tr>
                     <tr>
                         <td>Prepared By:</td>
-                        <td>{{user}}</td>                        
+                        <td *ngIf="!editMode">{{user}}</td>
+                        <td *ngIf="editMode"><input type="text" [(ngModel)]="user" /></td>
                     </tr>				
                   </tbody>
                 </table>
@@ -76,7 +105,7 @@ import {billing} from '../med2patients/billing';
      </div>
        <div class="panel-body">
             <div class="table-responsive">
-              <table *ngIf="selectedForBill" class="table table-striped">
+              <table *ngIf="!editMode && selectedForBill" class="table table-striped">
                     <thead>
                         <tr>                            
                             <th>Sl No</th>
@@ -97,7 +126,35 @@ import {billing} from '../med2patients/billing';
                         </tr>
                     </tbody>
                </table>
-			        
+			         <table *ngIf="editMode && med2patient" class="table table-striped">
+                    <thead>
+                        <tr>                            
+                            <th>Sl No</th>
+                            <th>Particulars</th>
+                            <th>Quanty</th>
+                            <th>Base Cost</th>
+                            <th>Amount</th>
+                            <th (click) = "toggleSelect()"><a>{{selectAll ? 'UnSelect all' : 'Select All'}}</a></th>                                                                         
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <tr *ngFor="#medicine of med2patient.medicines;var index=index">
+                             <td>{{index+1}}</td>
+                             <td>{{medicine.name}}</td>
+                             <td>{{medicine.qty}}</td>
+                             <td>{{medicine.cost}}</td>                             
+                             <td>{{medicine.cost * medicine.qty}}</td>
+                             <td *ngIf="selectAll">
+                                  <span *ngIf="exists(medicine)"><input type="checkbox" value=""  #cv [checked]=true (change)="onChangeSelectAll(index , medicine.name,cv.checked , medicine._id)"></span>
+                                  <span *ngIf="!exists(medicine)"><input type="checkbox" value=""  #cv [checked]=false (change)="onChangeSelectAll(index , medicine.name,cv.checked , medicine._id)"></span>
+                             </td>
+                             <td *ngIf="!selectAll">
+                                 <span *ngIf="!exists(medicine)"><input type="checkbox" value="" #cv [checked]=false (change)="onChangeUnSelectAll(index , medicine.name,cv.checked , medicine._id)"></span>
+                                 <span *ngIf="exists(medicine)"><input type="checkbox" value="" #cv [checked]=true (change)="onChangeUnSelectAll(index , medicine.name,cv.checked , medicine._id)"></span>
+                             </td>                                            
+                        </tr>
+                    </tbody>
+               </table>
             </div>
        </div>		 
 	     <div class="panel-footer">
@@ -116,7 +173,7 @@ import {billing} from '../med2patients/billing';
   styleUrls: ['html/actualpatients/actualpatients-list.component.css']
   
 })
-export class ActualBill1Component implements OnInit{
+export class ActualBill2Component implements OnInit{
   med2patient : Med2patient={"mongoId": " " };
   editMode = true;
   thepatient : Actualpatient={};
@@ -129,31 +186,43 @@ export class ActualBill1Component implements OnInit{
   notfinal=true;
   selectAll = true;
   id;
-  billid;
-
   notFinal=true;
   billyear =this.getBillingYear();
   tempbill = [];
   selectedForBill = [];
+  selectedForBillIndex  = [];
+  //this.setlen();
+  keepInMedicinesBool;
+  addingtoBillBool ;
+  intilization = true; 
+  
   billentry : billing = { medicines : []} ;
   dontAdd = [] ;
   billDate = this.todaysDate();
   buildtotal = 0;
   billTotal = 0;
   user="ACE/MARSH";
-  billlist;
+
+  len;
   constructor(private med2patientsService : Med2patientsService,
               private actualpatientsService : ActualpatientsService,
               private routeParams: RouteParams,
               private router: Router){ }
 
+
+setlen()
+{
+  for(var i = 0 ; i< this.selectedForBill.length ; i++)
+  {
+    this.selectedForBillIndex.push(i);
+  }
+  
+}              
+
   ngOnInit(){
      let id = this.routeParams.get('id');
-     //let billid = this.routeParams.get('billid');
      this.id = id;
-     //this.billid = billid;
      console.log(id);
-     //console.log(billid);
       this.med2patientsService
           .getMed2patients(id)
           .subscribe(p => this.med2patient = p);
@@ -163,17 +232,30 @@ export class ActualBill1Component implements OnInit{
           .subscribe(p => this.selectedForBill = p.medicines);               
 
           console.log(this.selectedForBill);
-          console.log("//foo"); 
-         // this.foo();        
-     }
-     
 
-     foo()
+
+          this.med2patientsService
+          .getMed2patients(this.id)
+          .subscribe(p => this.len = p.medicines.length);
+
+          console.log("Len : " , this.len);
+      
+
+     } 
+
+     exists(med)
      {
-       for(var i = 0 ; i < this.med2patient.bills.length ; i++  )
-      {
-        console.log("testing : " , this.med2patient.bills[i].month);
-      }                
+       //console.log("in exists");
+       //console.log(this.selectedForBill);
+       for(var i=0;i<this.selectedForBill.length;i++)
+       {
+         //console.log(this.selectedForBill[i]._id+" : " + med._id);
+         //console.log(this.selectedForBill[i]._id == med._id);
+         if(this.selectedForBill[i]._id == med._id)
+            return true;
+       }
+
+       return false;
      }
 
      saveMed2patientDetails(){
@@ -189,17 +271,26 @@ export class ActualBill1Component implements OnInit{
 
      makeFinal()
      {
+        console.log("in make final");
         this.notFinal =!this.notFinal;
+        console.log("notFinal : " , this.notFinal );
         this.billentry.month = this.billmonth;
+        console.log("this.billentry : "   , this.billentry ) ;
         this.billentry.year = this.billyear;
-        
+        console.log("this.billentry : "   , this.billentry ) ;
         for(var i = 0 ; i < this.selectedForBill.length ; i++)
         {
-            this.billentry.medicines.push(this.selectedForBill[i]);
+            console.log("hi i : " , i );
+            console.log(this.selectedForBill);            
+            this.billentry.medicines.push(this.selectedForBill[i]);                   
+            
         }
 
-        this.med2patient.bills.push(this.billentry);
-        this.billentry.medicines = [];
+        var copy = this.med2patient.medicines;
+        
+
+        console.log(this.selectedForBill);
+        this.med2patient.bills.push(this.billentry);        
         this.saveMed2patientDetails();
      }
 
@@ -212,22 +303,28 @@ export class ActualBill1Component implements OnInit{
             this.tempbill = this.selectedForBill;
             console.log(this.tempbill);
             this.selectedForBill=[];
+            for(var i=0;i<this.len;i++)
+              this.addingtoBillBool[i] = true;
             console.log(this.tempbill);
             for(var i=0;i<this.tempbill.length;i++)
-            {          
+            {     
+                  
               if(!(id == this.tempbill[i]._id))
               {
                   //console.log(this.med2patient.medicines[i].name);
                   this.selectedForBill.push(this.tempbill[i]);
+                  this.keepInMedicinesBool[i] = false;
               }
             }
 
+            //this.selectedForBill.push(this.med2patient.medicines[index]);
+            //this.keepInMedicinesBool[index] = false;
             console.log(this.selectedForBill);
         }
 
         else
         {
-            this.tempbill = this.selectedForBill;
+            /*this.tempbill = this.selectedForBill;
             console.log(this.tempbill);
             //this.selectedForBill=[];
             console.log(this.tempbill);
@@ -239,7 +336,10 @@ export class ActualBill1Component implements OnInit{
                   this.selectedForBill.push(this.med2patient.medicines[i]);
               }
             }
-            console.log(this.selectedForBill);
+            console.log(this.selectedForBill);*/
+
+
+            this.selectedForBill=[];
         }
    }
 
@@ -294,18 +394,32 @@ export class ActualBill1Component implements OnInit{
 
 toggleSelect()
 {
+  //var len ; 
     console.log("toggleSelect");
+    console.log("Len : " , this.len);
     this.selectAll = !this.selectAll;
     console.log(this.selectAll);
     if(this.selectAll)
     {
+        for(var i=0;i<this.len; i++)
+        {
+            this.keepInMedicinesBool[i] = false;  
+        }
         this.med2patientsService
           .getMed2patients(this.id)
           .subscribe(p => this.selectedForBill = p.medicines);
+
+          console.log("testing : " , this.selectedForBill);
+
+           
     }
 
     else
     {
+        for(var i=0;i<this.len; i++)
+        {
+            this.keepInMedicinesBool[i] = true;  
+        }
         this.selectedForBill=[];
     }
 

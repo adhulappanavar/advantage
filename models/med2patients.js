@@ -2,6 +2,30 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
+var payment = new Schema ({
+
+        amountPaid : Number , 
+
+        modeOfPayment : String , 
+
+        paidBy : String , 
+
+        phoneNo : Number ,
+
+        chequeNo : Number , 
+
+        date : Date , 
+
+        time : Date ,
+
+        month : String
+
+    },
+    {
+        timestamp : true
+    })
+
+
 var subMedicine = new Schema({ 
             medid   : String,
             name    : String,
@@ -12,10 +36,18 @@ var subMedicine = new Schema({
 var billing = new Schema({
 
     month : String , 
-    year : String , 
-    medicines : [ subMedicine ]
+    year : String ,    
+    medicines : [ subMedicine ] , 
+    date : Date , 
+    category : String , 
+    preparedBy : String ,
+    totalCost : Number 
+    },
+    {
+        timestamp : true
+    }
 
-});            
+);            
 
 var schema = new Schema({
     url             : String,
@@ -24,7 +56,8 @@ var schema = new Schema({
     dob             : Date,
     dateOfAdmission : Date,    
     name            : String,
-    gender          : String,    
+    gender          : String,
+    payment         : [payment] ,     
     medicines       : [ subMedicine ],
     newmedicines    : [ subMedicine ],
     medtotalcost    : Number,

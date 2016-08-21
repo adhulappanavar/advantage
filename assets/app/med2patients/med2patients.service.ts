@@ -57,6 +57,7 @@ function toMed2patient(r:any): Med2patient{
     height: r.height,
     gender : r.gender,
     mongoId : r._id,
+    payment : r.payment , 
     bills : r.bills ,
     medicines : r.medicines,
     newmedicines : r.newmedicines,

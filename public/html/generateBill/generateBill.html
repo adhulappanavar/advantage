@@ -1,0 +1,153 @@
+  <div class="row">  
+      <div class="col-md-6" align="center" *ngIf="notFinal"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-warning" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
+      <div class="col-md-6" align="center" *ngIf="!editMode && notFinal"><button class="btn btn-success" (click)="makeFinal()">Make Final Bill</button></div>
+  </div>
+  <br>
+  <div class="panel panel-default ">
+	  <div class="panel-heading">
+	    <div class='row'>     
+            <div class="col-md-4"><img  src="images/advantagelogo.png" width="250" height="170"></div>     
+            <div class="col-md-8" align="center">
+                  <h2>HI ADVANTAGE ELDER CARE</h2>
+                  <p>Hunasamaranahalli Post, (VIA) Bettahalasuru, Bangalore North - 562 157.</p>
+                  <p>Website : www.advantageeldercare.com</p>
+                  <p>Email: shajiphilip_advantage@yahoo.co.in</p>
+                  <p>Tel : 080 60121222, +91 98443 95515, 78295 92189</p>
+            </div>             
+    	 </div><br>
+       <div class="row" *ngIf="thepatient">
+            <div class="col-md-6" align="center">
+              <div class="table-responsive">
+              <div class="table table-striped">
+                <tbody>
+                <tr><td>Patient Name:</td><td>{{med2patient.name}}</td></tr>                
+                <tr><td>Reg No:</td><td>{{med2patient.registrationNumber}}</td></tr>
+                <tr><td>DOA :</td><td>{{stringAsDate(med2patient.dateOfAdmission)}}</td></tr>
+                <tr><td>Age/Gender</td><td>{{clacAge(med2patient.dob)}}/{{med2patient.gender}}</td></tr>
+              </div>
+              </div>
+            </div>
+            <div class="col-md-4" align="center">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <tbody>                    
+                    <tr>
+                      <td>Category:</td>
+                      <td *ngIf="!editMode">{{billtype}}</td>
+                      <td *ngIf="editMode">
+                        <select class="form-control" id="sel1" [(ngModel)] = "billtype" >
+                          <option value="Monthly Bill">Monthly Bill</option>
+                          <option value="Check Out">Check Out</option>
+                          <option value="Death">Death</option>                          
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>Month/Year:</td>
+                        <td *ngIf="!editMode">{{billmonth}} / {{billyear}}</td>
+                        <td *ngIf="editMode">
+                          <select class="form-control" id="sel1" [(ngModel)] = "billmonth" >
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>    
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>    
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>    
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>                          
+                          </select>
+                              /
+                          <select class="form-control" id="sel1" [(ngModel)] = "billyear" >
+                            <option [value]="billyear-1">{{billyear-1}}</option>
+                            <option [value]="billyear">{{billyear}}</option>
+                          </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Date:</td>
+                        <td *ngIf="!editMode">{{billDate}}</td>
+                        <td *ngIf="editMode"><input type="date" [(ngModel)] = "billDate"></td>
+                    </tr>
+                    <tr>
+                        <td>Prepared By:</td>
+                        <td *ngIf="!editMode">{{user}}</td>
+                        <td *ngIf="editMode"><input type="text" [(ngModel)]="user" /></td>
+                    </tr>				
+                  </tbody>
+                </table>
+              </div>
+            
+            </div>
+       </div>
+       
+     </div>
+       <div class="panel-body">
+            <div class="table-responsive">
+              <table *ngIf="!editMode && selectedForBill" class="table table-striped">
+                    <thead>
+                        <tr>                            
+                            <th>Sl No</th>
+                            <th>Particulars</th>
+                            <th>Quanty</th>
+                            <th>Base Cost</th>
+                            <th>Amount</th>
+                                                                                                     
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <tr *ngFor="#medicine of selectedForBill;var index=index">                            
+                             <td *ngIf="medicine.selected">{{index+1}}</td>
+                             <td *ngIf="medicine.selected">{{medicine.name}}</td>
+                             <td *ngIf="medicine.selected">{{medicine.qty}}</td>
+                             <td *ngIf="medicine.selected">{{medicine.cost}}</td>                             
+                             <td *ngIf="medicine.selected">{{medicine.cost * medicine.qty}}</td>
+                        </tr>
+                    </tbody>
+               </table>
+			         <table *ngIf="editMode && med2patient" class="table table-striped">
+                    <thead>
+                        <tr>                            
+                            <th>Sl No</th>
+                            <th>Particulars</th>
+                            <th>Quanty</th>
+                            <th>Base Cost</th>
+                            <th>Amount</th>
+                            <th (click) = "toggleSelect()"><a>{{selectAll ? 'Select all' : 'UnSelect  All'}}</a></th>                                                                         
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <tr *ngFor="#medicine of selectedForBill;var index=index">
+                             <td>{{index+1}}</td>
+                             <td>{{medicine.name}}</td>
+                             <td>{{medicine.qty}}</td>
+                             <td>{{medicine.cost}}</td>                             
+                             <td>{{medicine.cost * medicine.qty}}</td>
+                             <td *ngIf="!selectAll">
+                                  <span ><input type="checkbox" value=""  #cv [checked]=true (change)="onChangeSelectMedicine(index , medicine.name,cv.checked , medicine._id)"></span>
+                                                                
+                             </td>
+                             <td *ngIf="selectAll">  
+                                 <span ><input type="checkbox" value="" #cv [checked]=false (change)="onChangeSelectMedicine(index , medicine.name,cv.checked , medicine._id)"></span>
+                                                                  
+                             </td>                                            
+                        </tr>
+                    </tbody>
+               </table>
+            </div>
+       </div>		 
+	     <div class="panel-footer">
+           <div class="table responsive">
+              <table class="table table-striped">
+                  <tbody>
+                    <tr><td>Total Cost : </td><td>{{calcTotalAmount(med2patient.medtotalcost)}}</td></tr>
+                  </tbody>
+                  
+              </table>
+           </div>   
+       </div>
+       
+	</div>

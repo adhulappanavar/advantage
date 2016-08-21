@@ -23,7 +23,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 	  </div>
 	  <div class="panel-body">
 		<div class="table-responsive">
-		<table class="table">
+		<table class="table table-striped">
         <thead>
                     <tr>
                         <th>
@@ -47,7 +47,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 								<td>{{actualpatient.name}}</td>		
 					<td>{{actualpatient.gender}}</td>
 					<td>{{clacAge(actualpatient.dob)}}</td>
-          <td><a [routerLink]="['Bill For Patient', {id: actualpatient.id}]" >Create Bill</a></td>          
+          <td><a [routerLink]="['Payment History For Patient', {id: actualpatient.id}]" >Show Billing History</a></td>          
 				</tr>
           </tbody>
 		  </table>	  
@@ -59,7 +59,9 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
   styleUrls: ['html/actualpatients/actualpatients-list.component.css'],
   pipes : [ActualpatientsFilterPipe]
 })
-export class ActualpatientListPaymentComponent implements OnInit{
+
+
+export class PaymentInfoPatientListComponent implements OnInit{
   actualpatients: Med2patient[] = [];
   selectedActualpatient: Actualpatient;
   listFilter = "";

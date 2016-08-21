@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
-
+import {enableProdMode} from 'angular2/core';
+enableProdMode();
 // HTTP_PROVIDERS =. let's you inject http service
 import { HTTP_PROVIDERS } from 'angular2/http';
 
@@ -36,12 +37,17 @@ import { ActualmedicinesEditComponent} from './actualmedicines/actualmedicine-ed
 import { ActualmedicinesService } from './actualmedicines/actualmedicines.service';
 
 import {ActualpatientListPaymentComponent} from './actualpayment/actualpateintlist-payment.component';
-import { PaymentPageComponent } from './actualpayment/paymentpage.component';
 import{ActualBillComponent} from './actualbill/actualbill.component';
 import{ActualBill1Component} from './actualbill/actualbill1.component';
 
 import {BillListComponent} from './actualbill/billList.component';
 import {PatientBillListComponent} from './actualbill/patientbillList.component';
+import { PaymentPageComponent } from './actualpayment/paymentpage.component';
+import {PatientPaymentPageComponent} from './actualpayment/patientPaymentPage.component';
+
+
+import { PaymentInfoPatientListComponent } from './actualpayment/paymentinfo_patientlist.component';
+import {PaymentInfoPatientComponent} from './actualpayment/paymentinfo_patient.component';
 
 @Component({
     selector: 'my-app',
@@ -52,7 +58,7 @@ import {PatientBillListComponent} from './actualbill/patientbillList.component';
             <router-outlet></router-outlet>
         </div>
     `,
-    directives: [ROUTER_DIRECTIVES, HeaderComponent, PeopleComponent, PatientComponent, MedicineComponent, Med2patientComponent, ActualpatientComponent , ActualmedicineComponent ,  ActualpatientListPaymentComponent , ActualBillComponent , BillListComponent , PaymentPageComponent] ,
+    directives: [ROUTER_DIRECTIVES, HeaderComponent, PeopleComponent, PatientComponent, MedicineComponent, Med2patientComponent, ActualpatientComponent , ActualmedicineComponent ,  ActualpatientListPaymentComponent , ActualBillComponent , BillListComponent , PaymentPageComponent , PaymentInfoPatientListComponent] ,
     providers: [StarWarsService, PatientsService, MedicinesService, Med2patientsService, ActualpatientsService , ActualmedicinesService  ,ROUTER_PROVIDERS, HTTP_PROVIDERS]
     
 })
@@ -81,7 +87,11 @@ import {PatientBillListComponent} from './actualbill/patientbillList.component';
     { path : '/billlist' , name : 'Bill List' , component : BillListComponent },
     { path : '/patientbilllist/:id' , name : 'Patient Bill List' , component : PatientBillListComponent } , 
 
-    { path : '/paymentpage' , name : 'Payment Page' , component : PaymentPageComponent }
+    { path : '/paymentpage' , name : 'Payment Page' , component : PaymentPageComponent }, 
+    { path : '/paymentpageForPatient/:id' , name : 'Payment Page Patient' , component : PatientPaymentPageComponent },
+
+    { path : '/paymenthistorylist' , name : 'Payment History List' , component : PaymentInfoPatientListComponent }, 
+    { path : '/paymenthistoryeForPatient/:id' , name : 'Payment History For Patient' , component : PaymentInfoPatientComponent }
 
 ])
 

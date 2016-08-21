@@ -23,15 +23,15 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 				</div>
 				<div class="panel-body">
 					<div class="table-responsive">
-						<table class="table">
+						<table class="table table-striped">
 							<thead>
 								<tr>                    
 								<th>Month</th>                        
 								</tr>
 							</thead>
 							<tbody *ngIf="actualpatient">
-								<tr *ngFor="#billitem of actualpatient.bills">					
-									<td><a (click) = "toggleshowmeds(billitem._id)" >{{billitem.month}} / {{billitem._id}}</a></td>									          
+								<tr *ngFor="#billitem of actualpatient.bills ">					
+									<td><a (click) = "toggleshowmeds(billitem._id)" >{{billitem.month}} / {{billitem._id}} / {{billitem.timestamp}}</a></td>									          
 								</tr>
 							</tbody>
 						</table>	  
@@ -55,7 +55,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
        <div class="row" *ngIf="actualpatient">
             <div class="col-md-6" align="center">
               <div class="table-responsive">
-              <div class="table">
+              <div class="table table-striped">
                 <tbody>
                 <tr><td>Patient Name:</td><td>{{actualpatient.name}}</td></tr>                
                 <tr><td>Reg No:</td><td>{{actualpatient.registrationNumber}}</td></tr>
@@ -66,7 +66,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
             </div>
             <div class="col-md-4" align="center">
               <div class="table-responsive">
-                <table class="table">
+                <table class="table table-striped">
                   <tbody>                    
                     <tr>
                       <td>Category:</td>
@@ -94,7 +94,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
      </div>
        <div class="panel-body">
             <div class="table-responsive">
-              <table *ngIf="selectedForBill" class="table">
+              <table *ngIf="selectedForBill" class="table table-striped">
                     <thead>
                         <tr>                            
                             <th>Sl No</th>

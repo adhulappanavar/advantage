@@ -25,7 +25,7 @@ import {AuthService} from "../auth//auth.service";
 	  </div>
 	  <div class="panel-body">
 			<div class="table-responsive">
-			  <table class="table">
+			  <table class="table table-striped">
         <thead>
                     <tr>
                         <th>
