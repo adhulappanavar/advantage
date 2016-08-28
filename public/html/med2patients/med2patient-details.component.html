@@ -39,7 +39,7 @@
                </div>
             <div class="table-responsive">
 			         <table class="table table-striped">
-                  <thead>
+                  <thead> 
                     <tr>
                       <td>Medicine Name</td>
                       <th></th>                      
@@ -78,11 +78,11 @@
                                     </tr>
                                   </thead>
                                   <tbody id="list1">
-                                    <tr *ngFor="#newmed2patientmedicine of med2patient.newmedicines">
+                                    <tr *ngFor="#newmed2patientmedicine of med2patient.newmedicines;var index=index">
                                         <td>{{newmed2patientmedicine.name}}</td>                                        
                                         <td ><input [(ngModel)]="newmed2patientmedicine.qty" type="Number"></td>
                                         <td ><input [(ngModel)]="newmed2patientmedicine.cost" type="Number"></td>                                        
-                                        <td><a>Delete</a></td>
+                                        <td><a (click)="deletefromNewMeds(index)">Delete</a></td>
                                     </tr>
                                   </tbody>
                               </table>
@@ -105,10 +105,11 @@
                                                 </tr>
                                               </thead>
                                               <tbody id="list1">
-                                                <tr *ngFor="#med2patientmedicine of med2patient.medicines">
+                                                <tr *ngFor="#med2patientmedicine of med2patient.medicines;var index=index">
                                                     <td>{{med2patientmedicine.name}}</td>
                                                     <td>{{med2patientmedicine.qty}}</td>
                                                     <td>{{med2patientmedicine.cost}}</td>
+                                                    <td><a (click)="deletefromMeds(index)">Delete</a></td>
                                                 </tr>
                                               </tbody>
                                           </table>

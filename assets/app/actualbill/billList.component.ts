@@ -90,7 +90,7 @@ export class BillListComponent implements OnInit{
     
     onDelete(id : string) {
         this.actualpatientsService.deleteMessage(id);
-    }
+    } 
     
     stringAsDate(dateStr) {
           return new Date(dateStr);

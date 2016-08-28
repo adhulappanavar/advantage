@@ -35,8 +35,9 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 								</tr>
 							</thead>
 							<tbody *ngIf="actualpatient">
-								<tr *ngFor="#billitem of actualpatient.bills ">					
-									<td><a (click) = "toggleshowmeds(billitem._id)" >{{billitem.month}}</a></td>									          
+								<tr *ngFor="#billitem of actualpatient.bills; var index=index ">					
+									<td><a (click) = "toggleshowmeds(billitem._id)" >{{billitem.month}}</a></td>	
+                  <td><a>Delete</a></td>								          
 								</tr>
 							</tbody>
 						</table>	  

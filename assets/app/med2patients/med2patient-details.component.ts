@@ -75,6 +75,37 @@ export class Med2patientDetailsComponent implements OnInit {
            this.saveMed2patientDetails();
     }
 
+    deletefromNewMeds(index)
+    {  
+        console.log(index);
+        var temp = this.med2patient.newmedicines;
+        this.med2patient.newmedicines = [];
+        console.log(temp);
+        for(var i=0;i<temp.length;i++)
+        {
+            if(!(i==index))
+            {
+              this.med2patient.newmedicines.push(temp[i]);
+            }
+        }
+        this.saveMed2patientDetails();
+    }
+
+    deletefromMeds( index )
+    {
+        console.log(index);
+        var temp = this.med2patient.medicines;
+        this.med2patient.medicines = [];
+        for(var i=0;i<temp.length;i++)
+        {
+            if(!(i==index))
+            {
+              this.med2patient.medicines.push(temp[i]);
+            }
+        }
+        this.saveMed2patientDetails();
+    }
+
 
      onSaveFromNewMedicine2GivenMedicine(event : string, med2patient : Med2patient)
   {
