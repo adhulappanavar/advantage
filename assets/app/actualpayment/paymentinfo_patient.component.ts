@@ -28,7 +28,7 @@ import {enableProdMode} from 'angular2/core';
         </div>
 	  </div>	  
 
-
+ 
     <div class="panel panel-body">
         <div  class="row" *ngIf="med2patient" style="color:#337ab7;font-size:20px">
                     <div class="col-md-4"><span style="font-size:20px">Total Billed Amout : {{totalAmountBilled()}}</span></div>
@@ -36,9 +36,15 @@ import {enableProdMode} from 'angular2/core';
                     <div class="col-md-4">{{dues()}}</div>
             </div>
             <br>
-        <div class="row">
+            <div  class="row" *ngIf="med2patient" style="color:#337ab7;font-size:20px">
+                    <div class="col-md-4"><span style="font-size:20px">Last Billed Amout : {{med2patient.bills[med2patient.bills.length-1].totalCost}}</span></div>
+                    <div class="col-md-4">Last Amount Paid : {{med2patient.payment[med2patient.payment.length-1].amountPaid}}</div>
+                    <div class="col-md-4">{{lastDue()}}</div>
+            </div>
+            <br>
+        <div class="row"> 
         <div class="table-responsive col-md-6">
-                <div><b><span style="color:#337ab7;font-size:20px">Patient Bill List</span></b></div>
+                <div><b><span style="color:#337ab7;font-size:20px">Billed List</span></b></div>
 						<table class="table table-striped">
 							<thead>
 								<tr>                    
@@ -59,7 +65,7 @@ import {enableProdMode} from 'angular2/core';
 	    
 
         <div class="table-responsive col-md-6">
-                <div><b><span style="color:#337ab7;font-size:20px">Patient Payment List</span></b></div>
+                <div><b><span style="color:#337ab7;font-size:20px">Payed List</span></b></div>
 						<table class="table table-striped">
 							<thead>
 								<tr>                    
@@ -77,12 +83,7 @@ import {enableProdMode} from 'angular2/core';
 						</table>	  
 					</div>
 				</div>
-            </div>
-            <div  class="row" *ngIf="med2patient" style="color:#337ab7;font-size:20px">
-                   <div class="col-md-4"><span style="font-size:20px">Total Billed Amout : {{totalAmountBilled()}}</span></div>
-                    <div class="col-md-4">Total Amount Paid : {{totoalAmountPaid()}}</div>
-                    <div class="col-md-4">{{dues()}}</div>
-            </div>
+            </div>            
 	    </div>  
   
   `,
@@ -105,8 +106,10 @@ export class PaymentInfoPatientComponent implements OnInit{
   amountPaid;
   paymentMode="cheque";
   chequeNo;
+  reciptNo;
+  narration;
   imageMArgin = 2;
-  constructor(private actualpatientsService : ActualpatientsService , private med2patientsService : Med2patientsService , private routeParams: RouteParams){ }
+  constructor(private actualpatientsService : ActualpatientsService , private med2patientsService : Med2patientsService , private routeParams: RouteParams , private router : Router){ }
 
   ngOnInit(){   
     
@@ -117,6 +120,25 @@ export class PaymentInfoPatientComponent implements OnInit{
       .subscribe(p => this.med2patient = p)
 
       console.log("changes made");
+  }
+  lastDue()
+  {    
+      var lastbilledamt =0;
+      if(this.med2patient.bills.length-1>0)
+        lastbilledamt =this.med2patient.bills[this.med2patient.bills.length-1].totalCost;
+      
+      var lastpayedamt =0 ; 
+      if(this.med2patient.payment.length-1>0)
+        lastpayedamt = this.med2patient.payment[this.med2patient.payment.length-1].amountPaid;
+
+        if(lastbilledamt > lastpayedamt )
+            return "Due : " + (lastbilledamt-lastpayedamt);
+        else
+            return "Credit Amount : " + (lastpayedamt - lastbilledamt);
+  }
+  latestBilledAmount()
+  {
+      return this.med2patient.bills[this.med2patient.bills.length-1].totalCost
   }
 
   selectActualpatient(actualpatient: Actualpatient){
@@ -144,7 +166,7 @@ export class PaymentInfoPatientComponent implements OnInit{
         console.log(this.med2patient);
         console.log(this.med2patient.bills);
         console.log(this.med2patient.bills[0]);
-        
+        this.totalamountbilled=0;
         for(var i = 0 ; i< this.med2patient.bills.length ; i++)
             this.totalamountbilled=this.totalamountbilled + this.med2patient.bills[i].totalCost;
             
@@ -154,19 +176,28 @@ export class PaymentInfoPatientComponent implements OnInit{
 
     totoalAmountPaid()
     {
+        this.totalAmountPaid =0;
         for(var i=0;i<this.med2patient.payment.length;i++)
             this.totalAmountPaid = this.totalAmountPaid + this.med2patient.payment[i].amountPaid;
 
             return this.totalAmountPaid;
     }
 
+    
     dues()
     {
         if(this.totalamountbilled > this.totalAmountPaid)
             return "DUE : " + (this.totalamountbilled-this.totalAmountPaid);
 
         else
-            return "Carry Forward : " + (this.totalAmountPaid -this.totalamountbilled );
+            return "Credit Balance : " + (this.totalAmountPaid -this.totalamountbilled );
+    }
+
+    gotoPeoplesList(){
+        let link = ['Payment History List'];
+        this.router.navigate(link);
+        // could also use:
+        // window.history.back();
     }
 
     onSave()

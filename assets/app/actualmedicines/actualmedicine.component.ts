@@ -1,6 +1,6 @@
 import { Component, OnInit } from 'angular2/core';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
-
+import {Response} from 'angular2/http';
 import { Actualmedicine } from './actualmedicine';
 import { ActualmedicineDetailsComponent } from './actualmedicine-details.component';
 import { ActualmedicinesEditComponent } from './actualmedicine-edit.component';
@@ -51,7 +51,7 @@ import { ActualmedicinesFilterPipe } from './actualmedicine-filter.pipe';
             <a [routerLink] = "[ 'Actualmedicines Edit' , {id: actualmedicine.id} ]">Edit</a>
           </td>
           <td>
-            <a>Delete</a>
+            <a (click) = "onDelete(actualmedicine.id)">Delete</a>
           </td>
 				</tr>
         </tbody>
@@ -79,6 +79,21 @@ export class ActualmedicineComponent implements OnInit{
       .getAllActualmedicines()
       .subscribe(p => this.actualmedicines = p)
   }
+
+  onDelete(id : string) { console.log("logging another change!!!!");
+//        this.actualpatientsService.deleteMessage(id);
+      this.actualmedicinesService
+          .deleteActualmedicine(id)
+          .subscribe( 
+            (r: Response) => {console.log('success, ')},
+            (error) => {console.log('error: ', error);}
+          );
+
+        this.actualmedicinesService
+      .getAllActualmedicines()
+      .subscribe(p => this.actualmedicines = p)
+
+    }
 
   selectActualmedicine(actualmedicine: Actualmedicine){
     this.selectedActualmedicine = actualmedicine;

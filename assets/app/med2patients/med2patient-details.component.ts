@@ -31,11 +31,11 @@ export class Med2patientDetailsComponent implements OnInit {
     ngOnInit(){
 
         let id = this.routeParams.get('id');
-        console.log('getting med2patient with id: ', id);
+        console.log('getting med2patient with id: ', id); 
 
 
         this.med2patientsService
-          .getMed2patients(id)
+          .getMed2patients(id) 
           .subscribe(p => this.med2patient = p);
 
 

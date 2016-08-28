@@ -12,11 +12,13 @@ var payment = new Schema ({
 
         phoneNo : Number ,
 
-        chequeNo : Number , 
+        chequeNo : String , 
 
-        date : Date , 
+        reciptNo : String,
 
-        time : Date ,
+        narration : String,
+
+        date : Date,        
 
         month : String
 

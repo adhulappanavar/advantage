@@ -29,6 +29,31 @@ router.get('/static', function(req, res, next) {
  
 });
 
+router.delete('/:id' , function(req, res, next) { console.log("test");
+  console.log('del profile');
+  console.log(req.params.id);
+  console.log("param id");
+   Med2patients.findByIdAndRemove(req.params.id, function(err, doc) {
+        if (err) {
+            return res.status(404).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        if (!doc) {
+            return res.status(404).json({
+                title: 'No message found',
+                error: {message: 'Message could not be found'}
+            });
+        }
+        console.log("Mongo Record before update .... "+doc);
+        console.log("Request Body from Browser .... "+req.body);
+   });
+
+   
+});    
+
+
 router.get('/', function(req, res, next) {
     Med2patients.find()
         .exec(function(err, docs) {

@@ -32,6 +32,16 @@ export class Med2patientsService{
               .post(`${this.baseUrl}/med2patients/${med2patient.id}`,body, {headers: headers});
   }
 
+  deleteMed2patient(id: string) : Observable<Response>{
+      console.log("In delete Med2patient");
+        const body = JSON.stringify(id); 
+        console.log("body from Delete Med2patient : " , body);
+        const headers = new Headers({'Content-Type': 'application/json'});
+
+//         return this.http.post('/actualpatients' , body, {headers: headers});
+         return this.http.delete(`${this.baseUrl}/med2patients/${id}`);
+  }
+
 
 }
 

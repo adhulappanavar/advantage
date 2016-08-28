@@ -18,6 +18,19 @@ export class ActualmedicinesService{
       .map(mapActualmedicines);
       return actualmedicines$;
   }
+
+deleteActualmedicine(id: string) : Observable<Response>{
+      console.log("In delete medicine");
+        const body = JSON.stringify(id);
+        console.log("body from Delete Patient : " , body);
+        const headers = new Headers({'Content-Type': 'application/json'});
+
+//         return this.http.post('/actualpatients' , body, {headers: headers});
+         return this.http.delete(`${this.baseUrl}/actualmedicines/${id}`);
+
+
+  }
+
   getActualmedicine(id: string): Observable<Actualmedicine> {
     console.log("in service getActualmedicines(id)");
     let actualmedicines$ = this.http

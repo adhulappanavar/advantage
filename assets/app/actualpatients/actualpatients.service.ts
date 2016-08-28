@@ -11,7 +11,8 @@ export class ActualpatientsService{
     private baseUrl: string = 'http://localhost:3000';
 //    private baseUrl: string = 'http://192.168.1.104:3000';
 
-  constructor(private http : Http){}
+  med2patient;
+  constructor(private http : Http ){}
 
   getAllActualpatients(): Observable<Actualpatient[]>{
     let actualpatients$ = this.http
@@ -44,7 +45,7 @@ export class ActualpatientsService{
         const headers = new Headers({'Content-Type': 'application/json'});
 
          return this.http.post('/actualpatients' , body, {headers: headers});
-  }
+  } 
 
 deleteActualpatient(id: string) : Observable<Response>{
       console.log("In deleteStudent");
@@ -54,8 +55,6 @@ deleteActualpatient(id: string) : Observable<Response>{
 
 //         return this.http.post('/actualpatients' , body, {headers: headers});
          return this.http.delete(`${this.baseUrl}/actualpatients/${id}`);
-
-
   }
 
 

@@ -39,7 +39,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
                     </tr>
          </thead>
          <tbody *ngIf="actualpatients">
-				<tr *ngFor="#actualpatient of actualpatients">
+				<tr *ngFor="#actualpatient of actualpatients |  actualpatientsFilter:listFilter">
 					<td>
 							<img *ngIf='showImage' [src]='actualpatient.photoUrl' [title]='actualpatient.name' [style.width.px]='imageWidth' [style.margin.px]= 'imageMargin'/>
 					</td>
@@ -58,6 +58,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
   `,
   styleUrls: ['html/actualpatients/actualpatients-list.component.css'],
   pipes : [ActualpatientsFilterPipe]
+  
 })
 export class BillListComponent implements OnInit{
   @Input() actualpatients: Med2patient[] = [];

@@ -12,7 +12,7 @@ import { Med2patient } from '../med2patients/med2patient';
 
 import {billing} from '../med2patients/billing';
 
-@Component({
+@Component({ 
   selector: 'actualpatients-list', 
   directives: [ ROUTER_DIRECTIVES],
   templateUrl:"html/generateBill/generateBill.html"  ,
@@ -158,7 +158,7 @@ setlen()
         }
 
         else if(this.totalamountbilled < this.totalAmountPaid)
-            return "Carry Forward : " + (this.totalAmountPaid -this.totalamountbilled );
+            return "Credit Balance  : " + (this.totalAmountPaid -this.totalamountbilled );
     }
 
 
@@ -175,7 +175,7 @@ setlen()
 
         this.billentry.category = this.billtype;
         console.log("this.billentry : "   , this.billentry ) ;
-        //this.billentry.date = this.stringAsDate(this.billDate);
+        //this.billentry.date = this.stringAsDate(this.billDate); 
         //console.log("this.billentry : "   , this.billentry ) ;
         this.billentry.preparedBy = this.user;
         console.log("this.billentry : "   , this.billentry ) ;

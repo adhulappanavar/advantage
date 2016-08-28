@@ -15,7 +15,7 @@ export class ActualpatientsAddComponent implements OnInit {
     actualpatient : Actualpatient = {"registrationNumber" : "" ,   
     "name"        : "",
     "gender"      : "",
-    "dob"         : new Date(),
+    "dob"         : new Date(), 
     "dateOfAdmission" : new Date(),  
     "photoUrl"    : "",
     "pcpContact" : 
@@ -58,7 +58,7 @@ export class ActualpatientsAddComponent implements OnInit {
         this.router.navigate(link);
         // could also use:
         // window.history.back();
-    }
+    } 
     saveNewActualpatientsDetails(){
      // this.isSaved = true;
       this.actualpatientsService

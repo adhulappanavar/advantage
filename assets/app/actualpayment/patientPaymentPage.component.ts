@@ -52,9 +52,15 @@ import {payment} from '../med2patients/payment';
         <div class="row" *ngIf="paymentMode=='cheque'">
               <div class="col-md-3">cheque Number :</div> <div class="col-md-3"><input type="text" [(ngModel)] = "chequeNo"></div>
         </div><br>
+        <div class="row" *ngIf="paymentMode=='onlineTransfer'">
+              <div class="col-md-3">Narration :</div> <div class="col-md-3"><input type="text" [(ngModel)] = "narration"></div>
+        </div><br>
+        <div class="row" *ngIf="paymentMode=='cash'">
+              <div class="col-md-3">Recipt Number :</div> <div class="col-md-3"><input type="text" [(ngModel)] = "reciptno"></div>
+        </div><br>
         <div *ngIf="!isSaved"><button class="btn btn-success" (click) = "onSave()">Save Payment Details</button></div>
         <div *ngIf="isSaved">
-            <div><button class="btn btn-warning">See This Patinets Billing Info</button></div><br>
+            <div><button class="btn btn-warning" [routerLink]="['Payment History For Patient', {id: med2patient.id}]">See This Patinets Billing Info</button></div><br>
             <div  class="alert alert-success" width="500"> <h3>Saved</h3> </div>            
         </div>
     </div>
@@ -77,8 +83,10 @@ export class PatientPaymentPageComponent implements OnInit{
   amountPaid;
   paymentMode="cheque";
   chequeNo;
-  imageMArgin = 2;
-  constructor(private actualpatientsService : ActualpatientsService , private med2patientsService : Med2patientsService , private routeParams: RouteParams){ }
+  reciptno;
+  narration;
+  imageMArgin = 2; 
+  constructor(private actualpatientsService : ActualpatientsService , private med2patientsService : Med2patientsService , private routeParams: RouteParams , private router : Router){ }
 
   ngOnInit(){   
     
@@ -94,7 +102,13 @@ export class PatientPaymentPageComponent implements OnInit{
   selectActualpatient(actualpatient: Actualpatient){
     this.selectedActualpatient = actualpatient;
   }
-  
+   
+  gotoPeoplesList()
+  {
+      let link = ['Payment Page'];
+        this.router.navigate(link);
+  }
+
   toggleImage() : void
     {
         this.showImage = !this.showImage;

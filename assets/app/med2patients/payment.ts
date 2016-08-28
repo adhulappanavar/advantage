@@ -14,7 +14,11 @@ export interface payment {
 
         phoneNo? : number ,
 
-        chequeNo? : number , 
+        chequeNo? : String , 
+
+        reciptNo? : String,
+
+        narration? : String,
 
         date ?: Date , 
 

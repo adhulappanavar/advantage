@@ -1,10 +1,11 @@
 import { Component, OnInit } from 'angular2/core';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
-
+import {Response} from 'angular2/http';
 import { Actualpatient } from './actualpatient';
 import { ActualpatientDetailsComponent } from './actualpatient-details.component';
 import { ActualpatientsEditComponent } from './actualpatient-edit.component';
 import { ActualpatientsService } from './actualpatients.service';
+import { Med2patientsService } from '../med2patients/med2patients.service';
 import { RouteParams, Router} from 'angular2/router';
 import { ActualpatientsFilterPipe } from './actualpatient-filter.pipe';
 import {AuthService} from "../auth//auth.service";
@@ -58,10 +59,10 @@ import {AuthService} from "../auth//auth.service";
           <td>
             <a [routerLink] = "[ 'Actualpatients Edit' , {id: actualpatient.id} ]">Edit</a>
           </td>
+          <td><a>Discharge</a></td>
           <td>
             <a (click) = "onDelete(actualpatient.id)">Delete</a>
-          </td>
-          <td><a>CheckOut</a></td>          
+          </td>                    
 				</tr>
         </tbody>
 			  </table>	  
@@ -80,7 +81,8 @@ export class ActualpatientComponent implements OnInit{
   showImage = false;
   imageWidth= 50;
   imageMArgin = 2;
-  constructor(private actualpatientsService : ActualpatientsService , private _authService: AuthService , private router: Router){ }
+  med2patients;
+  constructor(private actualpatientsService : ActualpatientsService , private _authService: AuthService , private router: Router , private med2patientsService: Med2patientsService) { }
   femaleNo = 0 ; 
   maleNo = 0;
   ngOnInit(){
@@ -90,11 +92,15 @@ export class ActualpatientComponent implements OnInit{
         let link = ['Auth'];
         this.router.navigate(link);
       }
-
+ 
     //this.actualpatients = this.starWarsService.getAll();
     this.actualpatientsService
       .getAllActualpatients()
       .subscribe(p => this.actualpatients = p);
+
+      this.med2patientsService
+          .getAllMed2patients() 
+          .subscribe(p => this.med2patients = p);
 
       
   }
@@ -121,8 +127,10 @@ export class ActualpatientComponent implements OnInit{
     {
         this.showImage = !this.showImage;
     }
-    
+     
     onDelete(id : string) { console.log("logging another change!!!!");
+
+    console.log("patient id : " , id);
 //        this.actualpatientsService.deleteMessage(id);
       this.actualpatientsService
           .deleteActualpatient(id)
@@ -134,6 +142,33 @@ export class ActualpatientComponent implements OnInit{
           this.actualpatientsService
       .getAllActualpatients()
       .subscribe(p => this.actualpatients = p);
+      
+      
+      var med2patientid; 
+
+      //let id = this.routeParams.get('id');
+        
+
+        for(var i=0;i<this.med2patients.length;i++)
+        {
+          console.log(i);
+          console.log(this.med2patients[i].patientid == id);
+          console.log(id , " : " , this.med2patients[i].patientid);
+          if(this.med2patients[i].patientid == id)
+          {
+              med2patientid = this.med2patients[i]._id;
+              break;
+          }
+        }
+
+         console.log('getting med2patient with id: ',med2patientid);
+        
+        this.med2patientsService
+          .deleteMed2patient(med2patientid)
+          .subscribe( 
+            (r: Response) => {console.log('success, ')},
+            (error) => {console.log('error: ', error);}
+          );
 
     }
 

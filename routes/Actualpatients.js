@@ -75,6 +75,8 @@ router.post('/', function(req, res, next) {
             initialPayment : req.body.initialPayment , 
             comments : req.body.comments             
            });
+
+        var res;
         actualpatients.save(function(err, result) {
             if (err) {
                 return res.status(404).json({
@@ -82,6 +84,7 @@ router.post('/', function(req, res, next) {
                     error: err
                 });
             }
+            res=result;
             /*res.status(201).json({
                 message: 'Saved message',
                 obj: result
@@ -89,15 +92,15 @@ router.post('/', function(req, res, next) {
         });
 
         var med2patients = new Med2patients({
-            url         : req.body.url,
-            patientid   : req.body.patientid,
+            url         : req.body.Photourl,
+            patientid   : res.id,
             name        : req.body.name,
             registrationNumber : req.body.registrationNumber,
             dob         : req.body.dob,
             dateOfAdmission : req.body.dateOfAdmission,
-            height      : req.body.height,
-            weight      : req.body.weight,
-            profession  : req.body.profession,
+            height      : 0,
+            weight      : 0,
+            profession  : "hi",
             medicines : [],
             newmedicines : [],
             medtotalcost : 0,
@@ -166,7 +169,7 @@ router.post('/:id', function(req, res, next) {
         });
     });
 });
-
+ 
 
 router.delete('/:id' , function(req, res, next) { console.log("test");
   console.log('del profile');
@@ -188,10 +191,12 @@ router.delete('/:id' , function(req, res, next) { console.log("test");
         console.log("Mongo Record before update .... "+doc);
         console.log("Request Body from Browser .... "+req.body);
    });
+
+   
 });    
  
 
-
+ 
 
 router.use('/', function(req, res, next) {
     jwt.verify(req.query.token, 'secret', function(err, decoded) {

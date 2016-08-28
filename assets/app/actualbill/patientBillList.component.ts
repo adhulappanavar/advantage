@@ -11,14 +11,19 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
   selector: 'actualpatients-list',
   directives: [ROUTER_DIRECTIVES],
   template: `
-  <div *ngIf="!showmeds">
+  <div *ngIf="!showmeds">  
 			<div class="panel panel-primary ">
 				<div class="panel-heading">
 					<div class='row'>            
-						<div class='col-md-2'><span style='font-size:large'>Patient List</span></div>
-						<div class='col-md-6'>
+						<div class='col-md-2'><span style='font-size:large'>Bill List For : {{actualpatient.name}}</span></div>
+						<div class='col-md-4'>
 							<span style='font-size:large'>Filter by:</span ><input style="color:black" type='text' [(ngModel)]='listFilter'/>
-						</div>           
+						</div>       
+            <div class="col-md-2 col-md-offset-4 ">
+                <a class='btn btn-default' (click)='gotoPeoplesList()' style='width:80px'>
+                     <i class='glyphicon glyphicon-chevron-left'></i> Back
+                </a>
+            </div>    
 					</div>	
 				</div>
 				<div class="panel-body">
@@ -31,7 +36,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 							</thead>
 							<tbody *ngIf="actualpatient">
 								<tr *ngFor="#billitem of actualpatient.bills ">					
-									<td><a (click) = "toggleshowmeds(billitem._id)" >{{billitem.month}} / {{billitem._id}} / {{billitem.timestamp}}</a></td>									          
+									<td><a (click) = "toggleshowmeds(billitem._id)" >{{billitem.month}}</a></td>									          
 								</tr>
 							</tbody>
 						</table>	  
@@ -159,6 +164,12 @@ export class PatientBillListComponent implements OnInit{
       
 
       console.log("changes made");
+  }
+
+  gotoPeoplesList()
+  {
+      let link = ['Bill List'];
+        this.router.navigate(link);
   }
 
   selectActualpatient(actualpatient: Actualpatient){
