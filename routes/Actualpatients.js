@@ -85,13 +85,7 @@ router.post('/', function(req, res, next) {
                 });
             }
             res1=result;
-            /*res.status(201).json({
-                message: 'Saved message',
-                obj: result
-            });*/
-        });
-
-        var med2patients = new Med2patients({
+            var med2patients = new Med2patients({
             url         : req.body.Photourl,
             patientid   : res1.id,
             name        : req.body.name,
@@ -118,6 +112,13 @@ router.post('/', function(req, res, next) {
                 obj: result
             });
         });
+            /*res.status(201).json({
+                message: 'Saved message',
+                obj: result
+            });*/
+        });
+
+        
 });
 
 
