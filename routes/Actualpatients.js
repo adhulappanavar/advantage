@@ -76,7 +76,7 @@ router.post('/', function(req, res, next) {
             comments : req.body.comments             
            });
 
-        var res;
+        var res1;
         actualpatients.save(function(err, result) {
             if (err) {
                 return res.status(404).json({
@@ -84,7 +84,7 @@ router.post('/', function(req, res, next) {
                     error: err
                 });
             }
-            res=result;
+            res1=result;
             /*res.status(201).json({
                 message: 'Saved message',
                 obj: result
@@ -93,7 +93,7 @@ router.post('/', function(req, res, next) {
 
         var med2patients = new Med2patients({
             url         : req.body.Photourl,
-            patientid   : res.id,
+            patientid   : res1.id,
             name        : req.body.name,
             registrationNumber : req.body.registrationNumber,
             dob         : req.body.dob,
