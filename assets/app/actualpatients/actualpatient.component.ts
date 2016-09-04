@@ -147,8 +147,8 @@ export class ActualpatientComponent implements OnInit{
       var med2patientid; 
 
       //let id = this.routeParams.get('id');
-        
-
+        console.log("trying to delete med2patient object");
+        if(this.med2patients)
         for(var i=0;i<this.med2patients.length;i++)
         {
           console.log(i);
@@ -156,10 +156,13 @@ export class ActualpatientComponent implements OnInit{
           console.log(id , " : " , this.med2patients[i].patientid);
           if(this.med2patients[i].patientid == id)
           {
-              med2patientid = this.med2patients[i]._id;
+              console.log("in IF");
+              console.log(this.med2patients[i].id);
+              console.log(this.med2patients[i]._id);
+              med2patientid = this.med2patients[i].id;
               break;
           }
-        }
+        } 
 
          console.log('getting med2patient with id: ',med2patientid);
         

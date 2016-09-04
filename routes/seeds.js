@@ -69,7 +69,7 @@ var actualpatients = new Array();
             actualpatients = docs;
             console.log(" List of patients ... ", actualpatients);
 
-
+            if(actualpatients)
             for(var i=0;i<actualpatients.length;i++)
             {
                 var med2patients = new Med2patients({

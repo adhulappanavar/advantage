@@ -70,6 +70,7 @@ export class HeaderComponent {
 
     makeactive(index)
     {
+        
         for(var i = 0 ; i<this.active.length ; i++)
         {
             this.active[i] = false;

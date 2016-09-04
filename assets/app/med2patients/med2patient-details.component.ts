@@ -81,6 +81,7 @@ export class Med2patientDetailsComponent implements OnInit {
         var temp = this.med2patient.newmedicines;
         this.med2patient.newmedicines = [];
         console.log(temp);
+        if(temp)
         for(var i=0;i<temp.length;i++)
         {
             if(!(i==index))
@@ -96,6 +97,7 @@ export class Med2patientDetailsComponent implements OnInit {
         console.log(index);
         var temp = this.med2patient.medicines;
         this.med2patient.medicines = [];
+        if(temp)
         for(var i=0;i<temp.length;i++)
         {
             if(!(i==index))
@@ -113,6 +115,7 @@ export class Med2patientDetailsComponent implements OnInit {
                 console.log("New Medicine to be save to Given medicine ..." , event, med2patient);
                 console.log ("New Medicine Length  ", med2patient.newmedicines.length);
                   console.log ("Med2Patient Object before save  ", med2patient);
+                  if(med2patient.newmedicines)
                 for(var i = 0 ; i < med2patient.newmedicines.length ; i++)
                 {
                       this.med2patient.medicines.push(med2patient.newmedicines[i]);

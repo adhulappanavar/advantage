@@ -147,7 +147,8 @@ router.post('/:id', function(req, res, next) {
         doc.newmedicines = req.body.newmedicines;
         var tempcost = 0; 
         if(req.body.medicines)
-         {               
+        {
+                if(req.body.medicines)               
                for (var index = 0; index < req.body.medicines.length; index++) {
                        tempcost = req.body.medicines[index].cost + tempcost;
                 }
@@ -155,7 +156,8 @@ router.post('/:id', function(req, res, next) {
             }
             
             if(req.body.newmedicines) {
-                    tempcost = 0;                              
+                    tempcost = 0;     
+                    if(req.body.newmedicines)                         
                     for (var index = 0; index < req.body.newmedicines.length; index++) {
                         tempcost = req.body.newmedicines[index].cost + tempcost;
                     }
@@ -179,6 +181,7 @@ router.post('/:id', function(req, res, next) {
 
 function calcuateTotalcost (medlist){
     var tempcost = 0;
+    if(medlist)
     for (var index = 0; index < medlist.length; index++) {
          tempcost += medlist[index].totalcost;
      }

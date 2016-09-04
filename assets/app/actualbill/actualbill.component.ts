@@ -20,13 +20,13 @@ import {billing} from '../med2patients/billing';
   
 })
 export class ActualBillComponent implements OnInit{
-  med2patient : Med2patient={"mongoId": " " };
+  med2patient : Med2patient;
   editMode = true;
   thepatient : Actualpatient={};
   billtype="Monthly Bill";
   billmonth=this.getBillingMonth();
   showImage = false;
-  imageWidth = 50;
+  imageWidth = 50; 
   imageMArgin = 2;
   slno = 1;
   notfinal=true;
@@ -42,7 +42,7 @@ export class ActualBillComponent implements OnInit{
   keepInMedicinesBool;
   addingtoBillBool ;
   intilization = true; 
-  
+  duecalc=true;
   billentry : billing = { medicines : []} ;
   dontAdd = [] ;
   billDate = this.todaysDate();
@@ -61,9 +61,12 @@ export class ActualBillComponent implements OnInit{
 
 setlen()
 {
-  for(var i = 0 ; i< this.selectedForBill.length ; i++)
+  if(this.selectedForBill)
   {
-    this.selectedForBillIndex.push(i);
+    for(var i = 0 ; i< this.selectedForBill.length ; i++)
+    {
+      this.selectedForBillIndex.push(i);
+    }
   }
   
 }              
@@ -82,15 +85,7 @@ setlen()
 
           console.log(this.selectedForBill);
 
-
-          this.med2patientsService
-          .getMed2patients(this.id)
-          .subscribe(p => this.len = p.medicines.length,
-                    () => {this.foo();}
-           );
            console.log("foo changes");
-          console.log("Len : " , this.len);
-      
 
      }
      saveMed2patientDetails(){
@@ -101,6 +96,11 @@ setlen()
             (r: Response) => {console.log('success, '+ JSON.stringify(this.med2patient))},
             (error) => {console.log('error: ', error);}     
           );
+    }
+
+    changeTotalCost()
+    {
+      this.med2patient.medtotalcost = this.med2patient.medtotalcost + this.dueAmount; 
     }
 
     onChangeSelectMedicine(index , classId,flag , id)
@@ -122,20 +122,32 @@ setlen()
 
     checkIfDues()
     {
-      this.totalAmountBilled();
-      this.totoalAmountPaid();
+      console.log(this.med2patient);
+      console.log(this.med2patient.name);
+      //console.log(this.med2patient.bills);
+      if(this.duecalc)
+      {
+        this.totalAmountBilled();
+        this.totoalAmountPaid();
+        this.due();
+        this.changeTotalCost();
+        this.duecalc = false;
+      }
     }
 
     totalAmountBilled()
     {
+        console.log("in totalAmountBilled name");
         this.totalamountbilled=0;
         console.log(this.med2patient);
-        console.log(this.med2patient.bills);
-        console.log(this.med2patient.bills[0]);
-        
-        for(var i = 0 ; i< this.med2patient.bills.length ; i++)
-            this.totalamountbilled=this.totalamountbilled + this.med2patient.bills[i].totalCost;
-            
+        console.log(this.med2patient.name);
+        //console.log(this.med2patient[0]);
+        if(this.med2patient.bills)
+        {
+          if(this.med2patient.bills)
+          for(var i = 0 ; i< this.med2patient.bills.length ; i++)
+              this.totalamountbilled=this.totalamountbilled + this.med2patient.bills[i].totalCost;
+        }   
         //var temp = this.dues();
         return this.totalamountbilled;
     }   
@@ -143,22 +155,18 @@ setlen()
     totoalAmountPaid()
     {
         this.totalAmountPaid = 0;
-        for(var i=0;i<this.med2patient.payment.length;i++)
-            this.totalAmountPaid = this.totalAmountPaid + this.med2patient.payment[i].amountPaid;
-
+        if(this.med2patient.bills)
+        {
+          if(this.med2patient.payment)
+          for(var i=0;i<this.med2patient.payment.length;i++)
+              this.totalAmountPaid = this.totalAmountPaid + this.med2patient.payment[i].amountPaid;
+        }
             return this.totalAmountPaid;
     }
 
-    duue()
-    {
-        if(this.totalamountbilled > this.totalAmountPaid)
-        {
-            this.dueAmount = (this.totalamountbilled-this.totalAmountPaid);
-            return true;
-        }
-
-        else if(this.totalamountbilled < this.totalAmountPaid)
-            return "Credit Balance  : " + (this.totalAmountPaid -this.totalamountbilled );
+    due()
+    {        
+         this.dueAmount = (this.totalamountbilled-this.totalAmountPaid);
     }
 
 
@@ -185,6 +193,7 @@ setlen()
         console.log("loop")
 
         this.med2patient.medicines = [];
+        if(this.selectedForBill)
         for(var i= 0 ; i < this.selectedForBill.length ; i++)
         {
           console.log(" i : " , i);
@@ -231,12 +240,13 @@ setlen()
     
   }
 
-  toggleSelect()
+  toggleSelect() 
   {   
       this.selectAll=!this.selectAll;
      console.log("toggleSelect");
      if(!this.selectAll)
      {
+       if(this.selectedForBill)
        for(var i = 0 ; i < this.selectedForBill.length ; i++)
         this.selectedForBill[i].selected = true;
      }
@@ -245,12 +255,13 @@ setlen()
   calcTotalAmount(actualmed2patient){
        console.log(this.thepatient);
        var cost=0;
+       if(this.selectedForBill)
        for(var i = 0 ; i<this.selectedForBill.length; i++)
        {
               if(this.selectedForBill[i].selected)
                   cost = cost + ( this.selectedForBill[i].cost * this.selectedForBill[i].qty  );
        }
-       return cost;
+       return cost+this.dueAmount;
      }
 
 

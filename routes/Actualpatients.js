@@ -135,7 +135,7 @@ router.post('/:id', function(req, res, next) {
             return res.status(404).json({
                 title: 'No message found',
                 error: {message: 'Message could not be found'}
-            });
+            }); 
         }
         console.log("Mongo Record before update .... "+doc);
         console.log("Request Body from Browser .... "+req.body);
@@ -163,10 +163,13 @@ router.post('/:id', function(req, res, next) {
                     error: err
                 });
             }
-            res.status(200).json({
+            /*res.status(200).json({
                 message: 'Success',
                 obj: result
-            });
+            });*/
+
+            
+          
         });
     });
 });

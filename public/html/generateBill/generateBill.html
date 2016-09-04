@@ -1,16 +1,17 @@
+  
   <div class="row">  
       <div class="col-md-6" align="center" *ngIf="notFinal"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-warning" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
       <div class="col-md-6" align="center" *ngIf="!editMode && notFinal"><button class="btn btn-success" (click)="makeFinal()">Make Final Bill</button></div>
   </div>
   <br>
-  <div class="panel panel-default ">
+  <div class="panel panel-default " *ngIf="med2patient">{{checkIfDues()}}
 	  <div class="panel-heading">
 	    <div class='row'>     
             <div class="col-md-4"><img  src="images/advantagelogo.png" width="250" height="170"></div>     
             <div class="col-md-8" align="center">
                   <h2>HI ADVANTAGE ELDER CARE</h2>
                   <p>Hunasamaranahalli Post, (VIA) Bettahalasuru, Bangalore North - 562 157.</p>
-                  <p>Website : www.advantageeldercare.com</p>
+                  <p>Website : <a href="<http://www.advantageeldercare.com">www.advantageeldercare.com</a></p>
                   <p>Email: shajiphilip_advantage@yahoo.co.in</p>
                   <p>Tel : 080 60121222, +91 98443 95515, 78295 92189</p>
             </div>             
@@ -143,7 +144,9 @@
            <div class="table responsive">
               <table class="table table-striped">
                   <tbody>
-                    <tr><td>Total Cost : </td><td>{{calcTotalAmount(med2patient.medtotalcost)}}</td></tr>
+                    <tr *ngIf="dueAmount>0"><td>DUE : </td><td>{{dueAmount}} </td></tr>
+                    <tr *ngIf="dueAmount<0"><td>CREDIT BALANCE : </td><td>{{-1*dueAmount}} </td></tr>
+                    <tr *ngIf="med2patient"><td>Total Cost : </td><td>{{calcTotalAmount(med2patient.medtotalcost)}}</td></tr>
                   </tbody>
                   
               </table>

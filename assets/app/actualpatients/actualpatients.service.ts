@@ -55,7 +55,7 @@ deleteActualpatient(id: string) : Observable<Response>{
 
 //         return this.http.post('/actualpatients' , body, {headers: headers});
          return this.http.delete(`${this.baseUrl}/actualpatients/${id}`);
-  }
+  } 
 
 
   deleteMessage(id: string) : Observable<Response>{

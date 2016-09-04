@@ -202,6 +202,7 @@ export class PatientBillListComponent implements OnInit{
        console.log("showmeds  :  " , this.showmeds);
        if(this.showmeds == true)
        {         
+          if(this.actualpatient.bills)
           for(var i=0; i< this.actualpatient.bills.length ; i++)
           {            
               console.log("i " , i  , " " , this.actualpatient.bills[i]._id);

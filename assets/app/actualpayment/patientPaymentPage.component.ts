@@ -80,7 +80,7 @@ export class PatientPaymentPageComponent implements OnInit{
   isSaved=false;
   paidBy;
   phoneNo;
-  amountPaid;
+  amountPaid=0;
   paymentMode="cheque";
   chequeNo;
   reciptno;
