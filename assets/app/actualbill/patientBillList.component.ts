@@ -45,12 +45,13 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 				</div>
 			</div>
     </div>  
-    <div *ngIf="showmeds">
-        <div class="panel panel-default ">
+    <div *ngIf="showmeds" class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
 	  <div class="panel-heading">
 	    <div class='row'>     
-            <div class="col-md-4"><img  src="images/advantagelogo.png" width="250" height="170"></div>     
-            <div class="col-md-8" align="center">
+            <div class="col-md-3"><img  src="images/advantagelogo.png" width="200" height="150"></div>     
+            <div class="col-md-7" align="center">
                   <h2>HI ADVANTAGE ELDER CARE</h2>
                   <p>Hunasamaranahalli Post, (VIA) Bettahalasuru, Bangalore North - 562 157.</p>
                   <p>Website : www.advantageeldercare.com</p>
@@ -124,7 +125,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 			        
             </div>
        </div>		 
-	     
+	     </div>
            
        
 	</div>  

@@ -4,7 +4,9 @@
       <div class="col-md-6" align="center" *ngIf="!editMode && notFinal"><button class="btn btn-success" (click)="makeFinal()">Make Final Bill</button></div>
   </div>
   <br>
-  <div class="panel panel-default " *ngIf="med2patient">{{checkIfDues()}}
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-default " *ngIf="med2patient">
 	  <div class="panel-heading">
 	    <div class='row'>     
             <div class="col-md-4"><img  src="images/advantagelogo.png" width="250" height="170"></div>     
@@ -143,10 +145,11 @@
 	     <div class="panel-footer">
            <div class="table responsive">
               <table class="table table-striped">
-                  <tbody>
+                  <tbody>                    {{checkIfDues()}}
+                    <tr *ngIf="med2patient"><td>Total Cost : </td><td>{{calcTotalAmount(med2patient.medtotalcost)}}</td></tr>
                     <tr *ngIf="dueAmount>0"><td>DUE : </td><td>{{dueAmount}} </td></tr>
                     <tr *ngIf="dueAmount<0"><td>CREDIT BALANCE : </td><td>{{-1*dueAmount}} </td></tr>
-                    <tr *ngIf="med2patient"><td>Total Cost : </td><td>{{calcTotalAmount(med2patient.medtotalcost)}}</td></tr>
+                    <tr *ngIf="med2patient"><td>Total Cost : </td><td>{{totalCost + dueAmount}}</td></tr>
                   </tbody>
                   
               </table>
@@ -154,3 +157,5 @@
        </div>
        
 	</div>
+  </div>
+  </div>

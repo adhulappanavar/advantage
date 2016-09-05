@@ -22,6 +22,7 @@ import {billing} from '../med2patients/billing';
 export class ActualBillComponent implements OnInit{
   med2patient : Med2patient;
   editMode = true;
+  totalCost = 0;
   thepatient : Actualpatient={};
   billtype="Monthly Bill";
   billmonth=this.getBillingMonth();
@@ -100,7 +101,7 @@ setlen()
 
     changeTotalCost()
     {
-      this.med2patient.medtotalcost = this.med2patient.medtotalcost + this.dueAmount; 
+      this.totalCost = this.totalCost + this.dueAmount; 
     }
 
     onChangeSelectMedicine(index , classId,flag , id)
@@ -173,6 +174,7 @@ setlen()
 
      makeFinal()
      {
+        this.checkIfDues();
         console.log("in make final"); 
         this.notFinal =!this.notFinal;
 
@@ -188,7 +190,7 @@ setlen()
         this.billentry.preparedBy = this.user;
         console.log("this.billentry : "   , this.billentry ) ;
         console.log("testing1");
-        this.billentry.totalCost = this.calcTotalAmount(this.med2patient.medtotalcost);
+        this.billentry.totalCost = this.totalCost;
         console.log("testing12");
         console.log("loop")
 
@@ -255,13 +257,14 @@ setlen()
   calcTotalAmount(actualmed2patient){
        console.log(this.thepatient);
        var cost=0;
-       if(this.selectedForBill)
+       //if(this.selectedForBill)
        for(var i = 0 ; i<this.selectedForBill.length; i++)
        {
               if(this.selectedForBill[i].selected)
                   cost = cost + ( this.selectedForBill[i].cost * this.selectedForBill[i].qty  );
        }
-       return cost+this.dueAmount;
+       this.totalCost = cost;
+       return cost;
      }
 
 
