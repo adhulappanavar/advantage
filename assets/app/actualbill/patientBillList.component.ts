@@ -52,7 +52,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 	    <div class='row'>     
             <div class="col-md-3"><img  src="images/advantagelogo.png" width="200" height="150"></div>     
             <div class="col-md-7" align="center">
-                  <h2>HI ADVANTAGE ELDER CARE</h2>
+                  <h2>ADVANTAGE ELDER CARE</h2>
                   <p>Hunasamaranahalli Post, (VIA) Bettahalasuru, Bangalore North - 562 157.</p>
                   <p>Website : www.advantageeldercare.com</p>
                   <p>Email: shajiphilip_advantage@yahoo.co.in</p>
