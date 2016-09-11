@@ -15,11 +15,11 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 			<div class="panel panel-primary ">
 				<div class="panel-heading">
 					<div class='row'>            
-						<div class='col-md-2'><span style='font-size:large'>Bill List For : {{actualpatient.name}}</span></div>
-						<div class='col-md-4'>
+						<div class='col-xs-2'><span style='font-size:large'>Bill List For : {{actualpatient.name}}</span></div>
+						<div class='col-xs-4'>
 							<span style='font-size:large'>Filter by:</span ><input style="color:black" type='text' [(ngModel)]='listFilter'/>
 						</div>       
-            <div class="col-md-2 col-md-offset-4 ">
+            <div class="col-xs-2 col-xs-offset-4 ">
                 <a class='btn btn-default' (click)='gotoPeoplesList()' style='width:80px'>
                      <i class='glyphicon glyphicon-chevron-left'></i> Back
                 </a>
@@ -46,12 +46,12 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 			</div>
     </div>  
     <div *ngIf="showmeds" class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-xs-10 col-xs-offset-1">
         <div class="panel panel-default">
 	  <div class="panel-heading">
 	    <div class='row'>     
-            <div class="col-md-3"><img  src="images/advantagelogo.png" width="200" height="150"></div>     
-            <div class="col-md-7" align="center">
+            <div class="col-xs-3"><img  src="images/advantagelogo.png" width="200" height="150"></div>     
+            <div class="col-xs-7" align="center">
                   <h2>ADVANTAGE ELDER CARE</h2>
                   <p>Hunasamaranahalli Post, (VIA) Bettahalasuru, Bangalore North - 562 157.</p>
                   <p>Website : www.advantageeldercare.com</p>
@@ -60,7 +60,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
             </div>             
     	 </div><br>
        <div class="row" *ngIf="actualpatient">
-            <div class="col-md-6" align="center">
+            <div class="col-xs-6" align="center">
               <div class="table-responsive">
               <div class="table table-striped">
                 <tbody>
@@ -71,7 +71,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
               </div>
               </div>
             </div>
-            <div class="col-md-4" align="center">
+            <div class="col-xs-4" align="center">
               <div class="table-responsive">
                 <table class="table table-striped">
                   <tbody>                    

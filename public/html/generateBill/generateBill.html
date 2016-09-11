@@ -1,17 +1,16 @@
   
   <div class="row">  
-      <div class="col-md-4"> <button class='print'>Print</button></div>
-      <div class="col-md-4" align="center" *ngIf="notFinal"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-warning" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
-      <div class="col-md-4" align="center" *ngIf="!editMode && notFinal"><button class="btn btn-success" (click)="makeFinal()">Make Final Bill</button></div>
+      <div class="col-xs-6" align="center" *ngIf="notFinal"><strong style="color:grey">{{editMode ? 'Cilck After Editing is Done : ' : 'Click here to Edit : '}}</strong><button class="btn btn-warning" (click) = "toggleEditing()">{{editMode ? 'Done' : 'Edit'}}</button></div>
+      <div class="col-xs-6" align="center" *ngIf="!editMode && notFinal"><button class="btn btn-success" (click)="makeFinal()">Make Final Bill</button></div>
   </div>
   <br>
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-xs-10 col-xs-offset-1">
   <div class="panel panel-default " *ngIf="med2patient">
 	  <div class="panel-heading">
 	    <div class='row'>     
-            <div class="col-md-4"><img  src="images/advantagelogo.png" width="250" height="170"></div>     
-            <div class="col-md-8" align="center">
+            <div class="col-xs-4"><img  src="images/advantagelogo.png" width="250" height="170"></div>     
+            <div class="col-xs-8" align="center">
                   <h2>HI ADVANTAGE ELDER CARE</h2>
                   <p>Hunasamaranahalli Post, (VIA) Bettahalasuru, Bangalore North - 562 157.</p>
                   <p>Website : <a href="<http://www.advantageeldercare.com">www.advantageeldercare.com</a></p>
@@ -20,10 +19,10 @@
             </div>             
     	 </div><br>
        <div class="row" *ngIf="thepatient">
-            <div class="col-md-6" align="center">
+            <div class="col-xs-6" align="center">
               <div class="table-responsive">
               <div class="table table-striped">
-                <tbody>
+                <tbody>HIII
                 <tr><td>Patient Name:</td><td>{{med2patient.name}}</td></tr>                
                 <tr><td>Reg No:</td><td>{{med2patient.registrationNumber}}</td></tr>
                 <tr><td>DOA :</td><td>{{stringAsDate(med2patient.dateOfAdmission)}}</td></tr>
@@ -31,7 +30,7 @@
               </div>
               </div>
             </div>
-            <div class="col-md-4" align="center">
+            <div class="col-xs-4" align="center">
               <div class="table-responsive">
                 <table class="table table-striped">
                   <tbody>                    
