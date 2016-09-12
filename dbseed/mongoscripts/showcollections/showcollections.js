@@ -1,0 +1,2 @@
+use aniladvantagedb
+show collections
