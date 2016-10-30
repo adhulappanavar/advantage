@@ -1,0 +1,1 @@
+mongo < dropmed2patients.js
