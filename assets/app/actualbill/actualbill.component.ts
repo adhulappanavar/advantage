@@ -35,6 +35,7 @@ export class ActualBillComponent implements OnInit{
   selectAll = true;
   id;
   notFinal=true;
+  currentYear = this.getBillingYear();
   billyear =this.getBillingYear();
   tempbill = [];
   selectedForBill = [];
@@ -185,7 +186,7 @@ setlen()
 
         this.billentry.category = this.billtype;
         console.log("this.billentry : "   , this.billentry ) ;
-        //this.billentry.date = this.stringAsDate(this.billDate); 
+        this.billentry.date =this.stringAsDate( this.billDate); 
         //console.log("this.billentry : "   , this.billentry ) ;
         this.billentry.preparedBy = this.user;
         console.log("this.billentry : "   , this.billentry ) ;
@@ -252,6 +253,13 @@ setlen()
        for(var i = 0 ; i < this.selectedForBill.length ; i++)
         this.selectedForBill[i].selected = true;
      }
+
+     if(this.selectAll)
+     {
+       if(this.selectedForBill)
+       for(var i = 0 ; i < this.selectedForBill.length ; i++)
+        this.selectedForBill[i].selected = false;
+     }
   }
 
   calcTotalAmount(actualmed2patient){
@@ -269,7 +277,7 @@ setlen()
 
 
     stringAsDate(dateStr) {     
-          return moment(dateStr , "YYYY-MM-DD").format("DD-MM-YYYY");
+          return moment(dateStr , "YYYY-MM-DD").format("MM-DD-YYYY");
         }
         
      clacAge(dateStr){

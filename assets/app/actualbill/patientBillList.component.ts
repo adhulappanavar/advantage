@@ -36,7 +36,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 							</thead>
 							<tbody *ngIf="actualpatient">
 								<tr *ngFor="#billitem of actualpatient.bills; var index=index ">					
-									<td><a (click) = "toggleshowmeds(billitem._id)" >{{billitem.month}}</a></td>	
+									<td><a (click) = "toggleshowmeds(billitem._id , index)" >{{billitem.month}}/{{billitem.year}}</a></td>	
                   <td><a>Delete</a></td>								          
 								</tr>
 							</tbody>
@@ -77,19 +77,19 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
                   <tbody>                    
                     <tr>
                       <td>Category:</td>
-                      <td>Monthly Bill</td>                      
+                      <td>{{actualpatient.bills[billIndex].category}}</td>                      
                     </tr>
                     <tr>
                         <td>Month/Year:</td>
-                        <td>{{actualpatient.bills.month}} / {{actualpatient.bills.year}}</td>                        
+                        <td *ngIf="actualpatient">{{actualpatient.bills[billIndex].month}} / {{actualpatient.bills[billIndex].year}}</td>                        
                     </tr>
                     <tr>
                         <td>Date:</td>
-                        <td>{{billDate}}</td>                        
+                        <td *ngIf="actualpatient.bills[billIndex].date">{{stringAsDate(actualpatient.bills[billIndex].date)}}</td>                        
                     </tr>
                     <tr>
                         <td>Prepared By:</td>
-                        <td>{{user}}</td>                        
+                        <td>{{actualpatient.bills[billIndex].preparedBy}}</td>                        
                     </tr>				
                   </tbody>
                 </table>
@@ -124,6 +124,21 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
                </table>
 			        
             </div>
+
+       </div>
+
+        <div class="panel-footer">
+           <div class="table responsive">
+              <table class="table table-striped">
+                  <tbody>                    {{checkIfDues()}}
+                    <tr *ngIf="actualpatient"><td>Total Cost : </td><td>{{calcTotalAmount(actualpatient.medtotalcost)}}</td></tr>
+                    <tr *ngIf="dueAmount>0"><td>DUE : </td><td>{{dueAmount}} </td></tr>
+                    <tr *ngIf="dueAmount<0"><td>CREDIT BALANCE : </td><td>{{-1*dueAmount}} </td></tr>
+                   
+                  </tbody>
+                  
+              </table>
+           </div>   
        </div>		 
 	     </div>
            
@@ -142,22 +157,21 @@ export class PatientBillListComponent implements OnInit{
   listFilter = "";
   selectedForBill;
   medList =[];
+  totalamountbilled;
+  thepatient : Actualpatient={};
+  duecalc = true;
   showImage = false;
+  billIndex=0;
   imageWidth = 50;
+  totalAmountPaid;
+  totalCost;
+  dueAmount;
   imageMArgin = 2;
   constructor(private actualpatientsService : ActualpatientsService , private med2patientsService : Med2patientsService,
-  private routeParams: RouteParams){ }
+  private routeParams: RouteParams, private router: Router){ }
 
   ngOnInit(){
-    //this.actualpatients = this.starWarsService.getAll();
-    /*this.actualpatientsService
-      .getAllActualpatients()
-      .subscribe(p => this.actualpatients = p)
-      var m = moment("Mar 26th, 1989", "MMM-DD-YYYY");
-      console.log(moment().format('HH:mm:ss'));
-      console.log('You are '+m.fromNow(true) + ' old'); // You are 23 years old
-      */
-
+   
        let id = this.routeParams.get('id');
 
       this.med2patientsService
@@ -167,6 +181,91 @@ export class PatientBillListComponent implements OnInit{
 
       console.log("changes made");
   }
+  
+  checkIfDues()
+    {
+      console.log(this.actualpatient);
+      console.log(this.actualpatient.name);
+      //console.log(this.med2patient.bills);
+      if(this.duecalc)
+      {
+        this.totalAmountBilled();
+        this.totoalAmountPaid();
+        this.due();
+        this.changeTotalCost();
+        this.duecalc = false;
+      }
+    }
+
+    changeTotalCost()
+    {
+      this.totalCost = this.totalCost + this.dueAmount; 
+    }
+
+    calcTotalAmount(actualmed2patient){
+       console.log(this.thepatient);
+       var cost=0;
+       //if(this.selectedForBill)
+       for(var i = 0 ; i<this.selectedForBill.length; i++)
+       {
+              
+                  cost = cost + ( this.selectedForBill[i].cost * this.selectedForBill[i].qty  );
+       }
+       this.totalCost = cost;
+       return cost;
+     }
+
+
+    onChangeSelectMedicine(index , classId,flag , id)
+    {
+      console.log(index+" : "+classId+" : "+flag+" : " + id);
+      if(flag == true)
+      {
+        console.log("selected");        
+        this.selectedForBill[index].selected = true;
+      }
+
+      else
+      {
+          console.log("unselected");
+          this.selectedForBill[index].selected = false;
+      }
+    }
+
+    totalAmountBilled()
+    {
+        console.log("in totalAmountBilled name");
+        this.totalamountbilled=0;
+        console.log(this.actualpatient);
+        console.log(this.actualpatient.name);
+        //console.log(this.med2patient[0]);
+        if(this.actualpatient.bills)
+        {
+          if(this.actualpatient.bills)
+          for(var i = 0 ; i< this.actualpatient.bills.length ; i++)
+              this.totalamountbilled=this.totalamountbilled + this.actualpatient.bills[i].totalCost;
+        }   
+        //var temp = this.dues();
+        return this.totalamountbilled;
+    }   
+
+    totoalAmountPaid()
+    {
+        this.totalAmountPaid = 0;
+        if(this.actualpatient.bills)
+        {
+          if(this.actualpatient.payment)
+          for(var i=0;i<this.actualpatient.payment.length;i++)
+              this.totalAmountPaid = this.totalAmountPaid + this.actualpatient.payment[i].amountPaid;
+        }
+            return this.totalAmountPaid;
+    }
+
+    due()
+    {        
+         this.dueAmount = (this.totalamountbilled-this.totalAmountPaid);
+    }
+
 
   gotoPeoplesList()
   {
@@ -196,11 +295,24 @@ export class PatientBillListComponent implements OnInit{
        return m.fromNow(true);
      }
 
-     toggleshowmeds( billId)
+     stringAsDate(dateStr) {     
+          return moment(dateStr).format("DD-MM-YYYY");
+        }
+
+     toggleshowmeds( billId , index)
      {
        this.showmeds = !this.showmeds;
        console.log("billid : " , billId);
        console.log("showmeds  :  " , this.showmeds);
+       this.billIndex = index;
+       for(var i=0;i<this.actualpatient.bills.length;i++)
+       {
+         if(this.actualpatient.bills[i]._id == billId)
+         {
+           this.billIndex = i;
+           break;
+         }
+       }
        if(this.showmeds == true)
        {         
           if(this.actualpatient.bills)

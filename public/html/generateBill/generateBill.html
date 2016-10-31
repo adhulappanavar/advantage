@@ -21,7 +21,7 @@
             <div class="col-xs-6" align="center">
               <div class="table-responsive">
               <div class="table table-striped">
-                <tbody>HIII
+                <tbody>
                 <tr><td>Patient Name:</td><td>{{med2patient.name}}</td></tr>                
                 <tr><td>Reg No:</td><td>{{med2patient.registrationNumber}}</td></tr>
                 <tr><td>DOA :</td><td>{{stringAsDate(med2patient.dateOfAdmission)}}</td></tr>
@@ -64,8 +64,8 @@
                           </select>
                               /
                           <select class="form-control" id="sel1" [(ngModel)] = "billyear" >
-                            <option [value]="billyear-1">{{billyear-1}}</option>
-                            <option [value]="billyear">{{billyear}}</option>
+                            <option [value]="currentYear-1">{{currentYear-1}}</option>
+                            <option [value]="currentYear">{{currentYear}}</option>
                           </select>
                         </td>
                     </tr>
