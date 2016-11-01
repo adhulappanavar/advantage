@@ -12,7 +12,7 @@ import {payment} from '../med2patients/payment';
 @Component({
   selector: 'actualpatients-list',
   directives: [ROUTER_DIRECTIVES],
-  template: `
+  template: `{{setpaidbyandphoneno()}}
   <div class="panel panel-primary ">
 	  <div class="panel-heading">
         <div class="row">         
@@ -30,10 +30,17 @@ import {payment} from '../med2patients/payment';
 
     <div class="panel panel-body">
         <div *ngIf="med2patient">
-            <div  class="row alert alert-info" width="500"> <div class="col-md-4"><h3>Previous Bill Total Was : </h3></div><div class="col-md-4"> </div> </div>            
+            <div  class="row alert alert-info" width="500"> <div class="col-md-4"><h3>Previous Bill Total Was : </h3></div><div class="col-md-4"> <h3>{{med2patient.bills[med2patient.bills.length-1].totalCost}}</h3></div> </div>            
         </div><br>
-        <div class="row">
-            <div class="col-md-3">Paid By :</div><div class="col-md-3"> <input type="text" [(ngModel)] = "paidBy"></div>
+        <div *ngIf="med2patient">
+            <h3>PCG contacts:HII</h3><br>
+
+        </div>
+        
+
+
+        <div class="row" *ngIf="med2patient">
+            <div class="col-md-3">Paid By :</div><div class="col-md-3"> <input type="text" value="name" [(ngModel)] = "paidBy" ></div>
         </div><br>
         <div class="row">
             <div class="col-md-3">Contact Number : </div><div class="col-md-3"><input type="text" [(ngModel)] = "phoneNo"></div>
@@ -84,6 +91,7 @@ export class PatientPaymentPageComponent implements OnInit{
   paymentMode="cheque";
   chequeNo;
   reciptno;
+  actualpatients;
   narration;
   imageMArgin = 2; 
   constructor(private actualpatientsService : ActualpatientsService , private med2patientsService : Med2patientsService , private routeParams: RouteParams , private router : Router){ }
@@ -96,11 +104,33 @@ export class PatientPaymentPageComponent implements OnInit{
       .getMed2patients(id)
       .subscribe(p => this.med2patient = p)
 
+      this.actualpatientsService
+      .getAllActualpatients()
+      .subscribe(p => this.actualpatients = p)
+
       console.log("changes made");
+
+      
   }
 
   selectActualpatient(actualpatient: Actualpatient){
     this.selectedActualpatient = actualpatient;
+  }
+
+  setpaidbyandphoneno()
+  {
+      console.log(this.actualpatients);
+        for (var i in this.actualpatients)
+        {
+            if(this.actualpatients[i].id == this.med2patient.patientid)
+            {
+                this.paidBy = this.actualpatients[i].pcpContact.name;
+                this.phoneNo = this.actualpatients[i].pcpContact.contactNo;
+            }
+
+            console.log("heeya");
+        }
+        console.log("heyyyya");
   }
    
   gotoPeoplesList()
