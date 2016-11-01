@@ -22,7 +22,8 @@ export class ActualpatientsEditComponent implements OnInit {
     {
 		  "name" : "" , 
 		  "contactNo" : "" , 
-		  "adress" : ""
+		  "adress" : "",
+      "emailId" : ""
 	   },
     "comments" : "",
     "initialPayment" : 

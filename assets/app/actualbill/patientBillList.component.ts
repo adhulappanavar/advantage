@@ -1,4 +1,5 @@
 import { Component, OnInit } from 'angular2/core';
+import { Response } from 'angular2/http';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
 import { RouteParams, Router} from 'angular2/router';
 import { Actualpatient } from '../actualpatients/actualpatient';
@@ -37,7 +38,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 							<tbody *ngIf="actualpatient">
 								<tr *ngFor="#billitem of actualpatient.bills; var index=index ">					
 									<td><a (click) = "toggleshowmeds(billitem._id , index)" >{{billitem.month}}/{{billitem.year}}</a></td>	
-                  <td><a>Delete</a></td>								          
+                  <td><a (click) = "deleteTheBill(billitem._id)">Delete</a></td>								          
 								</tr>
 							</tbody>
 						</table>	  
@@ -286,10 +287,7 @@ export class PatientBillListComponent implements OnInit{
         this.actualpatientsService.deleteMessage(id);
     }
     
-    stringAsDate(dateStr) {
-          return new Date(dateStr);
-        }
-        
+    
      clacAge(dateStr){
        var m = moment(new Date(dateStr) , "YYYY-MM-DD");
        return m.fromNow(true);
@@ -298,6 +296,42 @@ export class PatientBillListComponent implements OnInit{
      stringAsDate(dateStr) {     
           return moment(dateStr).format("DD-MM-YYYY");
         }
+
+        saveMed2patientDetails(){
+     
+      this.med2patientsService
+          .saveMed2patient(this.actualpatient)
+          .subscribe(
+            (r: Response) => {console.log('success, '+ JSON.stringify(this.med2patient))},
+            (error) => {console.log('error: ', error);}     
+          );
+    }
+
+     deleteTheBill(billid)
+     {
+       console.log("deleteTheBill");
+        var delbillitem;       
+        for(var i=0;i<this.actualpatient.bills.length;i++)
+       {
+         if(this.actualpatient.bills[i]._id == billid)
+         {
+           delbillitem = i;
+           break;
+         }
+       }
+      console.log("hi");
+      var temp = this.actualpatient.bills;
+      this.actualpatient.bills=[];
+      for(var i=0;i<temp.length;i++)
+      {
+        if(i!=delbillitem)
+          this.actualpatient.bills.push(temp[i]);
+      }
+
+      this.saveMed2patientDetails();
+
+     }        
+
 
      toggleshowmeds( billId , index)
      {

@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var contact = new Schema({
     name : String , 
     contactNo : String , 
-    adress : String 
+    adress : String,
+    emailId : String 
 });
 
 var initialPayment = new Schema({

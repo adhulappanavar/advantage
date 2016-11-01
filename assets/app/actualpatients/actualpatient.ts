@@ -10,6 +10,7 @@ export interface Actualpatient {
         name : string; 
         contactNo : string; 
         adress : string;
+        emailId : string;
     }
     comments? : string;
     initialPayment? : {

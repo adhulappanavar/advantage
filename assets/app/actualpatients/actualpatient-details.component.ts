@@ -26,7 +26,8 @@ export class ActualpatientDetailsComponent implements OnInit {
     "pcpContact" : {
 		"name" : "" , 
 		"contactNo" : "" , 
-		"adress" : ""
+		"adress" : "",
+    "emailId" : ""
 	},
     "comments" : "",
     "initialPayment" : {
