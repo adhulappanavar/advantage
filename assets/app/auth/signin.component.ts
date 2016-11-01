@@ -31,10 +31,12 @@ export class SigninComponent implements OnInit {
         this._authService.signin(user)
             .subscribe(
                 data => {
+                    console.log(data);
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userId', data.userId);
                     localStorage.setItem('firstname', data.firstname);
                     localStorage.setItem('lastname', data.lastname);
+                    localStorage.setItem("emailId" , data.email);
                     this._router.navigateByUrl('/');
                 },
                 error => console.error(error)

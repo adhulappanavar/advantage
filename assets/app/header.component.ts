@@ -24,7 +24,7 @@ import {AuthService} from "./auth//auth.service";
                                 <ul class="nav navbar-nav navbar-right">
                                     
                                         <li *ngIf="isLoggedIn()" class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown"><strong style="color:#337ab7;font-size:large">Welcome {{getUserName()}}
+                                            <a class="dropdown-toggle" data-toggle="dropdown"><strong style="color:#337ab7;font-size:large">Welcome11 {{getUserName()}}
                                             <span class="caret"></span></strong></a>
                                             <ul class="dropdown-menu">
                                             <li align="center"><a (click) ="onLogout()">Logout</a></li>                                            
@@ -84,6 +84,8 @@ export class HeaderComponent {
     getUserName(){
             return localStorage.getItem('firstname') + " " + localStorage.getItem('lastname') ;
     }
+
+    
 
      onLogout() {
         this._authService.logout();
