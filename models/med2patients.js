@@ -65,7 +65,11 @@ var schema = new Schema({
     medtotalcost    : Number,
     bills           : [ billing ], 
     newmedtotalcost : Number
-});
+    },
+    {
+        timestamp : true
+    }
+);
 
 module.exports = mongoose.model('Med2patients', schema);
 

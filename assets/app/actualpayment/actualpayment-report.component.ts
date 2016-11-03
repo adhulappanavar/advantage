@@ -34,11 +34,11 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 					<td>{{actualpatient.name}}</td>		
 					<td>{{actualpatient.gender}}</td>
 					<td>{{clacAge(actualpatient.dob)}}</td>
-                    <td>{{totalAmountBilled(actualpatient)}}/hello</td>    
-                    <td>{{totoalAmountPaid(actualpatient)}}</td>     
-                    <td>{{dues()}}</td> 
-                    <td>{{actualpatient.bills && actualpatient.bills.length>0? actualpatient.bills[actualpatient.bills.length-1].totalCost : 0}}</td>
-                    <td>{{actualpatient.payment && actualpatient.payment.length>0 ? actualpatient.payment[actualpatient.payment.length-1].amountPaid : 0}}</td>          
+                    <td>{{totalAmountBilled(actualpatient)}}</td>    
+                    <td>{{totoalAmountPaid(actualpatient)}}</td>
+                    <td><strong *ngIf="dues()[0]=='C'" style="color:green">{{dues()}}</strong><strong *ngIf="dues()[0]==''" style="color:red">{{dues()}}</strong></td> 
+                    <td>{{actualpatient.bills && actualpatient.bills.length>0? actualpatient.bills[actualpatient.bills.length-1].totalCost : "no bills"}}</td>
+                    <td>{{actualpatient.payment && actualpatient.payment.length>0 ? actualpatient.payment[actualpatient.payment.length-1].amountPaid : "not paid"}}</td>          
 				</tr>
           </tbody>
 		  </table>	  
@@ -117,10 +117,10 @@ export class PaymentInfoReportComponent implements OnInit{
     dues()
     {
         if(this.totalamountbilled > this.totalAmountPaid)
-            return "DUE : " + (this.totalamountbilled-this.totalAmountPaid);
+            return "DUE :" + (this.totalamountbilled-this.totalAmountPaid);
 
         else
-            return "Credit Balance : " + (this.totalAmountPaid -this.totalamountbilled );
+            return "Credit Balance :" + (this.totalAmountPaid -this.totalamountbilled );
     }
 
 

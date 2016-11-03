@@ -37,8 +37,9 @@ import {enableProdMode} from 'angular2/core';
             </div>
             <br>
             <div  class="row" *ngIf="med2patient" style="color:#337ab7;font-size:20px">
-                    <div class="col-md-6"><span style="font-size:20px">Last Billed Amout : {{med2patient.bills && med2patient.bills.length>0? med2patient.bills[med2patient.bills.length-1].totalCost : 0}};({{med2patient.bills[med2patient.bills.length-1].month}}/{{med2patient.bills [med2patient.bills.length-1].year}})</span></div>
-                    <div class="col-md-4">Last Amount Paid : {{med2patient.payment && med2patient.payment.length>0 ? med2patient.payment[med2patient.payment.length-1].amountPaid : 0}};({{med2patient.payment[med2patient.payment.length-1].month}})</div>
+                    <div class="col-md-6"><span style="font-size:20px">Last Billed Amout : 
+                    {{med2patient.bills && med2patient.bills.length>0?  med2patient.bills[med2patient.bills.length-1].totalCost + ";(" + med2patient.bills[med2patient.bills.length-1].month + "/" +med2patient.bills[med2patient.bills.length-1].year +")" :  "No bills yet  "}}</span></div>
+                    <div class="col-md-4">Last Amount Paid : {{med2patient.payment && med2patient.payment.length>0 ? med2patient.payment[med2patient.payment.length-1].amountPaid +";("+ med2patient.payment[med2patient.payment.length-1].month+")" : "No Amount Paid yet"}}</div>
                     
             </div>
             <br> 
