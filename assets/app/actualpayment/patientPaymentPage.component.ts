@@ -29,8 +29,8 @@ import {payment} from '../med2patients/payment';
 
 
     <div class="panel panel-body">
-        <div *ngIf="med2patient">
-            <div  class="row alert alert-info" width="500"> <div class="col-md-4"><h3>Previous Bill Total Was : </h3></div><div class="col-md-4"> <h3>{{med2patient.bills[med2patient.bills.length-1].totalCost}}</h3></div> </div>            
+        <div *ngIf="med2patient">        
+            <div  class="row alert alert-info" width="500" *ngIf="med2patient.bills.length>0"> <div class="col-md-4"><h3>Previous Bill Total Was : </h3></div><div class="col-md-4"> <h3>{{med2patient.bills[med2patient.bills.length-1].totalCost}}</h3></div> </div>            
         </div><br>
         <div *ngIf="med2patient">
             <h3>PCG contacts:HII</h3><br>
@@ -85,8 +85,8 @@ export class PatientPaymentPageComponent implements OnInit{
   imageWidth = 50;
   paymentObj : payment = {};
   isSaved=false;
-  paidBy;
-  phoneNo;
+  paidBy="";
+  phoneNo="";
   amountPaid=0;
   paymentMode="cheque";
   chequeNo;
@@ -120,9 +120,10 @@ export class PatientPaymentPageComponent implements OnInit{
   setpaidbyandphoneno()
   {
       console.log(this.actualpatients);
+
         for (var i in this.actualpatients)
         {
-            if(this.actualpatients[i].id == this.med2patient.patientid)
+            if(this.med2patient.patientid && this.actualpatients[i].id == this.med2patient.patientid)
             {
                 this.paidBy = this.actualpatients[i].pcpContact.name;
                 this.phoneNo = this.actualpatients[i].pcpContact.contactNo;

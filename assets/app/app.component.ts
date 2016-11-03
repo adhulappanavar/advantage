@@ -28,7 +28,9 @@ import { ActualpatientComponent} from './actualpatients/actualpatient.component'
 import { ActualpatientsAddComponent} from './actualpatients/actualpatient-add.component';
 import { ActualpatientDetailsComponent} from './actualpatients/actualpatient-details.component';
 import { ActualpatientsEditComponent} from './actualpatients/actualpatient-edit.component';
+import {ActualpatientReportComponent} from './actualpatients/actualpatient-report.component';
 import { ActualpatientsService } from './actualpatients/actualpatients.service';
+
 
 import { ActualmedicineComponent} from './actualmedicines/actualmedicine.component';
 import { ActualmedicinesAddComponent} from './actualmedicines/actualmedicine-add.component';
@@ -48,6 +50,9 @@ import {PatientPaymentPageComponent} from './actualpayment/patientPaymentPage.co
 
 import { PaymentInfoPatientListComponent } from './actualpayment/paymentinfo_patientlist.component';
 import {PaymentInfoPatientComponent} from './actualpayment/paymentinfo_patient.component';
+import {PaymentInfoReportComponent} from './actualpayment/actualpayment-report.component';
+
+
 
 @Component({
     selector: 'my-app',
@@ -58,7 +63,7 @@ import {PaymentInfoPatientComponent} from './actualpayment/paymentinfo_patient.c
             <router-outlet></router-outlet>
         </div>
     `,
-    directives: [ROUTER_DIRECTIVES, HeaderComponent, PeopleComponent, PatientComponent, MedicineComponent, Med2patientComponent, ActualpatientComponent , ActualmedicineComponent ,  ActualpatientListPaymentComponent , ActualBillComponent , BillListComponent , PaymentPageComponent , PaymentInfoPatientListComponent] ,
+    directives: [ROUTER_DIRECTIVES, HeaderComponent, PeopleComponent, PatientComponent, MedicineComponent, Med2patientComponent, ActualpatientComponent , ActualmedicineComponent ,  ActualpatientListPaymentComponent , ActualBillComponent , BillListComponent , PaymentPageComponent , PaymentInfoPatientListComponent,ActualpatientReportComponent , PaymentInfoReportComponent] ,
     providers: [StarWarsService, PatientsService, MedicinesService, Med2patientsService, ActualpatientsService , ActualmedicinesService  ,ROUTER_PROVIDERS, HTTP_PROVIDERS]
     
 })
@@ -74,6 +79,7 @@ import {PaymentInfoPatientComponent} from './actualpayment/paymentinfo_patient.c
     { path: '/ActualpatientsAdd', name: 'Actualpatients Add', component: ActualpatientsAddComponent },
     { path: '/ActualpatientsDetails', name: 'Actualpatients Details', component: ActualpatientDetailsComponent}, 
     { path: '/ActualpatientsEdit', name: 'Actualpatients Edit', component: ActualpatientsEditComponent},
+    { path: '/ActualpatientsReport', name: 'Actualpatients Report', component: ActualpatientReportComponent},
     
     { path: '/Actualmedicines', name: 'Actualmedicines', component: ActualmedicineComponent},
     { path: '/ActualmedicinesAdd', name: 'Actualmedicines Add', component: ActualmedicinesAddComponent},
@@ -91,7 +97,8 @@ import {PaymentInfoPatientComponent} from './actualpayment/paymentinfo_patient.c
     { path : '/paymentpageForPatient/:id' , name : 'Payment Page Patient' , component : PatientPaymentPageComponent },
 
     { path : '/paymenthistorylist' , name : 'Payment History List' , component : PaymentInfoPatientListComponent }, 
-    { path : '/paymenthistoryeForPatient/:id' , name : 'Payment History For Patient' , component : PaymentInfoPatientComponent }
+    { path : '/paymenthistoryeForPatient/:id' , name : 'Payment History For Patient' , component : PaymentInfoPatientComponent },
+    { path : '/paymentreport' , name : 'Payment Report' , component : PaymentInfoReportComponent },
 
 ])
 

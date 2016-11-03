@@ -14,56 +14,35 @@ import {AuthService} from "../auth//auth.service";
   directives: [ActualpatientDetailsComponent, ROUTER_DIRECTIVES],
   template: `
   <div class="panel panel-primary ">
-	  <div class="panel-heading">
-    <div class='row'>            
-            <div class='col-md-2'><span style='font-size:large'>Patient List</span></div>
-            <div class='col-md-4'>
-                <span style='font-size:large'>Filter by:</span ><input style="color:black" type='text' [(ngModel)]='listFilter'/>
-            </div>
-            <div class='col-md-2'><button class="btn btn-success" [routerLink] = "['Actualpatients Report']" >GENERATE REPORT</button></div>
-            <div class='col-md-1 '><button class="btn btn-danger" [routerLink] = "['Actualpatients Add']" >ADD</button></div>
-            <div class='col-md-1'>Female No : <span></span></div>
-     </div>		 
-	  </div>
+	   
 	  <div class="panel-body">
 			<div class="table-responsive">
 			  <table class="table table-striped">
         <thead>
-                    <tr>
-                        <th>
-                            <button class='btn btn-primary' (click) = "toggleImage()">
-                                {{showImage ? 'Hide' : 'Show'}} Image
-                            </button>
-                        </th>
+                    <tr>                        
                         <th>Reg No</th>
                         <th>Patient Name</th>
                         <th>Gender</th>
                         <th>Age</th>
-                        <th>DOA</th>                        
-                        <th></th>         
-                        <th></th>               
+                        <th>DOA</th>
+                        <th>Duration</th>   
+                        <th>PCG Contact Name</th>
+                        <th>PCG Contact Number</th>
+                        <th>PCG Contact Email-ID</th>
                     </tr>
          </thead>
          <tbody>
 				<tr *ngFor="#actualpatient of actualpatients | actualpatientsFilter:listFilter">
-          {{genderCount(actualpatient.gender)}}
-          <td>
-                <img *ngIf='showImage' [src]='actualpatient.photoUrl' [title]='actualpatient.name' [style.width.px]='imageWidth' [style.margin.px]= 'imageMargin'/>
-          </td>
+          {{genderCount(actualpatient.gender)}}         
           <td>{{actualpatient.registrationNumber}}</td>          
-					<td>
-					  <a href="#" [routerLink]="['Actualpatients Details', {id: actualpatient.id}]">{{actualpatient.name}}</a>
-					</td>		
+					<td>	  {{actualpatient.name}}					</td>		
           <td>{{actualpatient.gender}}</td>
           <td>{{clacAge(actualpatient.dob)}}</td>
           <td>{{stringAsDate(actualpatient.dateOfAdmission)|date }}</td>
-          <td>
-            <a [routerLink] = "[ 'Actualpatients Edit' , {id: actualpatient.id} ]">Edit</a>
-          </td>
-          <td><a>Discharge</a></td>
-          <td>
-            <a (click) = "onDelete(actualpatient.id)">Delete</a>
-          </td>                    
+          <td>{{clacAge(actualpatient.dateOfAdmission)}}</td>
+          <td>{{actualpatient.pcpContact.name}}</td>
+          <td><span *ngIf="actualpatient.pcpContact.contactNo">{{actualpatient.pcpContact.contactNo}}</span><span *ngIf="!actualpatient.pcpContact.contactNo">No contact no</span></td>                              
+          <td><span *ngIf="actualpatient.pcpContact.emailId">{{actualpatient.pcpContact.emailId}}</span><span *ngIf="!actualpatient.pcpContact.emailId">NO Email ID</span></td> 
 				</tr>
         </tbody>
 			  </table>	  
@@ -75,8 +54,8 @@ import {AuthService} from "../auth//auth.service";
   styleUrls: ['html/actualpatients/actualpatients-list.component.css'],
   pipes : [ActualpatientsFilterPipe]
 })
-export class ActualpatientComponent implements OnInit{
-  actualpatients: Actualpatient[] = [];
+export class ActualpatientReportComponent implements OnInit{
+  actualpatients: Actualpatient[] = []; 
   selectedActualpatient: Actualpatient;
   listFilter = "";
   showImage = false;

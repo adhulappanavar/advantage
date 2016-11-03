@@ -1,4 +1,4 @@
-import { Component, OnInit } from 'angular2/core';
+ import { Component, OnInit } from 'angular2/core';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
 
 import { Actualpatient } from '../actualpatients/actualpatient';
@@ -11,45 +11,34 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
   selector: 'actualpatients-list',
   directives: [ROUTER_DIRECTIVES],
   template: `
-  <div class="panel panel-primary ">
-	  <div class="panel-heading">
-    <div class='row'>            
-            <div class='col-md-2'><span style='font-size:large'>Patient List</span></div>
-            <div class='col-md-6'>
-                <span style='font-size:large'>Filter by:</span ><input style="color:black" type='text' [(ngModel)]='listFilter'/>
-            </div>            
-            <div class='col-md-2'><button class="btn btn-success" [routerLink] = "['Payment Report']" >GENERATE REPORT</button></div>
-                       
-     </div>	
-	 	 
-	  </div>
+  <div class="panel panel-primary ">	  
 	  <div class="panel-body">
 		<div class="table-responsive">
 		<table class="table table-striped">
         <thead>
-                    <tr>
-                        <th>
-                            <button class='btn btn-primary' (click) = "toggleImage()">
-                                {{showImage ? 'Hide' : 'Show'}} Image
-                            </button>
-                        </th>
+                    <tr>                        
                         <th>Reg No</th>
                         <th>Patient Name</th>
                         <th>Gender</th>
                         <th>Age</th>   
-                        <th></th>
+                        <th>totalamountbilled</th>
+                        <th>totalAmountPaid</th>
+                        <th>DUEs or Credit</th>
+                        <th>Last billed amount</th>
+                        <th>Last paid amount</th>                        
                     </tr>
          </thead>
          <tbody>
-				<tr *ngFor="#actualpatient of actualpatients | actualpatientsFilter:listFilter">
-					<td>
-							<img *ngIf='showImage' [src]='actualpatient.photoUrl' [title]='actualpatient.name' [style.width.px]='imageWidth' [style.margin.px]= 'imageMargin'/>
-					</td>
+				<tr *ngFor="#actualpatient of actualpatients | actualpatientsFilter:listFilter">					
 					<td>{{actualpatient.registrationNumber}}</td>          
-								<td>{{actualpatient.name}}</td>		
+					<td>{{actualpatient.name}}</td>		
 					<td>{{actualpatient.gender}}</td>
 					<td>{{clacAge(actualpatient.dob)}}</td>
-          <td><a [routerLink]="['Payment History For Patient', {id: actualpatient.id}]" >Show Billing History</a></td>          
+                    <td>{{totalAmountBilled(actualpatient)}}/hello</td>    
+                    <td>{{totoalAmountPaid(actualpatient)}}</td>     
+                    <td>{{dues()}}</td> 
+                    <td>{{actualpatient.bills && actualpatient.bills.length>0? actualpatient.bills[actualpatient.bills.length-1].totalCost : 0}}</td>
+                    <td>{{actualpatient.payment && actualpatient.payment.length>0 ? actualpatient.payment[actualpatient.payment.length-1].amountPaid : 0}}</td>          
 				</tr>
           </tbody>
 		  </table>	  
@@ -63,12 +52,14 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 })
 
 
-export class PaymentInfoPatientListComponent implements OnInit{
+export class PaymentInfoReportComponent implements OnInit{
   actualpatients: Med2patient[] = [];
-  selectedActualpatient: Actualpatient;
+  selectedActualpatient: Actualpatient; 
   listFilter = "";
   showImage = false;
   imageWidth = 50;
+  totalamountbilled=0;
+  totalAmountPaid=0;
   imageMArgin = 2;
   constructor(private actualpatientsService : ActualpatientsService , private med2patientsService : Med2patientsService){ }
 
@@ -87,6 +78,53 @@ export class PaymentInfoPatientListComponent implements OnInit{
 
       console.log("changes made");
   }
+
+
+  latestBilledAmount(med2patient)
+  {
+      if(med2patient.bills && med2patient.bills.length>0)
+        return med2patient.bills[med2patient.bills.length-1].totalCost;
+
+        return 0;
+  }
+
+
+  totalAmountBilled(med2patient)
+    {
+        console.log(med2patient);
+        console.log(med2patient.bills);
+        console.log(med2patient.bills[0]);
+        this.totalamountbilled=0;
+        if(med2patient.bills)
+        for(var i = 0 ; i< med2patient.bills.length ; i++)
+            this.totalamountbilled=this.totalamountbilled + med2patient.bills[i].totalCost;
+            
+        //var temp = this.dues();
+        return this.totalamountbilled;
+    }   
+
+  totoalAmountPaid(med2patient)
+    {
+        this.totalAmountPaid =0;
+        if(med2patient.payment)
+        for(var i=0;i<med2patient.payment.length;i++)
+            this.totalAmountPaid = this.totalAmountPaid + med2patient.payment[i].amountPaid;
+
+            return this.totalAmountPaid;
+    }
+
+
+    dues()
+    {
+        if(this.totalamountbilled > this.totalAmountPaid)
+            return "DUE : " + (this.totalamountbilled-this.totalAmountPaid);
+
+        else
+            return "Credit Balance : " + (this.totalAmountPaid -this.totalamountbilled );
+    }
+
+
+
 
   selectActualpatient(actualpatient: Actualpatient){
     this.selectedActualpatient = actualpatient;
