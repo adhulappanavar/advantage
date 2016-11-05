@@ -74,7 +74,7 @@ gulp.task('repl-local-mongodb', function(){
 
 gulp.task('repl-localhost', function(){
   gulp.src(devFolder+'/**/*')
-    .pipe(replace('http://localhost:3000', 'http://'+ 'ec2-35-154-8-81.ap-south-1.compute.amazonaws.com' + ':3000'))
+    .pipe(replace('http://localhost:3000', 'http://'+ '52.2.54.7' + ':3000'))
     .pipe(gulp.dest(devFolder));
 });
 
