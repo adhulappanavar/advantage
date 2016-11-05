@@ -65,7 +65,7 @@ gulp.task('prodserver', function(){
 gulp.task('repl-local-mongodb', function(){
   gulp.src('app.js')
     .pipe(replace('mongoose.connect(\'localhost:27017/aniladvantagedb\');', '//mongoose.connect(\'localhost:27017/aniladvantagedb\');'))
-    .pipe(replace('//var cfg = require(\'./config\');', 'var cfg = require('\./config\');'))
+    .pipe(replace('//var cfg = require(\'./config\');', 'var cfg = require(\'./config\');'))
     .pipe(replace('//mongoose.Promise = global.Promise;', 'mongoose.Promise = global.Promise;'))
     .pipe(replace('//mongoose.connect(cfg.mongo.uri);', 'mongoose.connect(cfg.mongo.uri);'))
     .pipe(gulp.dest(devFolder));
