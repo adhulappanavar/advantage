@@ -62,8 +62,25 @@ gulp.task('prodserver', function(){
 /******************************************** */
 /*****************END *********************** */
 /******************************************** */
+gulp.task('repl-local-mongodb', function(){
+  gulp.src('app.js')
+    .pipe(replace('mongoose.connect(\'localhost:27017/aniladvantagedb\');', '//mongoose.connect(\'localhost:27017/aniladvantagedb\');'))
+    .pipe(replace('//var cfg = require(\'./config\');', 'var cfg = require('\./config\');'))
+    .pipe(replace('//mongoose.Promise = global.Promise;', 'mongoose.Promise = global.Promise;'))
+    .pipe(replace('//mongoose.connect(cfg.mongo.uri);', 'mongoose.connect(cfg.mongo.uri);'))
+    .pipe(gulp.dest(devFolder));
+});
 
 
+gulp.task('repl-localhost', function(){
+  gulp.src(devFolder+'/**/*')
+    .pipe(replace('http://localhost:3000', 'http://'+ 'ec2-35-154-8-81.ap-south-1.compute.amazonaws.com' + ':3000'))
+    .pipe(gulp.dest(devFolder));
+});
+
+/******************************************** */
+/*****************END *********************** */
+/******************************************** */
 gulp.task('build-ts', function () {
     return gulp.src(appDev + '**/*.ts')
         .pipe(sourcemaps.init())
