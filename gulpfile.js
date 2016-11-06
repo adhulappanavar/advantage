@@ -22,6 +22,7 @@ var devFolder = './assets/',
     fs = require('fs'),
     rename = require('gulp-rename'),
     replace = require('gulp-replace'),
+    debug = require('gulp-debug'),
     os = require('os');;
 
 
@@ -64,18 +65,27 @@ gulp.task('prodserver', function(){
 /******************************************** */
 gulp.task('repl-local-mongodb', function(){
   gulp.src('app.js')
+    .pipe(debug({title: 'adv-debug-src:'}))
     .pipe(replace('mongoose.connect(\'localhost:27017/aniladvantagedb\');', '//mongoose.connect(\'localhost:27017/aniladvantagedb\');'))
+    .pipe(debug({title: 'adv-debug-comment-localhost:'}))
     .pipe(replace('//var cfg = require(\'./config\');', 'var cfg = require(\'./config\');'))
+    .pipe(debug({title: 'adv-debug-uncomment-varcfg:'}))
     .pipe(replace('//mongoose.Promise = global.Promise;', 'mongoose.Promise = global.Promise;'))
+        .pipe(debug({title: 'adv-debug-uncomment-mongoose-promise:'}))
     .pipe(replace('//mongoose.connect(cfg.mongo.uri);', 'mongoose.connect(cfg.mongo.uri);'))
-    .pipe(gulp.dest(devFolder));
+        .pipe(debug({title: 'adv-debug-uncomment-config-uri:'}))
+    .pipe(gulp.dest(devFolder))
+    .pipe(debug({title: 'adv-debug-dest ********:'}));
 });
 
 
 gulp.task('repl-localhost', function(){
-  gulp.src(devFolder+'/**/*')
+  gulp.src(devFolder+'/**/*service.ts')
+    .pipe(debug({title: 'adv-debug-src:'}))
     .pipe(replace('http://localhost:3000', 'http://'+ '52.2.54.7' + ':3000'))
-    .pipe(gulp.dest(devFolder));
+    .pipe(debug({title: 'adv-debug-replace-*******:'}))
+    .pipe(gulp.dest(devFolder))
+    .pipe(debug({title: 'adv-debug-dest:'}));
 });
 
 /******************************************** */
@@ -95,3 +105,5 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['watch', 'build-ts']);
+
+
