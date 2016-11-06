@@ -23,6 +23,7 @@ var devFolder = './assets/',
     rename = require('gulp-rename'),
     replace = require('gulp-replace'),
     debug = require('gulp-debug'),
+    currentFolder = '.',
     os = require('os');;
 
 
@@ -64,7 +65,7 @@ gulp.task('prodserver', function(){
 /*****************END *********************** */
 /******************************************** */
 gulp.task('repl-local-mongodb', function(){
-  gulp.src('app.js')
+  gulp.src(currentFolder + '/app.js')
     .pipe(debug({title: 'adv-debug-src:'}))
     .pipe(replace('mongoose.connect(\'localhost:27017/aniladvantagedb\');', '//mongoose.connect(\'localhost:27017/aniladvantagedb\');'))
     .pipe(debug({title: 'adv-debug-comment-localhost:'}))
@@ -74,7 +75,7 @@ gulp.task('repl-local-mongodb', function(){
         .pipe(debug({title: 'adv-debug-uncomment-mongoose-promise:'}))
     .pipe(replace('//mongoose.connect(cfg.mongo.uri);', 'mongoose.connect(cfg.mongo.uri);'))
         .pipe(debug({title: 'adv-debug-uncomment-config-uri:'}))
-    .pipe(gulp.dest(devFolder))
+    .pipe(gulp.dest(currentFolder))
     .pipe(debug({title: 'adv-debug-dest ********:'}));
 });
 
@@ -96,7 +97,6 @@ gulp.task('build-ts', function () {
         .pipe(sourcemaps.init())
         .pipe(typescript(tsProject))
         .pipe(sourcemaps.write())
-        // .pipe(jsuglify())
         .pipe(concat('bundle.js'))
         .pipe(gulp.dest(appProd));
 });
