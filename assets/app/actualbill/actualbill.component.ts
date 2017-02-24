@@ -83,7 +83,7 @@ setlen()
 
       this.med2patientsService
           .getMed2patients(id)
-          .subscribe(p => this.selectedForBill = p.medicines);               
+          .subscribe(p => this.selectedForBill = this.foo( p.medicines));               
 
           console.log(this.selectedForBill);
 
@@ -230,9 +230,45 @@ setlen()
         recipient.selected = (recipient.selected) ? false : true;
     }
 
-    foo()
+    foo(a)
     {
-      console.log("foo caleed");
+      var bill =[];
+      console.log( "this is a :" + a);
+      console.log("a.medicine");
+      console.log(a.medicines);
+      console.log("this is a:");
+      console.log(a);
+      console.log("this is a[0]");
+      console.log(a[0][0]);
+      bill.push(a[0]);
+      console.log("this is bill");
+      console.log(bill);
+      console.log("foo caleed123456"); 
+      //console.log(this.selectedForBill);
+      for(var i=1;i<a.length;i++)
+      {console.log(i);
+        var found = false;
+        for(var j = 0 ; j<bill.length;j++)
+        {
+         // console.log("in j " + j);
+          console.log(a[i].name + ":"+bill[j].name+":"+a[i].name.localeCompare(bill[j].name));
+          if(a[i].name.localeCompare(bill[j].name)==0)
+          {
+            console.log("in if");
+            console.log(bill[j]);
+            bill[j].qty  = parseInt(bill[j].qty) + 1;found=true;
+            console.log(bill[j]);
+          }
+      //    console.log("end j");
+        }
+        if(!found)
+        {
+          bill.push(a[i]);
+        }
+     //   console.log("end i");
+      }
+
+      return bill;
     }
 
   toggleEditing()
