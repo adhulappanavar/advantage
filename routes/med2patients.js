@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken');
 var Med2patients = require('../models/med2patients');
 
 
+
 router.get('/static', function(req, res, next) {
         res.json( [
              {

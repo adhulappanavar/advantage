@@ -14,7 +14,7 @@ import {AuthService} from "../auth//auth.service";
   directives: [ActualpatientDetailsComponent, ROUTER_DIRECTIVES],
   template: `
   <div class="panel panel-primary ">
-	   
+	   <div align="center" class="row"><h2><span class="col-md-6">Female Patients : {{actualpatients.length-maleNo}} </span><span>Male Patients : {{maleNo}} </span></h2></div>
 	  <div class="panel-body">
 			<div class="table-responsive">
 			  <table class="table table-striped">
@@ -82,7 +82,21 @@ export class ActualpatientReportComponent implements OnInit{
           .getAllMed2patients() 
           .subscribe(p => this.med2patients = p);
 
+
+            this.actualpatientsService
+      .getAllActualpatients()
+      .subscribe(p => this.maleNo = this.countfemale(p));
       
+  }
+  countfemale(list)
+  {
+    var mn =0;
+    for(var i=0;i<list.length;i++)
+    {
+      if(list[i].gender.localeCompare("Female"))
+        mn=mn+1;
+    }
+    return mn;
   }
 
   selectActualpatient(actualpatient: Actualpatient){

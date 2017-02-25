@@ -17,12 +17,12 @@ import {AuthService} from "../auth//auth.service";
 	  <div class="panel-heading">
     <div class='row'>            
             <div class='col-md-2'><span style='font-size:large'>Patient List</span></div>
-            <div class='col-md-4'>
+            <div class='col-md-3'>
                 <span style='font-size:large'>Filter by:</span ><input style="color:black" type='text' [(ngModel)]='listFilter'/>
             </div>
             <div class='col-md-2'><button class="btn btn-success" [routerLink] = "['Actualpatients Report']" >GENERATE REPORT</button></div>
             <div class='col-md-1 '><button class="btn btn-danger" [routerLink] = "['Actualpatients Add']" >ADD</button></div>
-            <div class='col-md-1'>Female No : <span></span></div>
+            <div class='col-md-2'>Female:{{actualpatients.length-maleNo}} <br>Male : {{maleNo}} <span></span></div>
      </div>		 
 	  </div>
 	  <div class="panel-body">
@@ -103,7 +103,22 @@ export class ActualpatientComponent implements OnInit{
           .getAllMed2patients() 
           .subscribe(p => this.med2patients = p);
 
+      this.actualpatientsService
+      .getAllActualpatients()
+      .subscribe(p => this.maleNo = this.countfemale(p));
+
       
+  }
+
+  countfemale(list)
+  {
+    var mn =0;
+    for(var i=0;i<list.length;i++)
+    {
+      if(list[i].gender.localeCompare("Female"))
+        mn=mn+1;
+    }
+    return mn;
   }
 
   selectActualpatient(actualpatient: Actualpatient){
