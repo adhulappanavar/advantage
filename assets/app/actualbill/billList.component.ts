@@ -47,7 +47,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 					<td *ngIf="actualpatient.activePatient">{{actualpatient.name}}</td>		
 					<td *ngIf="actualpatient.activePatient">{{actualpatient.gender}}</td>
 					<td *ngIf="actualpatient.activePatient">{{clacAge(actualpatient.dob)}}</td>
-          <td><a [routerLink] = "['Patient Bill List' , {id: actualpatient.id}]">Bill List</a></td>          
+                    <td *ngIf="actualpatient.activePatient"><a [routerLink] = "['Patient Bill List' , {id: actualpatient.id}]">Bill List</a></td>          
 				</tr>
           </tbody>
 		   </table>	  

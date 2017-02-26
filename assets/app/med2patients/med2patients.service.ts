@@ -62,6 +62,7 @@ function toMed2patient(r:any): Med2patient{
     patientid : r.patientid,
     registrationNumber : r.registrationNumber,
     dob : r.dob,
+    activePatient : r.activePatient , 
     dateOfAdmission : r.dateOfAdmission,    
     weight: r.weight,
     height: r.height,

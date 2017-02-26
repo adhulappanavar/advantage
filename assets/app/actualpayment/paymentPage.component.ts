@@ -44,7 +44,7 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
 							<img *ngIf='showImage' [src]='actualpatient.photoUrl' [title]='actualpatient.name' [style.width.px]='imageWidth' [style.margin.px]= 'imageMargin'/>
 					</td>
 					<td *ngIf="actualpatient.activePatient">{{actualpatient.registrationNumber}}</td>          
-								<td>{{actualpatient.name}}</td>		
+					<td *ngIf="actualpatient.activePatient">{{actualpatient.name}}</td>		
 					<td *ngIf="actualpatient.activePatient">{{actualpatient.gender}}</td>
 					<td *ngIf="actualpatient.activePatient">{{clacAge(actualpatient.dob)}}</td>
           <td *ngIf="actualpatient.activePatient"><a [routerLink]="['Payment Page Patient', {id: actualpatient.id}]">Payment Page</a></td>          
