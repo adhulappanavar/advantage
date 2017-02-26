@@ -33,16 +33,16 @@ import {AuthService} from "../auth//auth.service";
          </thead>
          <tbody>
 				<tr *ngFor="#actualpatient of actualpatients | actualpatientsFilter:listFilter">
-          {{genderCount(actualpatient.gender)}}         
-          <td>{{actualpatient.registrationNumber}}</td>          
-					<td>	  {{actualpatient.name}}					</td>		
-          <td>{{actualpatient.gender}}</td>
-          <td>{{clacAge(actualpatient.dob)}}</td>
-          <td>{{stringAsDate(actualpatient.dateOfAdmission)|date }}</td>
-          <td>{{clacAge(actualpatient.dateOfAdmission)}}</td>
-          <td>{{actualpatient.pcpContact.name}}</td>
-          <td><span *ngIf="actualpatient.pcpContact.contactNo">{{actualpatient.pcpContact.contactNo}}</span><span *ngIf="!actualpatient.pcpContact.contactNo">No contact no</span></td>                              
-          <td><span *ngIf="actualpatient.pcpContact.emailId">{{actualpatient.pcpContact.emailId}}</span><span *ngIf="!actualpatient.pcpContact.emailId">NO Email ID</span></td> 
+                   
+          <td *ngIf="actualpatient.activePatient">{{actualpatient.registrationNumber}}</td>          
+					<td *ngIf="actualpatient.activePatient">	  {{actualpatient.name}}					</td>		
+          <td *ngIf="actualpatient.activePatient">{{actualpatient.gender}}</td>
+          <td *ngIf="actualpatient.activePatient">{{clacAge(actualpatient.dob)}}</td>
+          <td *ngIf="actualpatient.activePatient">{{stringAsDate(actualpatient.dateOfAdmission)|date }}</td>
+          <td *ngIf="actualpatient.activePatient">{{clacAge(actualpatient.dateOfAdmission)}}</td>
+          <td *ngIf="actualpatient.activePatient">{{actualpatient.pcpContact.name}}</td>
+          <td *ngIf="actualpatient.activePatient"><span *ngIf="actualpatient.pcpContact.contactNo">{{actualpatient.pcpContact.contactNo}}</span><span *ngIf="!actualpatient.pcpContact.contactNo">No contact no</span></td>                              
+          <td *ngIf="actualpatient.activePatient"><span *ngIf="actualpatient.pcpContact.emailId">{{actualpatient.pcpContact.emailId}}</span><span *ngIf="!actualpatient.pcpContact.emailId">NO Email ID</span></td> 
 				</tr>
         </tbody>
 			  </table>	  

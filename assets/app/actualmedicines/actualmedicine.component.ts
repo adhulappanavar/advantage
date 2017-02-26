@@ -40,9 +40,7 @@ import { ActualmedicinesFilterPipe } from './actualmedicine-filter.pipe';
          </thead>
          <tbody>
 				<tr *ngFor="#actualmedicine of actualmedicines | actualmedicinesFilter:listFilter">
-          <td>
-                <img *ngIf='showImage' [src]='actualmedicine.url' [title]='actualmedicine.name' [style.width.px]='imageWidth' [style.margin.px]= 'imageMargin'/>
-          </td>
+          
 					<td>
 					  <a href="#" [routerLink]="['Actualmedicines Details', {id: actualmedicine.id}]">{{actualmedicine.name}}</a>
 					</td>		

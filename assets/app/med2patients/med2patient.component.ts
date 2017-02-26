@@ -40,7 +40,7 @@ import {ActualpatientsFilterPipe} from './actualpatient-filter.pipe';
          </thead>
          <tbody>
               <tr *ngFor="#med2patient of med2patients | actualpatientsFilter : listFilter">     
-                      <td>
+                      <td *ngIf="med2patient.activePatient">
                       <a href="#" [routerLink]="['Med2patient Details', {id: med2patient.id}]">{{med2patient.name}}</a>
                       </td>		
               </tr>         

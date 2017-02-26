@@ -85,6 +85,7 @@ function toActualpatient(r:any): Actualpatient{
     id : r._id , 
     registrationNumber : r.registrationNumber ,     
     name        : r.name,
+    activePatient : r.activePatient , 
     gender      : r.gender,
     dob         : r.dob,
     dateOfAdmission : r.dateOfAdmission,  

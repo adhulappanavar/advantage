@@ -8,7 +8,7 @@ var payment = new Schema ({
 
         modeOfPayment : String , 
 
-        paidBy : String , 
+        paidBy : String ,  
 
         phoneNo : Number ,
 
@@ -59,6 +59,7 @@ var schema = new Schema({
     dateOfAdmission : Date,    
     name            : String,
     gender          : String,
+    activePatient  : Boolean ,
     payment         : [payment] ,     
     medicines       : [ subMedicine ],
     newmedicines    : [ subMedicine ],

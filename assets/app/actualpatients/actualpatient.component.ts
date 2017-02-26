@@ -45,23 +45,22 @@ import {AuthService} from "../auth//auth.service";
                     </tr>
          </thead>
          <tbody>
-				<tr *ngFor="#actualpatient of actualpatients | actualpatientsFilter:listFilter">
-          {{genderCount(actualpatient.gender)}}
-          <td>
+				<tr *ngFor="#actualpatient of actualpatients | actualpatientsFilter:listFilter">         
+          <td *ngIf="actualpatient.activePatient">
                 <img *ngIf='showImage' [src]='actualpatient.photoUrl' [title]='actualpatient.name' [style.width.px]='imageWidth' [style.margin.px]= 'imageMargin'/>
           </td>
-          <td>{{actualpatient.registrationNumber}}</td>          
-					<td>
+          <td *ngIf="actualpatient.activePatient">{{actualpatient.registrationNumber}}</td>          
+					<td *ngIf="actualpatient.activePatient">
 					  <a href="#" [routerLink]="['Actualpatients Details', {id: actualpatient.id}]">{{actualpatient.name}}</a>
 					</td>		
-          <td>{{actualpatient.gender}}</td>
-          <td>{{clacAge(actualpatient.dob)}}</td>
-          <td>{{stringAsDate(actualpatient.dateOfAdmission)|date }}</td>
-          <td>
+          <td *ngIf="actualpatient.activePatient">{{actualpatient.gender}}</td>
+          <td *ngIf="actualpatient.activePatient">{{clacAge(actualpatient.dob)}}</td>
+          <td *ngIf="actualpatient.activePatient">{{stringAsDate(actualpatient.dateOfAdmission)|date }}</td>
+          <td *ngIf="actualpatient.activePatient">
             <a [routerLink] = "[ 'Actualpatients Edit' , {id: actualpatient.id} ]">Edit</a>
           </td>
-          <td><a>Discharge</a></td>
-          <td>
+          <td *ngIf="actualpatient.activePatient"><a (click) = "onDischarge(actualpatient.id)">Discharge</a></td>
+          <td *ngIf="actualpatient.activePatient">
             <a (click) = "onDelete(actualpatient.id)">Delete</a>
           </td>                    
 				</tr>
@@ -82,10 +81,11 @@ export class ActualpatientComponent implements OnInit{
   showImage = false;
   imageWidth= 50;
   imageMArgin = 2;
+   femaleNo = 0 ; 
+  maleNo = 0;
   med2patients;
   constructor(private actualpatientsService : ActualpatientsService , private _authService: AuthService , private router: Router , private med2patientsService: Med2patientsService) { }
-  femaleNo = 0 ; 
-  maleNo = 0;
+ 
   ngOnInit(){
 
     if(!this.isLoggedIn())

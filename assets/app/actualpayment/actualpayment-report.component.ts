@@ -13,6 +13,10 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
   template: `
   <div class="panel panel-primary ">	  
 	  <div class="panel-body">
+        <div class="row">
+            Total Biiled Amount for the month : {{monthBilledAmount()}}
+            total Amount Paid for the month : {{monthPaidAmoutn()}}
+        </div>
 		<div class="table-responsive">
 		<table class="table table-striped">
         <thead>
@@ -30,15 +34,15 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
          </thead>
          <tbody>
 				<tr *ngFor="#actualpatient of actualpatients | actualpatientsFilter:listFilter">					
-					<td>{{actualpatient.registrationNumber}}</td>          
-					<td>{{actualpatient.name}}</td>		
-					<td>{{actualpatient.gender}}</td>
-					<td>{{clacAge(actualpatient.dob)}}</td>
-                    <td>{{totalAmountBilled(actualpatient)}}</td>    
-                    <td>{{totoalAmountPaid(actualpatient)}}</td>
-                    <td><strong *ngIf="dues()[0]=='C'" style="color:green">{{dues()}}</strong><strong *ngIf="dues()[0]==''" style="color:red">{{dues()}}</strong></td> 
-                    <td>{{actualpatient.bills && actualpatient.bills.length>0? actualpatient.bills[actualpatient.bills.length-1].totalCost : "no bills"}}</td>
-                    <td>{{actualpatient.payment && actualpatient.payment.length>0 ? actualpatient.payment[actualpatient.payment.length-1].amountPaid : "not paid"}}</td>          
+					<td *ngIf="actualpatient.activePatient">{{actualpatient.registrationNumber}}</td>          
+					<td *ngIf="actualpatient.activePatient">{{actualpatient.name}}</td>		
+					<td *ngIf="actualpatient.activePatient">{{actualpatient.gender}}</td>
+					<td *ngIf="actualpatient.activePatient">{{clacAge(actualpatient.dob)}}</td>
+                    <td *ngIf="actualpatient.activePatient">{{totalAmountBilled(actualpatient)}}</td>    
+                    <td *ngIf="actualpatient.activePatient">{{totoalAmountPaid(actualpatient)}}</td>
+                    <td *ngIf="actualpatient.activePatient"><strong *ngIf="dues()[0]=='C'" style="color:green">{{dues()}}</strong><strong *ngIf="dues()[0]=='D'" style="color:red">{{dues()}}</strong></td> 
+                    <td *ngIf="actualpatient.activePatient">{{actualpatient.bills && actualpatient.bills.length>0? actualpatient.bills[actualpatient.bills.length-1].totalCost : "no bills"}}</td>
+                    <td *ngIf="actualpatient.activePatient">{{actualpatient.payment && actualpatient.payment.length>0 ? actualpatient.payment[actualpatient.payment.length-1].amountPaid : "not paid"}}</td>          
 				</tr>
           </tbody>
 		  </table>	  
@@ -79,6 +83,53 @@ export class PaymentInfoReportComponent implements OnInit{
       console.log("changes made");
   }
 
+  monthBilledAmount()
+  {
+      console.log("iin monthBilledAmount");
+    var tba = 0;
+    console.log(this.actualpatients);
+    for(var i=0;i<this.actualpatients.length;i++)
+    {
+        if(this.actualpatients[i].payment){ console.log("payment array : ");
+            console.log(this.actualpatients[i].payment);
+        
+            for(var j=0;j<this.actualpatients[i].bills.length;j++)
+            {
+                if(this.actualpatients[i].bills.length-1>=0)
+                tba = tba + this.actualpatients[i].bills[this.actualpatients[i].bills.length-1].totalCost;
+                else
+                tba = tba + this.actualpatients[i].bills[0].totalCost;
+            }
+        }
+    }
+      return tba;
+  }
+
+ monthPaidAmoutn()
+  {
+      console.log("inn monthPaidAmoutn");
+   /* var tba = 0;
+    console.log(this.actualpatients);
+    for(var i=0;i<this.actualpatients.length;i++)
+    {
+        console.log(this.actualpatients[i].bills);
+        for(var j=0;j<this.actualpatients[i].bills.length;j++)
+        {
+            tba = tba + this.actualpatients[i].payment[this.actualpatients[i].payment.length-1].amountPaid;
+        }
+
+    }
+      return tba;*/
+      var tba = 0;
+    console.log(this.actualpatients);
+    for(var i=0;i<this.actualpatients.length;i++)
+    {
+            console.log(i);
+    }
+      return "testing456";
+  }
+
+
 
   latestBilledAmount(med2patient)
   {
@@ -116,6 +167,7 @@ export class PaymentInfoReportComponent implements OnInit{
 
     dues()
     {
+
         if(this.totalamountbilled > this.totalAmountPaid)
             return "DUE :" + (this.totalamountbilled-this.totalAmountPaid);
 

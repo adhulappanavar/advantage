@@ -10,7 +10,7 @@ var contact = new Schema({
 
 var initialPayment = new Schema({
     registrationFee : Number,
-    cautionDeposit : Number,
+    cautionDeposit : Number, 
     advancePayment : Number,
     establishmentCharges : Number,
     monthlyCharges : Number,
@@ -24,6 +24,7 @@ var schema = new Schema({
     name            : String,    
     gender          : String,
     dob             : Date ,
+    activePatient  : Boolean , 
     dateOfAdmission : Date ,
     photourl             : String,
     comments : String , 

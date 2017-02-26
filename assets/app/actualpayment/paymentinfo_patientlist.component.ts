@@ -42,14 +42,14 @@ import { ActualpatientsFilterPipe } from '../actualpatients/actualpatient-filter
          </thead>
          <tbody>
 				<tr *ngFor="#actualpatient of actualpatients | actualpatientsFilter:listFilter">
-					<td>
+					<td *ngIf="actualpatient.activePatient">
 							<img *ngIf='showImage' [src]='actualpatient.photoUrl' [title]='actualpatient.name' [style.width.px]='imageWidth' [style.margin.px]= 'imageMargin'/>
 					</td>
-					<td>{{actualpatient.registrationNumber}}</td>          
-								<td>{{actualpatient.name}}</td>		
-					<td>{{actualpatient.gender}}</td>
-					<td>{{clacAge(actualpatient.dob)}}</td>
-          <td><a [routerLink]="['Payment History For Patient', {id: actualpatient.id}]" >Show Billing History</a></td>          
+					<td *ngIf="actualpatient.activePatient">{{actualpatient.registrationNumber}}</td>          
+					<td *ngIf="actualpatient.activePatient">{{actualpatient.name}}</td>		
+					<td *ngIf="actualpatient.activePatient">{{actualpatient.gender}}</td>
+					<td *ngIf="actualpatient.activePatient">{{clacAge(actualpatient.dob)}}</td>
+          <td *ngIf="actualpatient.activePatient"><a [routerLink]="['Payment History For Patient', {id: actualpatient.id}]" >Show Billing History</a></td>          
 				</tr>
           </tbody>
 		  </table>	  

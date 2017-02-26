@@ -15,7 +15,7 @@ import { ActualmedicinesFilterPipe } from '../actualmedicines/actualmedicine-fil
   templateUrl: 'html/med2patients/med2patient-details.component.html',
   styleUrls: ['html/med2patients/med2patient-details.component.css'],
   pipes : [ActualmedicinesFilterPipe]
-})
+}) 
 export class Med2patientDetailsComponent implements OnInit {
     @Input() med2patient : Med2patient;
     actualmedicines: Actualmedicine[] = [];

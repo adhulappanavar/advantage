@@ -108,4 +108,3 @@ export class AppComponent {
 
     foo(){ return false;}
 }
-

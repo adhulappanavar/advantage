@@ -18,6 +18,7 @@ export class ActualpatientsAddComponent implements OnInit {
     "dob"         : new Date(), 
     "dateOfAdmission" : new Date(),  
     "photoUrl"    : "",
+    "activePatient" : "true" ,
     "pcpContact" : 
     {
 		  "name" : "" , 

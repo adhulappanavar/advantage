@@ -1,3 +1,62 @@
+1) Bill list UI sort by year month
+
+2) filter by give by registration 
+
+3) genrate report for bill give total expenditure
+
+4) report of patients no of male and female    - DONE
+
+5) multiple pcg contacts 
+
+
+6) Error : when i delete a patient from patient list the female no and male no is getting screwed up 
+
+7) when they create bill and say that patient is discharged we need to handle case
+I think we also need to handel the case to store if it was eath or ddischarge not sure 
+have to figure this out by the morning 
+
+8) Multiple pcp contacts 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 19) add bill type to med2patients billing schema  and bill date and user made by
 
 16) Make admin role

@@ -9,6 +9,7 @@ export interface Med2patient {
   patientid? : string;
   registrationNumber? : string;
   dob? : Date;
+  activePatient ? : boolean;
   dateOfAdmission? : string;
   gender? : string;
   height?: number;

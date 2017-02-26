@@ -6,7 +6,8 @@ export interface Actualpatient {
     dob    ?    : Date;
     dateOfAdmission? : Date;  
     photoUrl  ?  : string;
-    pcpContact? : {
+    activePatient ? : boolean;
+    pcpContact? : { 
         name : string; 
         contactNo : string; 
         adress : string;

@@ -59,7 +59,7 @@ router.get('/:id', function(req, res, next) {
                 message: 'Success',
                 obj: docs
             });
-        });
+        }); 
 });
 
 router.post('/', function(req, res, next) {
@@ -69,6 +69,7 @@ router.post('/', function(req, res, next) {
             name        : req.body.name,            
             gender      : req.body.gender,
             dob  : req.body.dob,
+            activePatient : req.body.activePatient,
             dateOfAdmission : req.body.dateOfAdmission,
             Photourl         : req.body.Photourl,
             pcpContact : req.body.pcpContact , 
@@ -93,6 +94,7 @@ router.post('/', function(req, res, next) {
             dob         : req.body.dob,
             dateOfAdmission : req.body.dateOfAdmission,
             height      : 0,
+            activePatient : req.body.activePatient,
             weight      : 0,
             profession  : "hi",
             medicines : [],
@@ -150,6 +152,7 @@ router.post('/:id', function(req, res, next) {
         doc.name = req.body.name;
         doc.gender = req.body.gender;
         doc.dob = req.body.dob;
+        doc.activePatient = req.body.activePatient;
         doc.dateOfAdmission = req.body.dateOfAdmission;
         doc.Photourl = req.body.Photourl,
         doc.pcpContact = req.body.pcpContact,

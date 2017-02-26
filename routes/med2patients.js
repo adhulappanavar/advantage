@@ -33,7 +33,7 @@ router.get('/static', function(req, res, next) {
 router.delete('/:id' , function(req, res, next) { console.log("test");
   console.log('del profile');
   console.log(req.params.id);
-  console.log("param id");
+  console.log("param id"); 
    Med2patients.findByIdAndRemove(req.params.id, function(err, doc) {
         if (err) {
             return res.status(404).json({
@@ -98,6 +98,7 @@ router.post('/', function(req, res, next) {
             dob         : req.body.dob,
             gender      : req.body.gender , 
             bills       : req.body.bills ,
+            activePatient : req.body.activePatient,
             payemnt     : req.body.payment ,  
             dateOfAdmission : req.body.dateOfAdmission,            
             medicines : req.body.medicines,
@@ -141,6 +142,7 @@ router.post('/:id', function(req, res, next) {
         doc.dob = req.body.dob;
         doc.gender = req.body.gender;
         doc.bills = req.body.bills;
+        doc.activePatient = req.body.activePatient;
         doc.dateOfAdmission = req.body.dateOfAdmission;
         doc.name = req.body.name;        
         doc.payment = req.body.payment;
