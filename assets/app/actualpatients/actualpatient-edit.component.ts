@@ -13,7 +13,7 @@ import { Actualpatient } from './actualpatient';
 })
 export class ActualpatientsEditComponent implements OnInit {
     actualpatient : Actualpatient = {"registrationNumber" : "" ,   
-    "name"        : "",
+    "name"        : "", 
     "gender"      : "",
     "dob"         : new Date(),
     "dateOfAdmission" : new Date(),  
@@ -63,14 +63,16 @@ export class ActualpatientsEditComponent implements OnInit {
     }
     saveActualpatientDetails(){
      // this.isSaved = true;
+     console.log("in edit saveActualpatientDetails");
+     console.log(this.isSaved);
       this.actualpatientsService
           .saveActualpatient(this.actualpatient)
           .subscribe( 
-            (r: Response) => {console.log('success, '+ JSON.stringify(this.actualpatient))},
+            (r: Response) => {console.log('success, '+ JSON.stringify(this.actualpatient))} ,
             (error) => {console.log('error: ', error);},
-            () => {this.isSaved = true;}
+            () => { console.log("Anonmous func");console.log(this.isSaved);this.isSaved = true;console.log(this.isSaved);}
           );
-          
-  //        this.isSaved = true;
+          console.log(this.isSaved);
+  //      this.isSaved = true;
     }
 }

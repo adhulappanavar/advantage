@@ -114,10 +114,10 @@ router.post('/', function(req, res, next) {
                 obj: result
             });
         });
-            /*res.status(201).json({
+            res.status(201).json({
                 message: 'Saved message',
                 obj: result
-            });*/
+            });
         });
 
         
@@ -166,10 +166,10 @@ router.post('/:id', function(req, res, next) {
                     error: err
                 });
             }
-            /*res.status(200).json({
+            res.status(200).json({
                 message: 'Success',
                 obj: result
-            });*/
+            });
 
             
           

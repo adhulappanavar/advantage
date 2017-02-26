@@ -18,7 +18,7 @@ export class ActualpatientsAddComponent implements OnInit {
     "dob"         : new Date(), 
     "dateOfAdmission" : new Date(),  
     "photoUrl"    : "",
-    "activePatient" : "true" ,
+    "activePatient" : true ,
     "pcpContact" : 
     {
 		  "name" : "" , 
@@ -68,7 +68,7 @@ export class ActualpatientsAddComponent implements OnInit {
           .subscribe( 
             (r: Response) => {console.log('success, '+ JSON.stringify(this.actualpatient))},
             (error) => {console.log('error: ', error);},
-            () => {this.isSaved = true;}
+            () => {console.log("Anonmous func");console.log(this.isSaved);this.isSaved = true;console.log(this.isSaved);}
           );
           
   //        this.isSaved = true;

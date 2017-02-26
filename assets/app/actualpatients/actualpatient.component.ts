@@ -61,7 +61,7 @@ import {AuthService} from "../auth//auth.service";
           </td>
           <td *ngIf="actualpatient.activePatient"><a (click) = "onDischarge(actualpatient.id)">Discharge</a></td>
           <td *ngIf="actualpatient.activePatient">
-            <a (click) = "onDelete(actualpatient.id)">Delete</a>
+            <a (click) = "onDelete(actualpatient.id)">Delete!!!</a>
           </td>                    
 				</tr>
         </tbody>
@@ -144,10 +144,12 @@ export class ActualpatientComponent implements OnInit{
         this.showImage = !this.showImage;
     }
      
-    onDelete(id : string) { console.log("logging another change!!!!");
+    onDelete(id : string) 
+    { 
+      console.log("logging another change!!!!");
 
-    console.log("patient id : " , id);
-//        this.actualpatientsService.deleteMessage(id);
+      console.log("patient id : " , id);
+      //        this.actualpatientsService.deleteMessage(id);
       this.actualpatientsService
           .deleteActualpatient(id)
           .subscribe( 

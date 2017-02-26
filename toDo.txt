@@ -17,7 +17,7 @@ have to figure this out by the morning
 
 8) Multiple pcp contacts 
 
-
+9) check if we edit name refelected in med2patients
 
 
 

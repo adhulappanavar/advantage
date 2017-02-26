@@ -30,9 +30,10 @@ export class ActualpatientsService{
       return actualpatients$;
   }
   saveActualpatient(actualpatient: Actualpatient) : Observable<Response>{
+        console.log("In saveActualpatient");
         const body = JSON.stringify(actualpatient);
         const headers = new Headers({'Content-Type': 'application/json'});
-        console.log("body from saveNewStudent : " , body);
+        console.log("body from saveActualpatient : " , body);
          return this.http
               .post(`${this.baseUrl}/actualpatients/${actualpatient.id}`,body, {headers: headers});
   }
